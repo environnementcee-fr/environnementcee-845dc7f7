@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { EligibilitySection } from "@/components/EligibilitySection";
@@ -20,6 +21,7 @@ const Index = () => {
       {/* SEO Meta Tags */}
       <title>Éclairage LED CEE - Prime pour Entreprises | EnvironnementCEE.fr</title>
       
+      <Header />
       <HeroSection onCTAClick={scrollToForm} />
       
       <section id="comment-ca-marche">
