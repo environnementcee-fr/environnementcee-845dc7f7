@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, ArrowLeft, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const step1Schema = z.object({
   buildingType: z.string().min(1, "Veuillez sélectionner un type de bâtiment"),
@@ -68,20 +69,68 @@ export const EligibilityForm = () => {
     setStep(2);
   };
 
-  const onStep2Submit = (data: Step2Data) => {
-    // Combine both steps data
-    const fullData = { ...step1Data, ...data };
-    console.log("Form submitted:", fullData);
-    
-    // Here you would typically send to your backend or webhook
-    // For now, we'll just show success
-    
-    toast({
-      title: "Demande envoyée avec succès",
-      description: "Vous serez recontacté sous 48h par notre équipe.",
-    });
-    
-    setSubmitted(true);
+  const onStep2Submit = async (data: Step2Data) => {
+    try {
+      // Combine both steps data
+      const fullData = {
+        building_type: step1Data?.buildingType || "",
+        surface: parseInt(step1Data?.surface || "0"),
+        current_lighting: step1Data?.currentLighting || "",
+        postal_code: step1Data?.postalCode || "",
+        company_name: data.companyName,
+        siren: data.siren,
+        employees: data.employees,
+        last_name: data.lastName,
+        first_name: data.firstName,
+        email: data.email,
+        phone: data.phone,
+        consent_partner: data.consentPartner,
+        consent_privacy: data.consentPrivacy,
+      };
+
+      console.log("Envoi du lead:", fullData);
+
+      // Insérer dans Supabase
+      const { data: insertedLead, error: insertError } = await supabase
+        .from("lead_submissions")
+        .insert([fullData])
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error("Erreur insertion:", insertError);
+        throw insertError;
+      }
+
+      console.log("Lead enregistré:", insertedLead);
+
+      // Appeler la fonction edge pour envoyer les emails
+      const { error: functionError } = await supabase.functions.invoke(
+        "notify-new-lead",
+        {
+          body: insertedLead,
+        }
+      );
+
+      if (functionError) {
+        console.error("Erreur notification email:", functionError);
+        // On continue même si l'email échoue, le lead est enregistré
+      }
+
+      toast({
+        title: "Demande envoyée avec succès",
+        description: "Vous serez recontacté sous 48h par notre équipe.",
+      });
+
+      setSubmitted(true);
+    } catch (error: any) {
+      console.error("Erreur lors de la soumission:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (submitted) {
