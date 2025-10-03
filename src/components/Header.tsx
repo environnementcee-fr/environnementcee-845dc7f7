@@ -14,7 +14,7 @@ export const Header = () => {
           <img 
             src={logoCEE} 
             alt="Les certificats d'économies d'énergie" 
-            className="h-32 md:h-40 w-auto object-contain mix-blend-multiply dark:mix-blend-lighten"
+            className="h-40 md:h-52 w-auto object-contain mix-blend-multiply dark:mix-blend-lighten"
           />
         </div>
       </div>
