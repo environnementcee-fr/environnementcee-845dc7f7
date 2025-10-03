@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { Header } from "@/components/Header";
+import { InfoBanner } from "@/components/InfoBanner";
 import { HeroSection } from "@/components/HeroSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { EligibilitySection } from "@/components/EligibilitySection";
@@ -22,6 +23,7 @@ const Index = () => {
       <title>Éclairage LED CEE - Prime pour Entreprises | EnvironnementCEE.fr</title>
       
       <Header />
+      <InfoBanner />
       <HeroSection onCTAClick={scrollToForm} />
       
       <section id="comment-ca-marche">
