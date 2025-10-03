@@ -9,12 +9,12 @@ export const Header = () => {
           <img 
             src={logoMinistere} 
             alt="Ministère de la Transition Écologique et Solidaire" 
-            className="h-28 md:h-36 w-auto object-contain"
+            className="h-28 md:h-36 w-auto object-contain mix-blend-multiply dark:mix-blend-lighten"
           />
           <img 
             src={logoCEE} 
             alt="Les certificats d'économies d'énergie" 
-            className="h-32 md:h-40 w-auto object-contain"
+            className="h-32 md:h-40 w-auto object-contain mix-blend-multiply dark:mix-blend-lighten"
           />
         </div>
       </div>
