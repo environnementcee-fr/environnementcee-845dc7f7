@@ -5,11 +5,11 @@ export const Header = () => {
   return (
     <header className="bg-background border-b border-border py-4">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 md:gap-12">
+        <div className="flex items-center justify-start gap-8 md:gap-12">
           <img 
             src={logoMinistere} 
             alt="Ministère de la Transition Écologique et Solidaire" 
-            className="h-16 md:h-20 w-auto object-contain"
+            className="h-20 md:h-28 w-auto object-contain"
           />
           <img 
             src={logoCEE} 
