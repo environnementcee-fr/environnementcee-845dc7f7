@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      lead_submissions: {
+        Row: {
+          assigned_to: string | null
+          building_type: string
+          company_name: string
+          consent_partner: boolean
+          consent_privacy: boolean
+          created_at: string
+          current_lighting: string
+          email: string
+          employees: string
+          first_name: string
+          id: string
+          ip_address: string | null
+          last_name: string
+          notes: string | null
+          phone: string
+          postal_code: string
+          referrer: string | null
+          siren: string
+          status: string
+          surface: number
+          user_agent: string | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          building_type: string
+          company_name: string
+          consent_partner?: boolean
+          consent_privacy?: boolean
+          created_at?: string
+          current_lighting: string
+          email: string
+          employees: string
+          first_name: string
+          id?: string
+          ip_address?: string | null
+          last_name: string
+          notes?: string | null
+          phone: string
+          postal_code: string
+          referrer?: string | null
+          siren: string
+          status?: string
+          surface: number
+          user_agent?: string | null
+        }
+        Update: {
+          assigned_to?: string | null
+          building_type?: string
+          company_name?: string
+          consent_partner?: boolean
+          consent_privacy?: boolean
+          created_at?: string
+          current_lighting?: string
+          email?: string
+          employees?: string
+          first_name?: string
+          id?: string
+          ip_address?: string | null
+          last_name?: string
+          notes?: string | null
+          phone?: string
+          postal_code?: string
+          referrer?: string | null
+          siren?: string
+          status?: string
+          surface?: number
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
