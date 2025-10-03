@@ -5,7 +5,7 @@ export const Header = () => {
   return (
     <header className="bg-background border-b border-border py-6">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center gap-8 md:gap-16">
+        <div className="flex items-center justify-between">
           <img 
             src={logoMinistere} 
             alt="Ministère de la Transition Écologique et Solidaire" 
