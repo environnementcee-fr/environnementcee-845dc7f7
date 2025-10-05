@@ -92,33 +92,29 @@ export const EligibilityForm = () => {
         consent_privacy: data.consentPrivacy,
       };
 
-      console.log("Envoi du lead:", fullData);
+      // Call secure Edge Function instead of direct database insert
+      const { data: result, error } = await supabase.functions.invoke('submit-lead', {
+        body: fullData,
+      });
 
-      // Insérer dans Supabase
-      const { data: insertedLead, error: insertError } = await supabase
-        .from("lead_submissions")
-        .insert([fullData])
-        .select()
-        .single();
-
-      if (insertError) {
-        console.error("Erreur insertion:", insertError);
-        throw insertError;
-      }
-
-      console.log("Lead enregistré:", insertedLead);
-
-      // Appeler la fonction edge pour envoyer les emails
-      const { error: functionError } = await supabase.functions.invoke(
-        "notify-new-lead",
-        {
-          body: insertedLead,
+      if (error) {
+        console.error('Submission error:', error);
+        
+        // Provide user-friendly error messages
+        let errorMessage = "Une erreur est survenue. Veuillez réessayer.";
+        
+        if (error.message?.includes("rate limit") || error.message?.includes("Trop de demandes")) {
+          errorMessage = "Vous avez déjà soumis plusieurs demandes récemment. Veuillez réessayer dans une heure.";
+        } else if (error.message?.includes("duplicate") || error.message?.includes("déjà été soumise")) {
+          errorMessage = "Une demande avec cet email a déjà été soumise récemment.";
         }
-      );
-
-      if (functionError) {
-        console.error("Erreur notification email:", functionError);
-        // On continue même si l'email échoue, le lead est enregistré
+        
+        toast({
+          title: "Erreur",
+          description: errorMessage,
+          variant: "destructive",
+        });
+        return;
       }
 
       toast({
@@ -128,10 +124,10 @@ export const EligibilityForm = () => {
 
       setSubmitted(true);
     } catch (error: any) {
-      console.error("Erreur lors de la soumission:", error);
+      console.error('Unexpected error:', error);
       toast({
         title: "Erreur",
-        description: error.message || "Une erreur est survenue. Veuillez réessayer.",
+        description: "Une erreur inattendue est survenue. Veuillez réessayer.",
         variant: "destructive",
       });
     } finally {
