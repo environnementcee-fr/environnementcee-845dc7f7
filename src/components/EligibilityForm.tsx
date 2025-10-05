@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -36,6 +36,7 @@ type Step2Data = z.infer<typeof step2Schema>;
 export const EligibilityForm = () => {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [step1Data, setStep1Data] = useState<Step1Data | null>(null);
   const { toast } = useToast();
 
@@ -70,6 +71,9 @@ export const EligibilityForm = () => {
   };
 
   const onStep2Submit = async (data: Step2Data) => {
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
     try {
       // Combine both steps data
       const fullData = {
@@ -127,9 +131,11 @@ export const EligibilityForm = () => {
       console.error("Erreur lors de la soumission:", error);
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue. Veuillez réessayer.",
+        description: error.message || "Une erreur est survenue. Veuillez réessayer.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -186,7 +192,7 @@ export const EligibilityForm = () => {
             <select
               id="buildingType"
               {...form1.register("buildingType")}
-              className="w-full mt-1.5 px-4 py-2 border border-input rounded-md bg-background focus:ring-2 focus:ring-ring"
+              className="w-full mt-1.5 px-4 py-2.5 border border-input rounded-md bg-background text-foreground focus:ring-2 focus:ring-ring focus:border-ring transition-smooth"
             >
               <option value="">Sélectionnez...</option>
               <option value="bureau">Bureaux</option>
@@ -199,7 +205,7 @@ export const EligibilityForm = () => {
               <option value="autre">Autre tertiaire</option>
             </select>
             {form1.formState.errors.buildingType && (
-              <p className="text-destructive text-sm mt-1">{form1.formState.errors.buildingType.message}</p>
+              <p className="text-destructive text-sm mt-1.5 font-medium">{form1.formState.errors.buildingType.message}</p>
             )}
           </div>
 
@@ -222,7 +228,7 @@ export const EligibilityForm = () => {
             <select
               id="currentLighting"
               {...form1.register("currentLighting")}
-              className="w-full mt-1.5 px-4 py-2 border border-input rounded-md bg-background focus:ring-2 focus:ring-ring"
+              className="w-full mt-1.5 px-4 py-2.5 border border-input rounded-md bg-background text-foreground focus:ring-2 focus:ring-ring focus:border-ring transition-smooth"
             >
               <option value="">Sélectionnez...</option>
               <option value="halogene">Halogènes</option>
@@ -232,7 +238,7 @@ export const EligibilityForm = () => {
               <option value="autre">Autre</option>
             </select>
             {form1.formState.errors.currentLighting && (
-              <p className="text-destructive text-sm mt-1">{form1.formState.errors.currentLighting.message}</p>
+              <p className="text-destructive text-sm mt-1.5 font-medium">{form1.formState.errors.currentLighting.message}</p>
             )}
           </div>
 
@@ -250,9 +256,12 @@ export const EligibilityForm = () => {
             )}
           </div>
 
-          <Button type="submit" className="w-full gradient-primary text-primary-foreground">
+          <Button 
+            type="submit" 
+            className="w-full gradient-primary text-primary-foreground hover:opacity-90 transition-smooth h-12 text-base font-semibold"
+          >
             Continuer
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </form>
       ) : (
@@ -291,7 +300,7 @@ export const EligibilityForm = () => {
             <select
               id="employees"
               {...form2.register("employees")}
-              className="w-full mt-1.5 px-4 py-2 border border-input rounded-md bg-background focus:ring-2 focus:ring-ring"
+              className="w-full mt-1.5 px-4 py-2.5 border border-input rounded-md bg-background text-foreground focus:ring-2 focus:ring-ring focus:border-ring transition-smooth"
             >
               <option value="">Sélectionnez...</option>
               <option value="1-10">1 à 10 salariés</option>
@@ -300,7 +309,7 @@ export const EligibilityForm = () => {
               <option value="250+">Plus de 250 salariés</option>
             </select>
             {form2.formState.errors.employees && (
-              <p className="text-destructive text-sm mt-1">{form2.formState.errors.employees.message}</p>
+              <p className="text-destructive text-sm mt-1.5 font-medium">{form2.formState.errors.employees.message}</p>
             )}
           </div>
 
@@ -395,14 +404,28 @@ export const EligibilityForm = () => {
               type="button" 
               variant="outline" 
               onClick={() => setStep(1)}
-              className="flex-1"
+              className="flex-1 h-12"
+              disabled={isSubmitting}
             >
-              <ArrowLeft className="mr-2 h-4 w-4" />
+              <ArrowLeft className="mr-2 h-5 w-5" />
               Retour
             </Button>
-            <Button type="submit" className="flex-1 gradient-primary text-primary-foreground">
-              Envoyer ma demande
-              <ArrowRight className="ml-2 h-4 w-4" />
+            <Button 
+              type="submit" 
+              className="flex-1 gradient-primary text-primary-foreground hover:opacity-90 transition-smooth h-12 text-base font-semibold"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Envoi en cours...
+                </>
+              ) : (
+                <>
+                  Envoyer ma demande
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </>
+              )}
             </Button>
           </div>
         </form>
