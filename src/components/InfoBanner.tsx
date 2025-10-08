@@ -7,7 +7,7 @@ export const InfoBanner = () => {
         <div className="flex items-center justify-center gap-3 text-center">
           <Sparkles className="h-5 w-5 text-primary animate-pulse" />
           <p className="text-sm md:text-base font-medium text-foreground">
-            <span className="font-bold text-primary">Toutes les aides CEE d'actualité</span> sont publiées en temps réel sur notre plateforme spécialisée
+            <span className="font-bold text-primary">Nouvelles aides CEE ajoutées régulièrement</span> · Mettez-nous en favoris pour ne rien manquer !
           </p>
           <Sparkles className="h-5 w-5 text-primary animate-pulse" />
         </div>
