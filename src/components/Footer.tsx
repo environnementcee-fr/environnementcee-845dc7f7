@@ -40,16 +40,16 @@ export const Footer = () => {
         <div className="border-t border-background/20 pt-8">
           <div className="text-center text-background/70 text-sm space-y-2">
             <p>
-              <strong>Éditeur :</strong> [Raison sociale] - SIREN : [000 000 000] - [Adresse complète]
+              <strong>Éditeur :</strong> FJLC ENVIRONNEMENT - SIREN : 849 863 535 - 8 B RUE ABEL, 75012 PARIS
             </p>
             <p>
-              <strong>Hébergeur :</strong> [Nom hébergeur] - [Adresse hébergeur]
+              <strong>Hébergeur :</strong> IONOS SARL - 7 Place de la Gare, 57200 Sarreguemines, France
             </p>
             <p className="mt-4">
               © {new Date().getFullYear()} EnvironnementCEE.fr - Tous droits réservés
             </p>
             <p className="text-xs mt-4 max-w-3xl mx-auto">
-              Les données collectées via ce formulaire sont traitées par [Raison sociale] et ses partenaires dans le but de vous recontacter concernant votre demande d'éligibilité CEE. 
+              Les données collectées via ce formulaire sont traitées par FJLC ENVIRONNEMENT et ses partenaires dans le but de vous recontacter concernant votre demande d'éligibilité CEE. 
               Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. 
               Les données sont conservées pendant 3 ans maximum. Pour toute question : <a href="mailto:contact@environnementcee.fr" className="text-primary hover:underline">contact@environnementcee.fr</a>
             </p>
