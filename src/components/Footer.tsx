@@ -29,10 +29,10 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold text-background mb-4">Mentions légales</h4>
             <ul className="space-y-2 text-sm text-background/80">
-              <li><a href="#mentions-legales" className="hover:text-primary transition-smooth">Mentions légales</a></li>
-              <li><a href="#politique-confidentialite" className="hover:text-primary transition-smooth">Politique de confidentialité</a></li>
-              <li><a href="#cookies" className="hover:text-primary transition-smooth">Gestion des cookies</a></li>
-              <li><a href="#contact" className="hover:text-primary transition-smooth">Contact</a></li>
+              <li><a href="/mentions-legales" className="hover:text-primary transition-smooth">Mentions légales</a></li>
+              <li><a href="/politique-confidentialite" className="hover:text-primary transition-smooth">Politique de confidentialité</a></li>
+              <li><a href="/gestion-cookies" className="hover:text-primary transition-smooth">Gestion des cookies</a></li>
+              <li><a href="/contact" className="hover:text-primary transition-smooth">Contact</a></li>
             </ul>
           </div>
         </div>
