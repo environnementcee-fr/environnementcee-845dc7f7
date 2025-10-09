@@ -9,6 +9,7 @@ import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import Contact from "./pages/Contact";
+import ThankYou from "./pages/ThankYou";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
           <Route path="/gestion-cookies" element={<CookiePolicy />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/merci" element={<ThankYou />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

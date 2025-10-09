@@ -29,7 +29,7 @@ export const HeroSection = ({ onCTAClick }: HeroSectionProps) => {
           </div>
 
           <h1 className="mb-6 text-foreground">
-            Remplacez vos luminaires par des LED 100% financées par le CEE
+            Remplacez vos luminaires par des LED jusqu'à 100% financé sous conditions*
           </h1>
           
           <p className="text-xl md:text-2xl mb-6 text-muted-foreground max-w-3xl mx-auto">
@@ -65,7 +65,7 @@ export const HeroSection = ({ onCTAClick }: HeroSectionProps) => {
           </Button>
 
           <p className="text-sm text-muted-foreground mt-6">
-            * Économies jusqu'à 80% sur votre consommation d'éclairage - Financement CEE
+            * Le financement jusqu'à 100% est soumis à conditions : éligibilité selon la fiche CEE BAT-EQ-127, montant forfaitaire déterminé par les obligés CEE, respect des critères techniques et administratifs. L'aide provient du dispositif des Certificats d'Économies d'Énergie.
           </p>
         </div>
       </div>

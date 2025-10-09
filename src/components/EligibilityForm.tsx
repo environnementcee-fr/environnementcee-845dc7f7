@@ -136,6 +136,22 @@ export const EligibilityForm = () => {
   };
 
   if (submitted) {
+    // Redirect to thank you page
+    window.location.href = "/merci";
+    return (
+      <Card className="p-12 text-center max-w-2xl mx-auto shadow-elegant animate-scale-in">
+        <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6">
+          <Loader2 className="h-10 w-10 text-primary-foreground animate-spin" />
+        </div>
+        <p className="text-muted-foreground">
+          Redirection en cours...
+        </p>
+      </Card>
+    );
+  }
+
+  // Show a placeholder while redirect is happening
+  if (false) {
     return (
       <Card className="p-12 text-center max-w-2xl mx-auto shadow-elegant animate-scale-in">
         <div className="w-20 h-20 rounded-full gradient-primary flex items-center justify-center mx-auto mb-6">
@@ -147,7 +163,7 @@ export const EligibilityForm = () => {
         <p className="text-muted-foreground mb-6">
           Merci pour votre intérêt ! Un expert vous contactera sous 48 heures pour étudier votre projet et vous accompagner dans vos démarches CEE.
         </p>
-        <Button 
+        <Button
           onClick={() => {
             setSubmitted(false);
             setStep(1);

@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: "Puis-je cumuler la prime CEE avec d'autres aides ?",
-    answer: "Oui, les Certificats d'Économies d'Énergie sont cumulables avec d'autres dispositifs : crédit d'impôt pour la rénovation énergétique, prêt économies d'énergie, aides régionales ou locales. Nos experts vous conseillent pour optimiser votre plan de financement.",
+    answer: "Oui, les Certificats d'Économies d'Énergie sont cumulables avec d'autres dispositifs : MaPrimeRénov' pour certains projets, crédit d'impôt pour la rénovation énergétique, prêt économies d'énergie, aides régionales ou locales. Nos experts vous conseillent pour optimiser votre plan de financement.",
   },
   {
     question: "Quels contrôles après installation ?",
@@ -33,6 +33,10 @@ const faqs = [
   {
     question: "Combien de temps prend l'installation ?",
     answer: "Selon la taille du projet, l'installation peut prendre de quelques jours à plusieurs semaines. L'étude préalable nécessite 1 à 2 semaines, puis le montage du dossier CEE 2 à 3 semaines. L'installation elle-même est planifiée pour minimiser l'impact sur votre activité.",
+  },
+  {
+    question: "Quel est le rôle d'EnvironnementCEE.fr ?",
+    answer: "EnvironnementCEE.fr est un intermédiaire privé qui facilite vos démarches CEE. Nous ne sommes pas un organisme public mais nous vous accompagnons dans la constitution du dossier, la mise en relation avec des professionnels RGE et des obligés CEE. Les aides proviennent du dispositif public des Certificats d'Économies d'Énergie.",
   },
 ];
 

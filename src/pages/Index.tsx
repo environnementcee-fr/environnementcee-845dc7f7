@@ -2,9 +2,12 @@ import { useRef } from "react";
 import { Header } from "@/components/Header";
 import { InfoBanner } from "@/components/InfoBanner";
 import { HeroSection } from "@/components/HeroSection";
+import { RoleSection } from "@/components/RoleSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
+import { ConditionsSection } from "@/components/ConditionsSection";
 import { EligibilitySection } from "@/components/EligibilitySection";
 import { BenefitsSection } from "@/components/BenefitsSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { EligibilityForm } from "@/components/EligibilityForm";
 import { FAQSection } from "@/components/FAQSection";
 import { Footer } from "@/components/Footer";
@@ -25,10 +28,13 @@ const Index = () => {
       <Header />
       <InfoBanner />
       <HeroSection onCTAClick={scrollToForm} />
+      <RoleSection />
       
       <section id="comment-ca-marche">
         <HowItWorksSection />
       </section>
+      
+      <ConditionsSection />
       
       <section id="eligibilite">
         <EligibilitySection />
@@ -37,6 +43,8 @@ const Index = () => {
       <section id="benefices">
         <BenefitsSection />
       </section>
+      
+      <TestimonialsSection />
       
       <section id="simulation" className="py-20 bg-card" ref={formRef}>
         <div className="container mx-auto px-4">
