@@ -7,8 +7,8 @@ const conditions = [
     title: "Luminaires complets conformes",
     items: [
       "Luminaire complet (corps, module LED remplaçable, driver, optique)",
-      "Durée de vie ≥ 50 000 heures (chute de flux ≤ 20%)",
-      "Efficacité lumineuse ≥ 120 lm/W (IK ≥ 10) ou ≥ 140 lm/W",
+      "Durée de vie ≥ 100 000 heures (chute de flux ≤ 20%)",
+      "Efficacité lumineuse ≥ 140 lm/W",
       "THD < 25%, facteur de déphasage ≥ 0,9",
       "Groupe de risque photobiologique < 2"
     ]
