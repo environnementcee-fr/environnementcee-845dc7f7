@@ -14,13 +14,13 @@ const criteria = [
   },
   {
     icon: Gauge,
-    title: "Durée de vie ≥ 50 000 heures",
+    title: "Durée de vie ≥ 100 000 heures",
     description: "Chute de flux lumineux ≤ 20 % en fin de vie. Garantie de performance durable.",
   },
   {
     icon: Zap,
     title: "Efficacité lumineuse élevée",
-    description: "≥ 120 lm/W (IK ≥ 10) ou ≥ 140 lm/W pour les autres luminaires. THD < 25 %, facteur déphasage ≥ 0,9.",
+    description: "≥ 140 lm/W pour tous les luminaires. THD < 25 %, facteur déphasage ≥ 0,9.",
   },
   {
     icon: Settings,
