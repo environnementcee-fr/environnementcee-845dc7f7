@@ -10,6 +10,8 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
+import { BackToHome } from "./components/BackToHome";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +31,8 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <BackToHome />
+        <ScrollToTop />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
