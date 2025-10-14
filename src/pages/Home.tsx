@@ -2,7 +2,18 @@ import { ArrowRight, Building2, Home as HomeIcon, CheckCircle, Users, FileText, 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import heroImage from "@/assets/hero-led-office.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import heroLedOffice from "@/assets/hero-led-office.jpg";
+import ledModules from "@/assets/led-modules.jpg";
+import installationLed from "@/assets/installation-led.jpg";
+import auditLed from "@/assets/audit-led.jpg";
 
 const Home = () => {
   return (
@@ -10,14 +21,10 @@ const Home = () => {
       {/* SEO Meta Tags */}
       <title>EnvironnementCEE.fr - Toutes vos aides écologiques et CEE sur une plateforme</title>
       
-      {/* Hero Section */}
-      <section className="relative min-h-[600px] flex items-center bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-        <div 
-          className="absolute inset-0 opacity-20 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
+      {/* Hero Section with Carousel */}
+      <section className="relative min-h-[600px] flex items-center bg-gradient-to-br from-primary/10 via-background to-secondary/10 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in mb-12">
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
               <CheckCircle className="h-4 w-4" />
               <span>Plateforme certifiée et sécurisée</span>
@@ -30,18 +37,92 @@ const Home = () => {
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
               Que vous soyez professionnel ou particulier, bénéficiez d'un accompagnement personnalisé pour financer votre transition énergétique jusqu'à 100%.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="text-lg h-14 shadow-lg">
-                <Link to="/simulation">
-                  Tester mon éligibilité
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="text-lg h-14">
-                <Link to="/qui-sommes-nous">En savoir plus</Link>
-              </Button>
-            </div>
+          </div>
+
+          {/* Carousel */}
+          <div className="max-w-4xl mx-auto mb-8">
+            <Carousel
+              plugins={[
+                Autoplay({
+                  delay: 4000,
+                }),
+              ]}
+              className="w-full"
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+            >
+              <CarouselContent>
+                <CarouselItem>
+                  <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={heroLedOffice} 
+                      alt="Installation LED dans bureaux professionnels" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-2xl font-bold">Éclairage LED Professionnel</h3>
+                      <p className="text-white/90">Jusqu'à 80% d'économies sur vos factures</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={installationLed} 
+                      alt="Installation de système LED haute performance" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-2xl font-bold">Installation Rapide</h3>
+                      <p className="text-white/90">Par des professionnels certifiés RGE</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={ledModules} 
+                      alt="Modules LED haute efficacité énergétique" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-2xl font-bold">Technologie LED Avancée</h3>
+                      <p className="text-white/90">Performance et durabilité garanties</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={auditLed} 
+                      alt="Audit énergétique et conseil personnalisé" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-2xl font-bold">Audit Gratuit</h3>
+                      <p className="text-white/90">Évaluation personnalisée de votre projet</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              </CarouselContent>
+              <CarouselPrevious className="left-4" />
+              <CarouselNext className="right-4" />
+            </Carousel>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
+            <Button asChild size="lg" className="text-lg h-14 shadow-lg">
+              <Link to="/simulation">
+                Tester mon éligibilité
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="text-lg h-14">
+              <Link to="/qui-sommes-nous">En savoir plus</Link>
+            </Button>
           </div>
         </div>
       </section>
