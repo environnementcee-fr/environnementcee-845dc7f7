@@ -30,6 +30,12 @@ import IsolationParticulier from "./pages/particulier/Isolation";
 import PACParticulier from "./pages/particulier/PAC";
 import BrasseurAirParticulier from "./pages/particulier/BrasseurAir";
 import HoussePiscine from "./pages/particulier/HoussePiscine";
+
+// Pages Blog
+import AidesCEE2025 from "./pages/blog/AidesCEE2025";
+import IsolationBatimentTertiaire from "./pages/blog/IsolationBatimentTertiaire";
+import PACIndustrielle from "./pages/blog/PACIndustrielle";
+
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { BackToHome } from "./components/BackToHome";
@@ -72,6 +78,11 @@ const App = () => (
           <Route path="/particulier/pac" element={<PACParticulier />} />
           <Route path="/particulier/brasseur-air" element={<BrasseurAirParticulier />} />
           <Route path="/particulier/housse-piscine" element={<HoussePiscine />} />
+          
+          {/* Routes Blog */}
+          <Route path="/blog/aides-cee-2025" element={<AidesCEE2025 />} />
+          <Route path="/blog/isolation-batiment-tertiaire" element={<IsolationBatimentTertiaire />} />
+          <Route path="/blog/pac-industrielle" element={<PACIndustrielle />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

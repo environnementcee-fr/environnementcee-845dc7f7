@@ -6,31 +6,31 @@ import { Link } from "react-router-dom";
 const Blog = () => {
   const articles = [
     {
-      title: "Les nouveautés CEE 2025 : ce qui change pour vous",
-      excerpt: "Découvrez les évolutions majeures du dispositif CEE en 2025 et comment en profiter.",
+      title: "Les aides CEE en 2025 : ce qui change pour les professionnels",
+      excerpt: "Découvrez les nouvelles conditions d'éligibilité et les montants revalorisés pour vos projets de rénovation énergétique.",
       date: "15 janvier 2025",
-      category: "Actualités",
-      slug: "nouveautes-cee-2025",
+      category: "Réglementation",
+      slug: "aides-cee-2025",
     },
     {
-      title: "Isolation : murs ou combles, que choisir en priorité ?",
-      excerpt: "Guide complet pour prioriser vos travaux d'isolation et maximiser vos économies.",
+      title: "Isolation des bâtiments tertiaires : guide complet 2025",
+      excerpt: "Comment optimiser l'isolation de vos locaux professionnels et profiter des aides disponibles.",
       date: "10 janvier 2025",
-      category: "Guide",
-      slug: "isolation-priorites",
+      category: "Isolation",
+      slug: "isolation-batiment-tertiaire",
     },
     {
-      title: "Pompe à chaleur : témoignage d'une PME qui a divisé sa facture par 2",
-      excerpt: "Retour d'expérience concret d'une entreprise ayant bénéficié des aides CEE.",
+      title: "Pompes à chaleur industrielles : le guide pour les professionnels",
+      excerpt: "Tout savoir sur les PAC pour grandes surfaces et bâtiments tertiaires.",
       date: "5 janvier 2025",
-      category: "Témoignage",
-      slug: "temoignage-pac-pme",
+      category: "Chauffage",
+      slug: "pac-industrielle",
     },
     {
       title: "Éclairage LED professionnel : ROI et économies réelles",
       excerpt: "Analyse chiffrée du retour sur investissement d'un passage au LED pour les entreprises.",
       date: "28 décembre 2024",
-      category: "Analyse",
+      category: "Éclairage",
       slug: "led-roi-economies",
     },
     {
@@ -51,10 +51,12 @@ const Blog = () => {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      "Actualités": "bg-primary/10 text-primary",
-      "Guide": "bg-secondary/10 text-secondary",
-      "Témoignage": "bg-accent/10 text-accent",
-      "Analyse": "bg-muted text-muted-foreground",
+      "Réglementation": "bg-primary/10 text-primary",
+      "Isolation": "bg-accent/10 text-accent",
+      "Chauffage": "bg-secondary/10 text-secondary",
+      "Éclairage": "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
+      "Guide": "bg-blue-500/10 text-blue-700 dark:text-blue-400",
+      "Actualités": "bg-purple-500/10 text-purple-700 dark:text-purple-400",
     };
     return colors[category] || "bg-muted text-muted-foreground";
   };
