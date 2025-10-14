@@ -7,21 +7,39 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Validation schema
+// Validation schema - Universal pour tous types d'aides
 const leadSchema = z.object({
-  building_type: z.string().min(1).max(100),
-  surface: z.number().int().positive().max(999999),
-  current_lighting: z.string().min(1).max(100),
-  postal_code: z.string().regex(/^[0-9]{5}$/),
-  company_name: z.string().min(1).max(200),
-  siren: z.string().regex(/^[0-9]{9}$/),
-  employees: z.string().min(1).max(50),
+  aid_type: z.enum(["led_entrepot", "led_bureau", "led_solaire", "isolation", "pac", "brasseur_air", "housse_piscine"]),
+  user_type: z.enum(["particulier", "professionnel"]),
+  // Champs communs requis
   first_name: z.string().min(1).max(100),
   last_name: z.string().min(1).max(100),
   email: z.string().email().max(255),
   phone: z.string().regex(/^\+?[0-9\s\-\(\)]{6,20}$/),
+  postal_code: z.string().regex(/^[0-9]{5}$/),
   consent_privacy: z.boolean().refine(val => val === true),
   consent_partner: z.boolean(),
+  // Champs optionnels (selon le type d'aide)
+  building_type: z.string().optional(),
+  surface: z.number().optional(),
+  current_lighting: z.string().optional(),
+  company_name: z.string().optional(),
+  siren: z.string().optional(),
+  employees: z.string().optional(),
+  ceiling_height: z.number().optional(),
+  fixture_count: z.number().optional(),
+  current_fixture_type: z.string().optional(),
+  zone_type: z.string().optional(),
+  sun_exposure: z.string().optional(),
+  lamppost_height: z.number().optional(),
+  wall_material: z.string().optional(),
+  insulation_type: z.string().optional(),
+  construction_year: z.number().optional(),
+  income_bracket: z.string().optional(),
+  heating_system: z.string().optional(),
+  pac_type: z.string().optional(),
+  usage_type: z.string().optional(),
+  room_count: z.number().optional(),
 });
 
 // Simple in-memory rate limiting (IP-based)

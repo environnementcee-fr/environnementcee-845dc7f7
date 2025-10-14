@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Lightbulb, Euro, CheckCircle, Clock } from "lucide-react";
+import { LEDEntrepotForm } from "@/components/forms/LEDEntrepotForm";
 
 const LEDEntrepot = () => {
   return (
@@ -143,6 +144,19 @@ const LEDEntrepot = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="mb-4 text-foreground">Testez votre éligibilité maintenant</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Complétez ce formulaire en 2 minutes pour connaître vos aides CEE
+            </p>
+          </div>
+          <LEDEntrepotForm />
         </div>
       </section>
 

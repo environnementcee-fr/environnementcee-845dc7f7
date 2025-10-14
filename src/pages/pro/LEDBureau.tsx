@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building, Euro, CheckCircle, Zap } from "lucide-react";
+import { LEDBureauForm } from "@/components/forms/LEDBureauForm";
 
 const LEDBureau = () => {
   return (
@@ -119,6 +120,19 @@ const LEDBureau = () => {
         </div>
       </section>
 
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <h2 className="mb-4 text-foreground">Testez votre éligibilité maintenant</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Complétez ce formulaire en 2 minutes pour connaître vos aides CEE
+            </p>
+          </div>
+          <LEDBureauForm />
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="py-16 gradient-secondary">
         <div className="container mx-auto px-4">
@@ -129,7 +143,7 @@ const LEDBureau = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="secondary" className="shadow-lg">
-                <Link to="/simulation">Demander mon étude gratuite</Link>
+                <Link to="/contact">Nous contacter</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="shadow-lg bg-primary-foreground">
                 <Link to="/professionnels">Voir toutes les aides pro</Link>
