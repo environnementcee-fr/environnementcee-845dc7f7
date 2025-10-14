@@ -46,6 +46,42 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Nos Solutions - Choix Pro/Particuliers */}
+      <section className="py-20 bg-gradient-to-br from-background via-background to-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="mb-4 text-foreground">Nos solutions adaptées à votre profil</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Choisissez votre parcours pour découvrir les aides qui vous correspondent
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* Button Professionnels */}
+            <Link to="/professionnels" className="group">
+              <div className="relative h-32 rounded-3xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative flex items-center gap-4 px-8">
+                  <Building2 className="h-10 w-10 text-white flex-shrink-0" />
+                  <span className="text-3xl font-bold text-white">Je suis professionnel</span>
+                </div>
+              </div>
+            </Link>
+
+            {/* Button Particuliers */}
+            <Link to="/particuliers" className="group">
+              <div className="relative h-32 rounded-3xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="relative flex items-center gap-4 px-8">
+                  <HomeIcon className="h-10 w-10 text-white flex-shrink-0" />
+                  <span className="text-3xl font-bold text-white">Je suis particulier</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Notre Rôle */}
       <section className="py-16 bg-card">
         <div className="container mx-auto px-4">
@@ -85,98 +121,6 @@ const Home = () => {
                 </CardContent>
               </Card>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Nos Solutions - Choix Pro/Particuliers */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="mb-4 text-foreground">Nos solutions adaptées à votre profil</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Choisissez votre parcours pour découvrir les aides qui vous correspondent
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Card Professionnels */}
-            <Card className="group hover:shadow-lg transition-smooth border-2 hover:border-primary cursor-pointer overflow-hidden">
-              <Link to="/professionnels">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <Building2 className="h-12 w-12 text-primary group-hover:scale-110 transition-smooth" />
-                    <ArrowRight className="h-6 w-6 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-smooth" />
-                  </div>
-                  <CardTitle className="text-2xl">Je suis un professionnel</CardTitle>
-                  <CardDescription className="text-base">
-                    Entreprises, artisans, collectivités, associations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Éclairage LED haute performance</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Isolation thermique professionnelle</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Pompes à chaleur industrielles</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Brasseurs d'air professionnels</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full mt-6 group-hover:bg-primary group-hover:text-primary-foreground">
-                    Découvrir les aides professionnelles
-                  </Button>
-                </CardContent>
-              </Link>
-            </Card>
-
-            {/* Card Particuliers */}
-            <Card className="group hover:shadow-lg transition-smooth border-2 hover:border-primary cursor-pointer overflow-hidden">
-              <Link to="/particuliers">
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <HomeIcon className="h-12 w-12 text-primary group-hover:scale-110 transition-smooth" />
-                    <ArrowRight className="h-6 w-6 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-smooth" />
-                  </div>
-                  <CardTitle className="text-2xl">Je suis un particulier</CardTitle>
-                  <CardDescription className="text-base">
-                    Propriétaires occupants, bailleurs, locataires
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Isolation de votre logement</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Pompe à chaleur résidentielle</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Brasseur d'air économique</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span>Housse piscine flottante</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full mt-6 group-hover:bg-primary group-hover:text-primary-foreground">
-                    Découvrir les aides particuliers
-                  </Button>
-                </CardContent>
-              </Link>
-            </Card>
           </div>
         </div>
       </section>
