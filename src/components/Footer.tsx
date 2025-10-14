@@ -1,57 +1,54 @@
-import { Leaf } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <footer className="gradient-secondary py-12 mt-20">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+    <footer className="bg-gradient-to-br from-primary/5 to-secondary/5 border-t mt-20">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Leaf className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold text-background">EnvironnementCEE.fr</span>
-            </div>
-            <p className="text-background/80 text-sm leading-relaxed">
-              Plateforme d'éligibilité aux aides écologiques CEE pour les entreprises, collectivités et associations.
+            <h3 className="font-bold text-lg mb-4">EnvironnementCEE.fr</h3>
+            <p className="text-sm text-muted-foreground">
+              Votre partenaire pour les Certificats d'Économies d'Énergie
             </p>
           </div>
-
+          
           <div>
-            <h4 className="font-semibold text-background mb-4">Navigation</h4>
-            <ul className="space-y-2 text-sm text-background/80">
-              <li><a href="#comment-ca-marche" className="hover:text-primary transition-smooth">Comment ça marche</a></li>
-              <li><a href="#eligibilite" className="hover:text-primary transition-smooth">Critères d'éligibilité</a></li>
-              <li><a href="#benefices" className="hover:text-primary transition-smooth">Bénéfices</a></li>
-              <li><a href="#simulation" className="hover:text-primary transition-smooth">Simulation</a></li>
-              <li><a href="#faq" className="hover:text-primary transition-smooth">FAQ</a></li>
+            <h4 className="font-semibold mb-4">Navigation</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/professionnels" className="text-muted-foreground hover:text-primary">Professionnels</Link></li>
+              <li><Link to="/particuliers" className="text-muted-foreground hover:text-primary">Particuliers</Link></li>
+              <li><Link to="/aides" className="text-muted-foreground hover:text-primary">Les Aides CEE</Link></li>
+              <li><Link to="/blog" className="text-muted-foreground hover:text-primary">Blog</Link></li>
+              <li><Link to="/qui-sommes-nous" className="text-muted-foreground hover:text-primary">Qui sommes-nous</Link></li>
             </ul>
           </div>
-
+          
           <div>
-            <h4 className="font-semibold text-background mb-4">Mentions légales</h4>
-            <ul className="space-y-2 text-sm text-background/80">
-              <li><a href="/mentions-legales" className="hover:text-primary transition-smooth">Mentions légales</a></li>
-              <li><a href="/politique-confidentialite" className="hover:text-primary transition-smooth">Politique de confidentialité</a></li>
-              <li><a href="/gestion-cookies" className="hover:text-primary transition-smooth">Gestion des cookies</a></li>
-              <li><a href="/contact" className="hover:text-primary transition-smooth">Contact</a></li>
+            <h4 className="font-semibold mb-4">Informations</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/contact" className="text-muted-foreground hover:text-primary">Contact</Link></li>
+              <li><Link to="/simulation" className="text-muted-foreground hover:text-primary">Simulation</Link></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold mb-4">Légal</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/mentions-legales" className="text-muted-foreground hover:text-primary">Mentions légales</Link></li>
+              <li><Link to="/politique-confidentialite" className="text-muted-foreground hover:text-primary">Politique de confidentialité</Link></li>
+              <li><Link to="/gestion-cookies" className="text-muted-foreground hover:text-primary">Gestion des cookies</Link></li>
             </ul>
           </div>
         </div>
-
-        <div className="border-t border-background/20 pt-8">
-          <div className="text-center text-background/70 text-sm space-y-2">
-            <p>
-              <strong>Éditeur :</strong> FJLC ENVIRONNEMENT - SIREN : 849 863 535 - 8 B RUE ABEL, 75012 PARIS
-            </p>
-            <p>
-              <strong>Hébergeur :</strong> IONOS SARL - 7 Place de la Gare, 57200 Sarreguemines, France
-            </p>
-            <p className="mt-4">
-              © {new Date().getFullYear()} EnvironnementCEE.fr - Tous droits réservés
-            </p>
-            <p className="text-xs mt-4 max-w-3xl mx-auto">
-              Les données collectées via ce formulaire sont traitées par FJLC ENVIRONNEMENT et ses partenaires dans le but de vous recontacter concernant votre demande d'éligibilité CEE. 
-              Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. 
-              Les données sont conservées pendant 3 ans maximum. Pour toute question : <a href="mailto:contact@environnementcee.fr" className="text-primary hover:underline">contact@environnementcee.fr</a>
+        
+        <div className="border-t pt-8">
+          <div className="text-sm text-muted-foreground space-y-2">
+            <p><strong>Éditeur :</strong> EnvironnementCEE.fr - [Adresse à compléter] - Email: contact@environnementcee.fr</p>
+            <p><strong>Hébergeur :</strong> Lovable (via Supabase) - [Adresse hébergeur]</p>
+            <p className="pt-4">© {new Date().getFullYear()} EnvironnementCEE.fr - Tous droits réservés</p>
+            <p className="text-xs">
+              Conformément au RGPD, vos données sont traitées de manière sécurisée. 
+              Vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles.
             </p>
           </div>
         </div>
