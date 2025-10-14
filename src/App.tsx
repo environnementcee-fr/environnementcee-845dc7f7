@@ -16,6 +16,20 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
+
+// Pages Pro
+import LEDEntrepot from "./pages/pro/LEDEntrepot";
+import LEDBureau from "./pages/pro/LEDBureau";
+import LEDSolaire from "./pages/pro/LEDSolaire";
+import IsolationPro from "./pages/pro/Isolation";
+import PACPro from "./pages/pro/PAC";
+import BrasseurAirPro from "./pages/pro/BrasseurAir";
+
+// Pages Particuliers
+import IsolationParticulier from "./pages/particulier/Isolation";
+import PACParticulier from "./pages/particulier/PAC";
+import BrasseurAirParticulier from "./pages/particulier/BrasseurAir";
+import HoussePiscine from "./pages/particulier/HoussePiscine";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { BackToHome } from "./components/BackToHome";
@@ -44,6 +58,21 @@ const App = () => (
           <Route path="/gestion-cookies" element={<CookiePolicy />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/merci" element={<ThankYou />} />
+          
+          {/* Routes Professionnels */}
+          <Route path="/pro/led-entrepot" element={<LEDEntrepot />} />
+          <Route path="/pro/led-bureau" element={<LEDBureau />} />
+          <Route path="/pro/led-solaire" element={<LEDSolaire />} />
+          <Route path="/pro/isolation" element={<IsolationPro />} />
+          <Route path="/pro/pac" element={<PACPro />} />
+          <Route path="/pro/brasseur-air" element={<BrasseurAirPro />} />
+          
+          {/* Routes Particuliers */}
+          <Route path="/particulier/isolation" element={<IsolationParticulier />} />
+          <Route path="/particulier/pac" element={<PACParticulier />} />
+          <Route path="/particulier/brasseur-air" element={<BrasseurAirParticulier />} />
+          <Route path="/particulier/housse-piscine" element={<HoussePiscine />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
