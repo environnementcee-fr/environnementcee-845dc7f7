@@ -56,25 +56,25 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {/* Button Professionnels */}
             <Link to="/professionnels" className="group">
-              <div className="relative h-32 rounded-3xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
+              <div className="relative h-24 rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative flex items-center gap-4 px-8">
-                  <Building2 className="h-10 w-10 text-white flex-shrink-0" />
-                  <span className="text-3xl font-bold text-white">Je suis professionnel</span>
+                <div className="relative flex items-center gap-3 px-6">
+                  <Building2 className="h-8 w-8 text-white flex-shrink-0" />
+                  <span className="text-2xl font-bold text-white">Je suis professionnel</span>
                 </div>
               </div>
             </Link>
 
             {/* Button Particuliers */}
             <Link to="/particuliers" className="group">
-              <div className="relative h-32 rounded-3xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
+              <div className="relative h-24 rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative flex items-center gap-4 px-8">
-                  <HomeIcon className="h-10 w-10 text-white flex-shrink-0" />
-                  <span className="text-3xl font-bold text-white">Je suis particulier</span>
+                <div className="relative flex items-center gap-3 px-6">
+                  <HomeIcon className="h-8 w-8 text-white flex-shrink-0" />
+                  <span className="text-2xl font-bold text-white">Je suis particulier</span>
                 </div>
               </div>
             </Link>
