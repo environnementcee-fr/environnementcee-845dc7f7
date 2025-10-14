@@ -1,0 +1,131 @@
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const Blog = () => {
+  const articles = [
+    {
+      title: "Les nouveautés CEE 2025 : ce qui change pour vous",
+      excerpt: "Découvrez les évolutions majeures du dispositif CEE en 2025 et comment en profiter.",
+      date: "15 janvier 2025",
+      category: "Actualités",
+      slug: "nouveautes-cee-2025",
+    },
+    {
+      title: "Isolation : murs ou combles, que choisir en priorité ?",
+      excerpt: "Guide complet pour prioriser vos travaux d'isolation et maximiser vos économies.",
+      date: "10 janvier 2025",
+      category: "Guide",
+      slug: "isolation-priorites",
+    },
+    {
+      title: "Pompe à chaleur : témoignage d'une PME qui a divisé sa facture par 2",
+      excerpt: "Retour d'expérience concret d'une entreprise ayant bénéficié des aides CEE.",
+      date: "5 janvier 2025",
+      category: "Témoignage",
+      slug: "temoignage-pac-pme",
+    },
+    {
+      title: "Éclairage LED professionnel : ROI et économies réelles",
+      excerpt: "Analyse chiffrée du retour sur investissement d'un passage au LED pour les entreprises.",
+      date: "28 décembre 2024",
+      category: "Analyse",
+      slug: "led-roi-economies",
+    },
+    {
+      title: "Comment cumuler CEE, MaPrimeRénov' et éco-PTZ ?",
+      excerpt: "Le guide pratique pour maximiser vos aides et financer 100% de vos travaux.",
+      date: "20 décembre 2024",
+      category: "Guide",
+      slug: "cumuler-aides",
+    },
+    {
+      title: "Rénovation globale : la nouvelle star des aides 2025",
+      excerpt: "Tout savoir sur MaPrimeRénov' Parcours Accompagné et les aides bonifiées.",
+      date: "15 décembre 2024",
+      category: "Actualités",
+      slug: "renovation-globale-2025",
+    },
+  ];
+
+  const getCategoryColor = (category: string) => {
+    const colors: Record<string, string> = {
+      "Actualités": "bg-primary/10 text-primary",
+      "Guide": "bg-secondary/10 text-secondary",
+      "Témoignage": "bg-accent/10 text-accent",
+      "Analyse": "bg-muted text-muted-foreground",
+    };
+    return colors[category] || "bg-muted text-muted-foreground";
+  };
+
+  return (
+    <div className="min-h-screen">
+      <title>Blog & Actualités - EnvironnementCEE.fr</title>
+      
+      {/* Hero */}
+      <section className="gradient-hero py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+            <h1 className="mb-6 text-foreground">
+              Blog & Actualités
+            </h1>
+            <p className="text-xl text-muted-foreground">
+              Restez informé des dernières actualités sur les aides CEE, découvrez nos guides pratiques et nos témoignages clients.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Articles */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {articles.map((article, index) => (
+              <Card 
+                key={index}
+                className="group hover:shadow-lg transition-smooth border-2 hover:border-primary cursor-pointer flex flex-col"
+              >
+                <Link to={`/blog/${article.slug}`} className="flex flex-col h-full">
+                  <CardHeader className="flex-1">
+                    <div className="flex items-center justify-between mb-3">
+                      <Badge className={getCategoryColor(article.category)}>
+                        {article.category}
+                      </Badge>
+                      <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-smooth" />
+                    </div>
+                    <CardTitle className="text-xl group-hover:text-primary transition-smooth">
+                      {article.title}
+                    </CardTitle>
+                    <CardDescription className="line-clamp-2">
+                      {article.excerpt}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <span>{article.date}</span>
+                    </div>
+                  </CardContent>
+                </Link>
+              </Card>
+            ))}
+          </div>
+
+          {/* Note CMS */}
+          <div className="max-w-4xl mx-auto mt-12">
+            <Card className="bg-muted/50 border-dashed">
+              <CardContent className="pt-6 text-center">
+                <p className="text-sm text-muted-foreground">
+                  📝 <strong>À venir :</strong> Système de gestion de contenu (CMS) intégré pour faciliter la publication et l'édition d'articles.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Blog;
