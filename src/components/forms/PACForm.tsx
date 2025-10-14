@@ -13,10 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { pacStep1Schema, pacStep2PartSchema, pacStep2ProSchema, type PACStep1Data, type PACStep2PartData, type PACStep2ProData } from "@/lib/validations/pac";
 
-export const PACForm = () => {
+interface PACFormProps {
+  defaultTab?: "part" | "pro";
+}
+
+export const PACForm = ({ defaultTab = "part" }: PACFormProps) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [userType, setUserType] = useState<"particulier" | "professionnel">("particulier");
+  const [userType, setUserType] = useState<"particulier" | "professionnel">(
+    defaultTab === "pro" ? "professionnel" : "particulier"
+  );
   const [step1Data, setStep1Data] = useState<PACStep1Data | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 

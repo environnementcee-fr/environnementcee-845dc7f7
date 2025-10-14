@@ -13,10 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { brasseurAirStep1Schema, brasseurAirStep2PartSchema, brasseurAirStep2ProSchema, type BrasseurAirStep1Data, type BrasseurAirStep2PartData, type BrasseurAirStep2ProData } from "@/lib/validations/brasseur-air";
 
-export const BrasseurAirForm = () => {
+interface BrasseurAirFormProps {
+  defaultTab?: "part" | "pro";
+}
+
+export const BrasseurAirForm = ({ defaultTab = "part" }: BrasseurAirFormProps) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [userType, setUserType] = useState<"particulier" | "professionnel">("particulier");
+  const [userType, setUserType] = useState<"particulier" | "professionnel">(
+    defaultTab === "pro" ? "professionnel" : "particulier"
+  );
   const [step1Data, setStep1Data] = useState<BrasseurAirStep1Data | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Thermometer, Euro, CheckCircle, Zap } from "lucide-react";
+import { PACForm } from "@/components/forms/PACForm";
 
 const PACParticulier = () => {
   return (
@@ -159,6 +160,23 @@ const PACParticulier = () => {
         </div>
       </section>
 
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-8">
+            <h2 className="mb-4 text-foreground">Testez votre éligibilité en 2 minutes</h2>
+            <p className="text-muted-foreground">
+              Remplissez ce formulaire pour obtenir une estimation personnalisée de vos aides
+            </p>
+          </div>
+          <Card className="border-2 border-primary/20">
+            <CardContent className="pt-6">
+              <PACForm defaultTab="part" />
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="py-16 gradient-secondary">
         <div className="container mx-auto px-4">
@@ -168,9 +186,6 @@ const PACParticulier = () => {
               Un expert évalue gratuitement votre projet et vous aide à maximiser vos aides.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="shadow-lg">
-                <Link to="/simulation">Faire ma simulation gratuite</Link>
-              </Button>
               <Button asChild size="lg" variant="outline" className="shadow-lg bg-primary-foreground">
                 <Link to="/particuliers">Voir toutes les aides particuliers</Link>
               </Button>

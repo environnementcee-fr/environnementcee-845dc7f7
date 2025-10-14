@@ -13,10 +13,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { isolationStep1Schema, isolationStep2PartSchema, isolationStep2ProSchema, type IsolationStep1Data, type IsolationStep2PartData, type IsolationStep2ProData } from "@/lib/validations/isolation";
 
-export const IsolationForm = () => {
+interface IsolationFormProps {
+  defaultTab?: "part" | "pro";
+}
+
+export const IsolationForm = ({ defaultTab = "part" }: IsolationFormProps) => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const [userType, setUserType] = useState<"particulier" | "professionnel">("particulier");
+  const [userType, setUserType] = useState<"particulier" | "professionnel">(
+    defaultTab === "pro" ? "professionnel" : "particulier"
+  );
   const [step1Data, setStep1Data] = useState<IsolationStep1Data | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 

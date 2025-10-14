@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Thermometer, Euro, CheckCircle, Zap } from "lucide-react";
+import { PACForm } from "@/components/forms/PACForm";
 
 const PACPro = () => {
   return (
@@ -119,6 +120,23 @@ const PACPro = () => {
         </div>
       </section>
 
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-8">
+            <h2 className="mb-4 text-foreground">Testez votre éligibilité en 2 minutes</h2>
+            <p className="text-muted-foreground">
+              Remplissez ce formulaire pour obtenir une estimation personnalisée de vos aides
+            </p>
+          </div>
+          <Card className="border-2 border-primary/20">
+            <CardContent className="pt-6">
+              <PACForm defaultTab="pro" />
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="py-16 gradient-secondary">
         <div className="container mx-auto px-4">
@@ -128,9 +146,6 @@ const PACPro = () => {
               Nos experts dimensionnent la PAC idéale pour votre activité.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="shadow-lg">
-                <Link to="/simulation">Demander mon étude gratuite</Link>
-              </Button>
               <Button asChild size="lg" variant="outline" className="shadow-lg bg-primary-foreground">
                 <Link to="/professionnels">Voir toutes les aides pro</Link>
               </Button>

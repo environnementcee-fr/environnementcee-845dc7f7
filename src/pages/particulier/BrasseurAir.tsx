@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Fan, Euro, CheckCircle, Wind } from "lucide-react";
+import { BrasseurAirForm } from "@/components/forms/BrasseurAirForm";
 
 const BrasseurAirParticulier = () => {
   return (
@@ -149,6 +150,23 @@ const BrasseurAirParticulier = () => {
         </div>
       </section>
 
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-8">
+            <h2 className="mb-4 text-foreground">Testez votre éligibilité en 2 minutes</h2>
+            <p className="text-muted-foreground">
+              Remplissez ce formulaire pour obtenir une estimation personnalisée de vos aides
+            </p>
+          </div>
+          <Card className="border-2 border-primary/20">
+            <CardContent className="pt-6">
+              <BrasseurAirForm defaultTab="part" />
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="py-16 gradient-secondary">
         <div className="container mx-auto px-4">
@@ -158,9 +176,6 @@ const BrasseurAirParticulier = () => {
               Un conseiller vous accompagne dans votre projet de brasseur d'air.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary" className="shadow-lg">
-                <Link to="/simulation">Faire ma simulation gratuite</Link>
-              </Button>
               <Button asChild size="lg" variant="outline" className="shadow-lg bg-primary-foreground">
                 <Link to="/particuliers">Voir toutes les aides particuliers</Link>
               </Button>
