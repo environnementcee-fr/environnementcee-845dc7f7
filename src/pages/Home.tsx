@@ -25,11 +25,6 @@ const Home = () => {
       <section className="relative min-h-[600px] flex items-center bg-gradient-to-br from-primary/10 via-background to-secondary/10 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center animate-fade-in mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <CheckCircle className="h-4 w-4" />
-              <span>Plateforme certifiée et sécurisée</span>
-            </div>
-            
             <h1 className="mb-6 text-foreground">
               Toutes vos aides écologiques et CEE réunies sur une seule plateforme
             </h1>
