@@ -20,11 +20,13 @@ const BrasseurAirPro = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Optimisez le confort thermique dans vos grands volumes avec les aides CEE.
             </p>
-            <Button asChild size="lg" className="shadow-lg">
-              <Link to="/simulation">
-                Tester mon éligibilité
-                <ArrowRight className="ml-2" />
-              </Link>
+            <Button 
+              size="lg" 
+              className="shadow-lg"
+              onClick={() => document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
+              Tester mon éligibilité
+              <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
@@ -121,7 +123,7 @@ const BrasseurAirPro = () => {
       </section>
 
       {/* Formulaire d'éligibilité */}
-      <section className="py-16 bg-card">
+      <section id="eligibility-form" className="py-16 bg-card">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="text-center mb-8">
             <h2 className="mb-4 text-foreground">Testez votre éligibilité en 2 minutes</h2>

@@ -20,11 +20,13 @@ const LEDEntrepot = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Réduisez jusqu'à 80% votre consommation électrique grâce aux aides CEE. Financement jusqu'à 100%.
             </p>
-            <Button asChild size="lg" className="shadow-lg">
-              <Link to="/simulation">
-                Tester mon éligibilité
-                <ArrowRight className="ml-2" />
-              </Link>
+            <Button 
+              size="lg" 
+              className="shadow-lg"
+              onClick={() => document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
+              Tester mon éligibilité
+              <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
@@ -148,7 +150,7 @@ const LEDEntrepot = () => {
       </section>
 
       {/* Formulaire d'éligibilité */}
-      <section className="py-16">
+      <section id="eligibility-form" className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
             <h2 className="mb-4 text-foreground">Testez votre éligibilité maintenant</h2>

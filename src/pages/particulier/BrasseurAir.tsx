@@ -20,11 +20,13 @@ const BrasseurAirParticulier = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Optimisez le confort thermique de votre logement été comme hiver avec les aides CEE.
             </p>
-            <Button asChild size="lg" className="shadow-lg">
-              <Link to="/simulation">
-                Tester mon éligibilité
-                <ArrowRight className="ml-2" />
-              </Link>
+            <Button 
+              size="lg" 
+              className="shadow-lg"
+              onClick={() => document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
+              Tester mon éligibilité
+              <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>

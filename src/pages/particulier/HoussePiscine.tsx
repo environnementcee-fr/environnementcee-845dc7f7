@@ -20,11 +20,13 @@ const HoussePiscine = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Conservez la chaleur de votre piscine et économisez l'eau grâce aux aides CEE.
             </p>
-            <Button asChild size="lg" className="shadow-lg">
-              <Link to="/simulation">
-                Tester mon éligibilité
-                <ArrowRight className="ml-2" />
-              </Link>
+            <Button 
+              size="lg" 
+              className="shadow-lg"
+              onClick={() => document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            >
+              Tester mon éligibilité
+              <ArrowRight className="ml-2" />
             </Button>
           </div>
         </div>
