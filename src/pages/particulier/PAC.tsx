@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Thermometer, Euro, CheckCircle, Zap } from "lucide-react";
-import { PACForm } from "@/components/forms/PACForm";
+import PACForm from "@/components/forms/PACForm";
 
 const PACParticulier = () => {
   return (
@@ -173,7 +173,7 @@ const PACParticulier = () => {
           </div>
           <Card className="border-2 border-primary/20">
             <CardContent className="pt-6">
-              <PACForm defaultTab="part" />
+              <PACForm />
             </CardContent>
           </Card>
         </div>
