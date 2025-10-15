@@ -75,12 +75,12 @@ const aids: Aid[] = [
     userTypes: ["particulier", "professionnel"],
   },
   {
-    id: "housse-piscine",
-    title: "Housse Piscine",
-    description: "Couverture isothermique pour conservation de chaleur",
-    icon: Droplets,
-    path: "/particulier/housse-piscine",
-    userTypes: ["particulier"],
+    id: "hp-flottante",
+    title: "HP Flottante",
+    description: "Régulateur haute pression pour chambres froides professionnelles",
+    icon: Thermometer,
+    path: "/pro/hp-flottante",
+    userTypes: ["professionnel"],
   },
 ];
 

@@ -29,7 +29,7 @@ import BrasseurAirPro from "./pages/pro/BrasseurAir";
 import IsolationParticulier from "./pages/particulier/Isolation";
 import PACParticulier from "./pages/particulier/PAC";
 import BrasseurAirParticulier from "./pages/particulier/BrasseurAir";
-import HoussePiscine from "./pages/particulier/HoussePiscine";
+import HPFlottante from "./pages/pro/HPFlottante";
 
 // Pages Blog
 import AidesCEE2025 from "./pages/blog/AidesCEE2025";
@@ -72,12 +72,12 @@ const App = () => (
           <Route path="/pro/isolation" element={<IsolationPro />} />
           <Route path="/pro/pac" element={<PACPro />} />
           <Route path="/pro/brasseur-air" element={<BrasseurAirPro />} />
+          <Route path="/pro/hp-flottante" element={<HPFlottante />} />
           
           {/* Routes Particuliers */}
           <Route path="/particulier/isolation" element={<IsolationParticulier />} />
           <Route path="/particulier/pac" element={<PACParticulier />} />
           <Route path="/particulier/brasseur-air" element={<BrasseurAirParticulier />} />
-          <Route path="/particulier/housse-piscine" element={<HoussePiscine />} />
           
           {/* Routes Blog */}
           <Route path="/blog/aides-cee-2025" element={<AidesCEE2025 />} />
