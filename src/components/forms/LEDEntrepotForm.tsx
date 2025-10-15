@@ -2,342 +2,200 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  ledEntrepotStep1Schema,
+  ledEntrepotStep2Schema,
+  ledEntrepotStep3Schema,
+  ledEntrepotStep4Schema,
+  type LEDEntrepotStep1Data,
+  type LEDEntrepotStep2Data,
+  type LEDEntrepotStep3Data,
+  type LEDEntrepotStep4Data,
+} from "@/lib/validations/led-entrepot";
+import { VisualStepWizard, WizardStep } from "./VisualStepWizard";
+import { VisualChoiceCard } from "./VisualChoiceCard";
+import { FormFieldWithIcon } from "./FormFieldWithIcon";
+import { SuccessConfetti } from "./SuccessConfetti";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { supabase } from "@/integrations/supabase/client";
-import { ledEntrepotStep1Schema, ledEntrepotStep2ProSchema, type LEDEntrepotStep1Data, type LEDEntrepotStep2ProData } from "@/lib/validations/led-entrepot";
+import { FormLabel } from "@/components/ui/form";
+import batimentProImg from "@/assets/visuels/batiment-professionnel.svg";
+import ledEntrepotImg from "@/assets/visuels/led-entrepot.svg";
 
 export const LEDEntrepotForm = () => {
-  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [step1Data, setStep1Data] = useState<LEDEntrepotStep1Data | null>(null);
+  const [step2Data, setStep2Data] = useState<LEDEntrepotStep2Data | null>(null);
+  const [step3Data, setStep3Data] = useState<LEDEntrepotStep3Data | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const navigate = useNavigate();
 
   const form1 = useForm<LEDEntrepotStep1Data>({
     resolver: zodResolver(ledEntrepotStep1Schema),
-    defaultValues: {
-      surface: undefined,
-      ceiling_height: undefined,
-      current_fixture_type: "",
-      fixture_count: undefined,
-      postal_code: "",
-    },
+    defaultValues: { building_type: "" },
   });
 
-  const form2 = useForm<LEDEntrepotStep2ProData>({
-    resolver: zodResolver(ledEntrepotStep2ProSchema),
-    defaultValues: {
-      company_name: "",
-      siren: "",
-      employees: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone: "",
-      consent_privacy: false,
-      consent_partner: false,
-    },
+  const form2 = useForm<LEDEntrepotStep2Data>({
+    resolver: zodResolver(ledEntrepotStep2Schema),
   });
 
-  const onStep1Submit = (data: LEDEntrepotStep1Data) => {
-    setStep1Data(data);
-    setStep(2);
-  };
+  const form3 = useForm<LEDEntrepotStep3Data>({
+    resolver: zodResolver(ledEntrepotStep3Schema),
+  });
 
-  const onStep2Submit = async (data: LEDEntrepotStep2ProData) => {
-    if (!step1Data) return;
+  const form4 = useForm<LEDEntrepotStep4Data>({
+    resolver: zodResolver(ledEntrepotStep4Schema),
+  });
 
-    setIsSubmitting(true);
-    try {
-      const { error } = await supabase.functions.invoke("submit-lead", {
-        body: {
-          aid_type: "led_entrepot",
-          user_type: "professionnel",
-          ...step1Data,
-          ...data,
-        },
-      });
+  const buildingType = form1.watch("building_type");
 
-      if (error) throw error;
-
-      toast.success("Votre demande a été envoyée avec succès !");
-      navigate("/merci");
-    } catch (error: any) {
-      console.error("Erreur lors de l'envoi:", error);
-      toast.error(error.message || "Une erreur est survenue lors de l'envoi du formulaire");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const wizardSteps: WizardStep[] = [
+    { id: 1, title: "Type de bâtiment 🏭", emoji: "🏠", illustration: batimentProImg },
+    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: ledEntrepotImg },
+    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: batimentProImg },
+    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: ledEntrepotImg },
+  ];
 
   return (
-    <Card className="max-w-3xl mx-auto p-6">
-      <div className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
-            <div
-              className="h-full bg-primary transition-all duration-300"
-              style={{ width: `${(step / 2) * 100}%` }}
-            />
-          </div>
-          <span className="ml-4 text-sm text-muted-foreground">Étape {step}/2</span>
-        </div>
-      </div>
+    <>
+      <SuccessConfetti trigger={showConfetti} />
+      <VisualStepWizard
+        steps={wizardSteps}
+        currentStep={step}
+        totalSteps={4}
+        isLastStep={step === 4}
+        isSubmitting={isSubmitting}
+        canContinue={step === 1 ? !!buildingType : true}
+        onNext={() => {
+          if (step === 1) form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })();
+          else if (step === 2) form2.handleSubmit((data) => { setStep2Data(data); setStep(3); })();
+          else if (step === 3) form3.handleSubmit((data) => { setStep3Data(data); setStep(4); })();
+        }}
+        onBack={() => setStep(step - 1)}
+        onSubmit={form4.handleSubmit(async (data) => {
+          if (!step1Data || !step2Data || !step3Data) return;
+          setIsSubmitting(true);
+          try {
+            await supabase.functions.invoke("submit-lead", {
+              body: { type: "led_entrepot", user_type: "professionnel", ...step1Data, ...step2Data, ...step3Data, ...data },
+            });
+            setShowConfetti(true);
+            toast.success("Votre demande a été envoyée avec succès !");
+            setTimeout(() => navigate("/merci"), 2000);
+          } catch (error) {
+            toast.error("Une erreur est survenue.");
+          } finally {
+            setIsSubmitting(false);
+          }
+        })}
+      >
+        {step === 1 && (
+          <Form {...form1}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <VisualChoiceCard illustration={ledEntrepotImg} title="Entrepôt" icon="🏭"
+                isSelected={buildingType === "entrepot"} onClick={() => form1.setValue("building_type", "entrepot")} />
+              <VisualChoiceCard illustration={batimentProImg} title="Usine" icon="🏗️"
+                isSelected={buildingType === "usine"} onClick={() => form1.setValue("building_type", "usine")} />
+            </div>
+          </Form>
+        )}
 
-      {step === 1 ? (
-        <Form {...form1}>
-          <form onSubmit={form1.handleSubmit(onStep1Submit)} className="space-y-6">
-            <h2 className="text-2xl font-bold mb-6">Informations sur votre projet</h2>
-
-            <FormField
-              control={form1.control}
-              name="surface"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Surface de l'entrepôt (m²)</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="ex: 1000" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form1.control}
-              name="ceiling_height"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Hauteur sous plafond (m)</FormLabel>
-                  <FormControl>
-                    <Input type="number" step="0.1" placeholder="ex: 8" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form1.control}
-              name="current_fixture_type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type de luminaires actuels</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez" />
-                      </SelectTrigger>
-                    </FormControl>
+        {step === 2 && (
+          <Form {...form2}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField control={form2.control} name="surface" render={({ field }) => (
+                <FormFieldWithIcon icon="📐" label="Surface (m²)">
+                  <FormItem><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                </FormFieldWithIcon>
+              )} />
+              <FormField control={form2.control} name="ceiling_height" render={({ field }) => (
+                <FormFieldWithIcon icon="📏" label="Hauteur sous plafond (m)">
+                  <FormItem><FormControl><Input type="number" step="0.1" {...field} /></FormControl><FormMessage /></FormItem>
+                </FormFieldWithIcon>
+              )} />
+              <FormField control={form2.control} name="current_fixture_type" render={({ field }) => (
+                <FormFieldWithIcon icon="🔦" label="Type actuel">
+                  <FormItem>
+                    <Select onValueChange={field.onChange}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
                     <SelectContent>
                       <SelectItem value="tubes_fluorescents">Tubes fluorescents</SelectItem>
                       <SelectItem value="sodium">Lampes sodium</SelectItem>
                       <SelectItem value="halogenes">Halogènes</SelectItem>
                       <SelectItem value="autres">Autres</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    </SelectContent></Select><FormMessage />
+                  </FormItem>
+                </FormFieldWithIcon>
+              )} />
+              <FormField control={form2.control} name="fixture_count" render={({ field }) => (
+                <FormFieldWithIcon icon="💡" label="Nombre de luminaires">
+                  <FormItem><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                </FormFieldWithIcon>
+              )} />
+              <FormField control={form2.control} name="postal_code" render={({ field }) => (
+                <FormFieldWithIcon icon="📍" label="Code postal">
+                  <FormItem><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                </FormFieldWithIcon>
+              )} />
+            </div>
+          </Form>
+        )}
 
-            <FormField
-              control={form1.control}
-              name="fixture_count"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nombre de luminaires existants</FormLabel>
-                  <FormControl>
-                    <Input type="number" placeholder="ex: 50" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form1.control}
-              name="postal_code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Code postal</FormLabel>
-                  <FormControl>
-                    <Input placeholder="ex: 75001" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" className="w-full">Continuer</Button>
-          </form>
-        </Form>
-      ) : (
-        <Form {...form2}>
-          <form onSubmit={form2.handleSubmit(onStep2Submit)} className="space-y-6">
-            <h2 className="text-2xl font-bold mb-6">Vos coordonnées</h2>
-
-            <FormField
-              control={form2.control}
-              name="company_name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nom de l'entreprise</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form2.control}
-              name="siren"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>SIREN</FormLabel>
-                  <FormControl>
-                    <Input placeholder="123456789" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form2.control}
-              name="employees"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nombre de salariés</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez" />
-                      </SelectTrigger>
-                    </FormControl>
+        {step === 3 && (
+          <Form {...form3}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <FormField control={form3.control} name="company_name" render={({ field }) => (
+                <FormFieldWithIcon icon="🏢" label="Nom de l'entreprise"><FormItem><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem></FormFieldWithIcon>
+              )} />
+              <FormField control={form3.control} name="siren" render={({ field }) => (
+                <FormFieldWithIcon icon="🔢" label="SIREN"><FormItem><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem></FormFieldWithIcon>
+              )} />
+              <FormField control={form3.control} name="employees" render={({ field }) => (
+                <FormFieldWithIcon icon="👥" label="Nombre de salariés">
+                  <FormItem>
+                    <Select onValueChange={field.onChange}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
                     <SelectContent>
                       <SelectItem value="1-10">1 à 10</SelectItem>
                       <SelectItem value="11-50">11 à 50</SelectItem>
                       <SelectItem value="51-250">51 à 250</SelectItem>
                       <SelectItem value="250+">Plus de 250</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form2.control}
-                name="first_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Prénom</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
+                    </SelectContent></Select><FormMessage />
                   </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form2.control}
-                name="last_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Nom</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                </FormFieldWithIcon>
+              )} />
             </div>
+          </Form>
+        )}
 
-            <FormField
-              control={form2.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input type="email" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form2.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Téléphone</FormLabel>
-                  <FormControl>
-                    <Input type="tel" placeholder="0612345678" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form2.control}
-              name="consent_privacy"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      J'accepte la politique de confidentialité *
-                    </FormLabel>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form2.control}
-              name="consent_partner"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      J'accepte d'être contacté par les partenaires
-                    </FormLabel>
-                  </div>
-                </FormItem>
-              )}
-            />
-
-            <div className="flex gap-4">
-              <Button type="button" variant="outline" onClick={() => setStep(1)} className="flex-1">
-                Retour
-              </Button>
-              <Button type="submit" disabled={isSubmitting} className="flex-1">
-                {isSubmitting ? "Envoi..." : "Envoyer ma demande"}
-              </Button>
+        {step === 4 && (
+          <Form {...form4}>
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField control={form4.control} name="first_name" render={({ field }) => (
+                  <FormFieldWithIcon icon="👤" label="Prénom"><FormItem><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem></FormFieldWithIcon>
+                )} />
+                <FormField control={form4.control} name="last_name" render={({ field }) => (
+                  <FormFieldWithIcon icon="👤" label="Nom"><FormItem><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem></FormFieldWithIcon>
+                )} />
+                <FormField control={form4.control} name="email" render={({ field }) => (
+                  <FormFieldWithIcon icon="📧" label="Email"><FormItem><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem></FormFieldWithIcon>
+                )} />
+                <FormField control={form4.control} name="phone" render={({ field }) => (
+                  <FormFieldWithIcon icon="📞" label="Téléphone"><FormItem><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem></FormFieldWithIcon>
+                )} />
+              </div>
+              <FormField control={form4.control} name="consent_privacy" render={({ field }) => (
+                <FormItem className="flex items-start space-x-3"><FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} /></FormControl>
+                <FormLabel>J'accepte la politique de confidentialité *</FormLabel><FormMessage /></FormItem>
+              )} />
             </div>
-          </form>
-        </Form>
-      )}
-    </Card>
+          </Form>
+        )}
+      </VisualStepWizard>
+    </>
   );
 };

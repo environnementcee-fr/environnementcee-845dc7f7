@@ -163,7 +163,7 @@ const BrasseurAirParticulier = () => {
           </div>
           <Card className="border-2 border-primary/20">
             <CardContent className="pt-6">
-              <BrasseurAirForm defaultTab="part" />
+              <BrasseurAirForm />
             </CardContent>
           </Card>
         </div>

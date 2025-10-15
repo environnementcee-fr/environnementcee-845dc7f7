@@ -133,7 +133,7 @@ const IsolationPro = () => {
           </div>
           <Card className="border-2 border-primary/20">
             <CardContent className="pt-6">
-              <IsolationForm defaultTab="pro" />
+              <IsolationForm />
             </CardContent>
           </Card>
         </div>
