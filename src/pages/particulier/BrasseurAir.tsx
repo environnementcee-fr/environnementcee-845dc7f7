@@ -153,19 +153,9 @@ const BrasseurAirParticulier = () => {
       </section>
 
       {/* Formulaire d'éligibilité */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-8">
-            <h2 className="mb-4 text-foreground">Testez votre éligibilité en 2 minutes</h2>
-            <p className="text-muted-foreground">
-              Remplissez ce formulaire pour obtenir une estimation personnalisée de vos aides
-            </p>
-          </div>
-          <Card className="border-2 border-primary/20">
-            <CardContent className="pt-6">
-              <BrasseurAirForm />
-            </CardContent>
-          </Card>
+      <section id="eligibility-form" className="py-16">
+        <div className="container mx-auto px-4">
+          <BrasseurAirForm />
         </div>
       </section>
 
