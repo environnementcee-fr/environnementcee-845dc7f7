@@ -27,10 +27,10 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-import maisonImg from "@/assets/visuels/maison-individuelle.svg";
-import batimentProImg from "@/assets/visuels/batiment-professionnel.svg";
-import isolationPartImg from "@/assets/visuels/isolation-particulier.svg";
-import isolationProImg from "@/assets/visuels/isolation-pro.svg";
+const maisonImg = "/visuels/maison-individuelle.svg";
+const batimentProImg = "/visuels/batiment-professionnel.svg";
+const isolationPartImg = "/visuels/isolation-particulier.svg";
+const isolationProImg = "/visuels/isolation-pro.svg";
 
 export const IsolationForm = () => {
   const [step, setStep] = useState(1);

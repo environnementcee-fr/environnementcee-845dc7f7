@@ -17,8 +17,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import hpFlottanteImg from "@/assets/visuels/hp-flottante.svg";
-import batimentProImg from "@/assets/visuels/batiment-professionnel.svg";
+const hpFlottanteImg = "/visuels/hp-flottante.svg";
+const batimentProImg = "/visuels/batiment-professionnel.svg";
 
 const HPFlottanteForm = () => {
   const [step, setStep] = useState(1);

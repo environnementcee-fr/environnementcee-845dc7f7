@@ -23,8 +23,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-import ledSolairePiquerImg from "@/assets/visuels/led-solaire-piquer.svg";
-import ledSolaireMuralImg from "@/assets/visuels/led-solaire-mural.svg";
+const ledSolairePiquerImg = "/visuels/led-solaire-piquer.svg";
+const ledSolaireMuralImg = "/visuels/led-solaire-mural.svg";
 
 export const LEDSolaireForm = () => {
   const [step, setStep] = useState(1);

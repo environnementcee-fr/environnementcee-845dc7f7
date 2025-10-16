@@ -27,9 +27,9 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-import maisonImg from "@/assets/visuels/maison-individuelle.svg";
-import batimentProImg from "@/assets/visuels/batiment-professionnel.svg";
-import brasseurAirImg from "@/assets/visuels/brasseur-air.svg";
+const maisonImg = "/visuels/maison-individuelle.svg";
+const batimentProImg = "/visuels/batiment-professionnel.svg";
+const brasseurAirImg = "/visuels/brasseur-air.svg";
 
 export const BrasseurAirForm = () => {
   const [step, setStep] = useState(1);

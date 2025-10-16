@@ -23,9 +23,9 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-import maisonImg from "@/assets/visuels/maison-individuelle.svg";
-import appartementImg from "@/assets/visuels/appartement.svg";
-import pacImg from "@/assets/visuels/pac-particulier.svg";
+const maisonImg = "/visuels/maison-individuelle.svg";
+const appartementImg = "/visuels/appartement.svg";
+const pacImg = "/visuels/pac-particulier.svg";
 
 const PACForm = () => {
   const [step, setStep] = useState(1);
