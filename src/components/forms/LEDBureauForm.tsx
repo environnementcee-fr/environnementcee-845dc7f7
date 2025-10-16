@@ -97,7 +97,7 @@ export const LEDBureauForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration={batimentProImg} title="Bureaux" icon="🏢"
+              <VisualChoiceCard illustration={ledBureauImg} title="Bureaux" icon="🏢"
                 isSelected={buildingType === "bureaux"} onClick={() => form1.setValue("building_type", "bureaux")} />
               <VisualChoiceCard illustration={batimentProImg} title="Commerce" icon="🏪"
                 isSelected={buildingType === "commerce"} onClick={() => form1.setValue("building_type", "commerce")} />

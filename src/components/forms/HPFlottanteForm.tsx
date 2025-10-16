@@ -123,6 +123,7 @@ const HPFlottanteForm = () => {
               <h3 className="text-lg font-semibold mb-4">Type de bâtiment</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <VisualChoiceCard
+                  illustration={batimentProImg}
                   icon="🏪"
                   title="Supermarché"
                   subtitle="Grande surface alimentaire"
@@ -130,6 +131,7 @@ const HPFlottanteForm = () => {
                   onClick={() => form1.setValue("building_type", "supermarket")}
                 />
                 <VisualChoiceCard
+                  illustration={batimentProImg}
                   icon="🏭"
                   title="Grossiste"
                   subtitle="Entrepôt frigorifique"
@@ -137,6 +139,7 @@ const HPFlottanteForm = () => {
                   onClick={() => form1.setValue("building_type", "wholesaler")}
                 />
                 <VisualChoiceCard
+                  illustration={batimentProImg}
                   icon="🍽️"
                   title="Restaurant"
                   subtitle="Restauration commerciale"
