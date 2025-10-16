@@ -55,10 +55,10 @@ export const LEDEntrepotForm = () => {
   const buildingType = form1.watch("building_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment 🏭", emoji: "🏠", illustration: batimentProImg },
-    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: ledEntrepotImg },
-    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: batimentProImg },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: ledEntrepotImg },
+    { id: 1, title: "Type de bâtiment", subtitle: "Quel est votre type de local ?", emoji: "🏭", illustration: batimentProImg },
+    { id: 2, title: "Détails de l'éclairage", subtitle: "Parlez-nous de votre installation actuelle", emoji: "💡", illustration: ledEntrepotImg },
+    { id: 3, title: "Votre entreprise", subtitle: "Quelques informations sur votre société", emoji: "🏢", illustration: batimentProImg },
+    { id: 4, title: "Vos coordonnées", subtitle: "Pour vous recontacter rapidement", emoji: "📧", illustration: ledEntrepotImg },
   ];
 
   return (
