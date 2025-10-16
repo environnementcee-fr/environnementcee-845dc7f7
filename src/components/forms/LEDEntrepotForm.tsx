@@ -55,10 +55,10 @@ export const LEDEntrepotForm = () => {
   const buildingType = form1.watch("building_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment", subtitle: "Quel est votre type de local ?", emoji: "🏭", illustration: batimentProImg },
-    { id: 2, title: "Détails de l'éclairage", subtitle: "Parlez-nous de votre installation actuelle", emoji: "💡", illustration: ledEntrepotImg },
-    { id: 3, title: "Votre entreprise", subtitle: "Quelques informations sur votre société", emoji: "🏢", illustration: batimentProImg },
-    { id: 4, title: "Vos coordonnées", subtitle: "Pour vous recontacter rapidement", emoji: "📧", illustration: ledEntrepotImg },
+    { id: 1, title: "Type de bâtiment", subtitle: "Quel est votre type de local ?", emoji: "🏭", illustration: "🏭" },
+    { id: 2, title: "Détails de l'éclairage", subtitle: "Parlez-nous de votre installation actuelle", emoji: "💡", illustration: "💡" },
+    { id: 3, title: "Votre entreprise", subtitle: "Quelques informations sur votre société", emoji: "🏢", illustration: "🏢" },
+    { id: 4, title: "Vos coordonnées", subtitle: "Pour vous recontacter rapidement", emoji: "📧", illustration: "💡" },
   ];
 
   return (
@@ -97,9 +97,9 @@ export const LEDEntrepotForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration={ledEntrepotImg} title="Entrepôt" icon="🏭"
+              <VisualChoiceCard illustration="🏭" title="Entrepôt"
                 isSelected={buildingType === "entrepot"} onClick={() => form1.setValue("building_type", "entrepot")} />
-              <VisualChoiceCard illustration={batimentProImg} title="Usine" icon="🏗️"
+              <VisualChoiceCard illustration="🏗️" title="Usine"
                 isSelected={buildingType === "usine"} onClick={() => form1.setValue("building_type", "usine")} />
             </div>
           </Form>

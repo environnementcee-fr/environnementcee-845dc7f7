@@ -70,10 +70,10 @@ export const BrasseurAirForm = () => {
   const isPart = userType === "particulier";
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type d'usage 🌀", emoji: "🏠", illustration: isPart ? maisonImg : batimentProImg },
-    { id: 2, title: "Détails du projet 📋", emoji: "💡", illustration: brasseurAirImg },
-    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: isPart ? maisonImg : batimentProImg },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: brasseurAirImg },
+    { id: 1, title: "Type d'usage 🌀", emoji: "🏠", illustration: isPart ? "🏠" : "🏢" },
+    { id: 2, title: "Détails du projet 📋", emoji: "💡", illustration: "🌀" },
+    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: isPart ? "🏠" : "🏢" },
+    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "🌀" },
   ];
 
   return (
@@ -136,9 +136,9 @@ export const BrasseurAirForm = () => {
               <div>
                 <h3 className="text-lg font-semibold mb-4">Vous êtes :</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <VisualChoiceCard illustration={maisonImg} title="Particulier" icon="👤"
+                  <VisualChoiceCard illustration="👤" title="Particulier"
                     isSelected={userType === "particulier"} onClick={() => form1.setValue("user_type", "particulier")} />
-                  <VisualChoiceCard illustration={batimentProImg} title="Professionnel" icon="🏢"
+                  <VisualChoiceCard illustration="🏢" title="Professionnel"
                     isSelected={userType === "professionnel"} onClick={() => form1.setValue("user_type", "professionnel")} />
                 </div>
               </div>
@@ -147,9 +147,9 @@ export const BrasseurAirForm = () => {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Type d'usage :</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <VisualChoiceCard illustration={maisonImg} title="Domestique" icon="🏡"
+                    <VisualChoiceCard illustration="🏡" title="Domestique"
                       isSelected={usageType === "domestique"} onClick={() => form1.setValue("usage_type", "domestique")} />
-                    <VisualChoiceCard illustration={brasseurAirImg} title="Industriel" icon="🏭"
+                    <VisualChoiceCard illustration="🏭" title="Industriel"
                       isSelected={usageType === "industriel"} onClick={() => form1.setValue("usage_type", "industriel")} />
                   </div>
                 </div>

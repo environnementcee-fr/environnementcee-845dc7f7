@@ -54,10 +54,10 @@ const PACForm = () => {
   });
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Parlez-nous de votre projet 🏠", emoji: "🏠", illustration: maisonImg },
-    { id: 2, title: "Quelques détails pour calculer vos aides 💶", emoji: "💡", illustration: pacImg },
-    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: pacImg },
-    { id: 4, title: "On vous recontacte rapidement 🚀", emoji: "📧", illustration: pacImg },
+    { id: 1, title: "Parlez-nous de votre projet 🏠", emoji: "🏠", illustration: "🏠" },
+    { id: 2, title: "Quelques détails pour calculer vos aides 💶", emoji: "💡", illustration: "♨️" },
+    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: "♨️" },
+    { id: 4, title: "On vous recontacte rapidement 🚀", emoji: "📧", illustration: "♨️" },
   ];
 
   const buildingType = form1.watch("building_type");
@@ -98,9 +98,9 @@ const PACForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration={maisonImg} title="Maison individuelle" icon="🏡" 
+              <VisualChoiceCard illustration="🏡" title="Maison individuelle"
                 isSelected={buildingType === "maison"} onClick={() => form1.setValue("building_type", "maison")} />
-              <VisualChoiceCard illustration={appartementImg} title="Appartement" icon="🏢"
+              <VisualChoiceCard illustration="🏢" title="Appartement"
                 isSelected={buildingType === "appartement"} onClick={() => form1.setValue("building_type", "appartement")} />
             </div>
           </Form>

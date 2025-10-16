@@ -55,10 +55,10 @@ export const LEDBureauForm = () => {
   const buildingType = form1.watch("building_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment 🏢", emoji: "🏠", illustration: batimentProImg },
-    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: ledBureauImg },
-    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: batimentProImg },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: ledBureauImg },
+    { id: 1, title: "Type de bâtiment 🏢", emoji: "🏠", illustration: "🏢" },
+    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: "💡" },
+    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: "🏢" },
+    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "💡" },
   ];
 
   return (
@@ -97,9 +97,9 @@ export const LEDBureauForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration={ledBureauImg} title="Bureaux" icon="🏢"
+              <VisualChoiceCard illustration="🏢" title="Bureaux"
                 isSelected={buildingType === "bureaux"} onClick={() => form1.setValue("building_type", "bureaux")} />
-              <VisualChoiceCard illustration={batimentProImg} title="Commerce" icon="🏪"
+              <VisualChoiceCard illustration="🏪" title="Commerce"
                 isSelected={buildingType === "commerce"} onClick={() => form1.setValue("building_type", "commerce")} />
             </div>
           </Form>

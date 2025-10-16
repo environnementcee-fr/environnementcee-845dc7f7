@@ -71,10 +71,10 @@ export const IsolationForm = () => {
   const isPart = userType === "particulier";
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment 🏠", emoji: "🏠", illustration: isPart ? maisonImg : batimentProImg },
-    { id: 2, title: "Détails de l'isolation 📋", emoji: "💡", illustration: isPart ? isolationPartImg : isolationProImg },
-    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: isPart ? isolationPartImg : isolationProImg },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: isPart ? isolationPartImg : isolationProImg },
+    { id: 1, title: "Type de bâtiment 🏠", emoji: "🏠", illustration: isPart ? "🏠" : "🏢" },
+    { id: 2, title: "Détails de l'isolation 📋", emoji: "💡", illustration: "🏗️" },
+    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: isPart ? "🏠" : "🏢" },
+    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "🏗️" },
   ];
 
   return (
@@ -137,9 +137,9 @@ export const IsolationForm = () => {
               <div>
                 <h3 className="text-lg font-semibold mb-4">Vous êtes :</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <VisualChoiceCard illustration={maisonImg} title="Particulier" icon="👤"
+                  <VisualChoiceCard illustration="👤" title="Particulier"
                     isSelected={userType === "particulier"} onClick={() => form1.setValue("user_type", "particulier")} />
-                  <VisualChoiceCard illustration={batimentProImg} title="Professionnel" icon="🏢"
+                  <VisualChoiceCard illustration="🏢" title="Professionnel"
                     isSelected={userType === "professionnel"} onClick={() => form1.setValue("user_type", "professionnel")} />
                 </div>
               </div>
@@ -148,9 +148,9 @@ export const IsolationForm = () => {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Type de bâtiment :</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <VisualChoiceCard illustration={maisonImg} title={isPart ? "Maison individuelle" : "Bureau/Commerce"} icon="🏡"
+                    <VisualChoiceCard illustration="🏡" title={isPart ? "Maison individuelle" : "Bureau/Commerce"}
                       isSelected={buildingType === "maison"} onClick={() => form1.setValue("building_type", "maison")} />
-                    <VisualChoiceCard illustration={batimentProImg} title={isPart ? "Appartement" : "Immeuble tertiaire"} icon="🏢"
+                    <VisualChoiceCard illustration="🏢" title={isPart ? "Appartement" : "Immeuble tertiaire"}
                       isSelected={buildingType === "immeuble"} onClick={() => form1.setValue("building_type", "immeuble")} />
                   </div>
                 </div>

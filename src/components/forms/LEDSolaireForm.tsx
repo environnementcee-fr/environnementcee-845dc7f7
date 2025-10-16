@@ -55,10 +55,10 @@ export const LEDSolaireForm = () => {
   const installationType = form1.watch("installation_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type d'installation ☀️", emoji: "🏠", illustration: ledSolairePiquerImg },
-    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: installationType === "piquer" ? ledSolairePiquerImg : ledSolaireMuralImg },
-    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: ledSolairePiquerImg },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: ledSolairePiquerImg },
+    { id: 1, title: "Type d'installation ☀️", emoji: "🏠", illustration: "☀️" },
+    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: "💡" },
+    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: "🏢" },
+    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "☀️" },
   ];
 
   return (
@@ -97,9 +97,9 @@ export const LEDSolaireForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration={ledSolairePiquerImg} title="Lampadaires à piquer" icon="💡"
+              <VisualChoiceCard illustration="💡" title="Lampadaires à piquer"
                 isSelected={installationType === "piquer"} onClick={() => form1.setValue("installation_type", "piquer")} />
-              <VisualChoiceCard illustration={ledSolaireMuralImg} title="Appliques murales" icon="🌙"
+              <VisualChoiceCard illustration="🌙" title="Appliques murales"
                 isSelected={installationType === "mural"} onClick={() => form1.setValue("installation_type", "mural")} />
             </div>
           </Form>

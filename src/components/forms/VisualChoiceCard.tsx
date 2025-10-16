@@ -49,16 +49,10 @@ export const VisualChoiceCard = ({
       )}
 
       {/* Icon or Illustration */}
-      {illustration ? (
-        <div className="mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10 p-4 flex items-center justify-center">
-          <img
-            src={illustration}
-            alt={title}
-            className="w-full h-48 object-contain"
-          />
+      {illustration || icon ? (
+        <div className="mb-4 flex items-center justify-center">
+          <div className="text-6xl">{icon || illustration}</div>
         </div>
-      ) : icon ? (
-        <div className="text-4xl mb-4">{icon}</div>
       ) : null}
 
       {/* Content */}
