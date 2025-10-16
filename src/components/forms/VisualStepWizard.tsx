@@ -87,16 +87,35 @@ export const VisualStepWizard = ({
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
+            {/* Illustration */}
+            {currentStepData?.illustration && (
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.3 }}
+                className="mb-8"
+              >
+                <img
+                  src={currentStepData.illustration}
+                  alt={currentStepData.title}
+                  className="w-full h-48 md:h-64 object-cover rounded-2xl shadow-lg"
+                />
+              </motion.div>
+            )}
+
             {/* Title */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.3 }}
-              className="text-center mb-6"
+              transition={{ delay: 0.2, duration: 0.3 }}
+              className="text-center mb-8"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
                 {currentStepData?.title}
               </h2>
+              {currentStepData?.subtitle && (
+                <p className="text-lg text-muted-foreground">{currentStepData.subtitle}</p>
+              )}
             </motion.div>
 
             {/* Form Content */}
