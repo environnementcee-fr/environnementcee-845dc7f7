@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { TrustSignals } from "./TrustSignals";
 
 export interface WizardStep {
   id: number;
@@ -87,6 +88,13 @@ export const VisualStepWizard = ({
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
+            {/* Trust Signals */}
+            {currentStep === 1 && (
+              <div className="mb-6">
+                <TrustSignals />
+              </div>
+            )}
+
             {/* Form Content */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
