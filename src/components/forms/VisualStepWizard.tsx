@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TrustSignals } from "./TrustSignals";
+import { ReassuranceMessage } from "./ReassuranceMessage";
 
 export interface WizardStep {
   id: number;
@@ -94,6 +95,9 @@ export const VisualStepWizard = ({
                 <TrustSignals />
               </div>
             )}
+
+            {/* Reassurance Message */}
+            <ReassuranceMessage step={currentStep} totalSteps={totalSteps} />
 
             {/* Form Content */}
             <motion.div

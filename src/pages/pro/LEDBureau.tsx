@@ -3,11 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Building, Euro, CheckCircle, Zap } from "lucide-react";
 import { LEDBureauForm } from "@/components/forms/LEDBureauForm";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const LEDBureau = () => {
   return (
     <div className="min-h-screen">
       <title>Éclairage LED Bureau - CEE Professionnels | EnvironnementCEE.fr</title>
+      <StickyCTA targetId="eligibility-form" estimatedTime="2 min" />
       
       {/* Hero */}
       <section className="gradient-hero py-20">
