@@ -14,11 +14,11 @@ export const BackToHome = () => {
   return (
     <Button
       onClick={() => navigate("/")}
-      className="fixed top-4 right-4 z-50 rounded-full shadow-lg bg-background/90 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-105 h-12 w-12 md:h-14 md:w-14"
+      className="fixed top-4 right-16 lg:right-4 z-50 rounded-full shadow-lg bg-background/90 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-105 h-12 w-12"
       variant="outline"
       aria-label="Retour à l'accueil"
     >
-      <Home className="h-5 w-5 md:h-6 md:w-6" />
+      <Home className="h-5 w-5" />
     </Button>
   );
 };
