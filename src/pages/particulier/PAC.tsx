@@ -163,8 +163,8 @@ const PACParticulier = () => {
       </section>
 
       {/* Formulaire d'éligibilité */}
-      <section id="eligibility-form" className="py-16">
-        <div className="container mx-auto px-4">
+      <section className="py-16">
+        <div className="container mx-auto px-4" id="eligibility-form">
           <PACForm />
         </div>
       </section>
