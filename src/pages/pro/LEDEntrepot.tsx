@@ -32,6 +32,13 @@ const LEDEntrepot = () => {
         </div>
       </section>
 
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <LEDEntrepotForm />
+        </div>
+      </section>
+
       {/* Qu'est-ce que c'est */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -146,13 +153,6 @@ const LEDEntrepot = () => {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Formulaire d'éligibilité */}
-      <section className="py-16">
-        <div className="container mx-auto px-4" id="eligibility-form">
-          <LEDEntrepotForm />
         </div>
       </section>
 

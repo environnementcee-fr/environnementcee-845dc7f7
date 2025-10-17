@@ -12,8 +12,12 @@ const HPFlottante = () => {
         />
       </Helmet>
       
-      <div className="min-h-screen bg-background">
-        <HPFlottanteForm />
+      <div className="min-h-screen">
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <HPFlottanteForm />
+          </div>
+        </section>
       </div>
     </>
   );

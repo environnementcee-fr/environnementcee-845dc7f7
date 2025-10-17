@@ -32,6 +32,13 @@ const IsolationPro = () => {
         </div>
       </section>
 
+      {/* Formulaire d'éligibilité */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <IsolationForm />
+        </div>
+      </section>
+
       {/* Qu'est-ce que c'est */}
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
@@ -119,13 +126,6 @@ const IsolationPro = () => {
               </ul>
             </CardContent>
           </Card>
-        </div>
-      </section>
-
-      {/* Formulaire d'éligibilité */}
-      <section className="py-16">
-        <div className="container mx-auto px-4" id="eligibility-form">
-          <IsolationForm />
         </div>
       </section>
 
