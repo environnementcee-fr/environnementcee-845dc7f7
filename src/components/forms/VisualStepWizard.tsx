@@ -77,7 +77,7 @@ export const VisualStepWizard = ({
       </div>
 
       {/* Content */}
-      <div className="flex-1 container mx-auto px-4 py-8">
+      <div className="flex-1 container mx-auto px-4 py-4">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStep}
