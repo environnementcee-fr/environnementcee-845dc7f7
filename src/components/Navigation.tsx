@@ -1,10 +1,15 @@
-import { Leaf, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Leaf, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 
 export const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -51,37 +56,40 @@ export const Navigation = () => {
           </div>
 
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-muted transition-smooth"
-            aria-label="Menu"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+          {/* Mobile Menu */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                aria-label="Menu"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-2 mt-6">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`px-4 py-3 rounded-md text-sm font-medium transition-smooth ${
+                      isActive(item.path)
+                        ? "bg-primary text-primary-foreground"
+                        : "text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fade-in">
-            <div className="flex flex-col gap-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`px-4 py-3 rounded-md text-sm font-medium transition-smooth ${
-                    isActive(item.path)
-                      ? "bg-primary text-primary-foreground"
-                      : "text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </nav>
   );
