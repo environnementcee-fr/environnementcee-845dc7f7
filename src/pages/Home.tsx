@@ -10,10 +10,13 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import heroLedOffice from "@/assets/hero-led-office.jpg";
-import ledModules from "@/assets/led-modules.jpg";
-import installationLed from "@/assets/installation-led.jpg";
-import auditLed from "@/assets/audit-led.jpg";
+import ledBureau from "@/assets/carousel/led-bureau.jpg";
+import ledEntrepot from "@/assets/carousel/led-entrepot.jpg";
+import ledSolaire from "@/assets/carousel/led-solaire.jpg";
+import isolation from "@/assets/carousel/isolation.jpg";
+import pompeChaleur from "@/assets/carousel/pompe-chaleur.jpg";
+import panneauxSolaires from "@/assets/carousel/panneaux-solaires.jpg";
+import brasseurAir from "@/assets/carousel/brasseur-air.jpg";
 
 const Home = () => {
   return (
@@ -52,52 +55,91 @@ const Home = () => {
                 <CarouselItem>
                   <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
                     <img 
-                      src={heroLedOffice} 
-                      alt="Installation LED dans bureaux professionnels" 
+                      src={ledBureau} 
+                      alt="LED Bureau - Éclairage professionnel pour espaces tertiaires" 
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
-                      <h3 className="text-white text-lg md:text-2xl font-bold">Éclairage LED Professionnel</h3>
-                      <p className="text-white/90 text-sm md:text-base">Jusqu'à 80% d'économies sur vos factures</p>
+                      <h3 className="text-white text-lg md:text-2xl font-bold">LED Bureau</h3>
+                      <p className="text-white/90 text-sm md:text-base">Éclairage optimal pour espaces tertiaires</p>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
                   <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
                     <img 
-                      src={installationLed} 
-                      alt="Installation de système LED haute performance" 
+                      src={ledEntrepot} 
+                      alt="LED Entrepôt - Solutions industrielles haute performance" 
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
-                      <h3 className="text-white text-lg md:text-2xl font-bold">Installation Rapide</h3>
-                      <p className="text-white/90 text-sm md:text-base">Par des professionnels certifiés RGE</p>
+                      <h3 className="text-white text-lg md:text-2xl font-bold">LED Entrepôt</h3>
+                      <p className="text-white/90 text-sm md:text-base">Solutions industrielles haute performance</p>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
                   <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
                     <img 
-                      src={ledModules} 
-                      alt="Modules LED haute efficacité énergétique" 
+                      src={ledSolaire} 
+                      alt="LED Solaire - Éclairage extérieur autonome" 
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
-                      <h3 className="text-white text-lg md:text-2xl font-bold">Technologie LED Avancée</h3>
-                      <p className="text-white/90 text-sm md:text-base">Performance et durabilité garanties</p>
+                      <h3 className="text-white text-lg md:text-2xl font-bold">LED Solaire</h3>
+                      <p className="text-white/90 text-sm md:text-base">Éclairage extérieur autonome</p>
                     </div>
                   </div>
                 </CarouselItem>
                 <CarouselItem>
                   <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
                     <img 
-                      src={auditLed} 
-                      alt="Audit énergétique et conseil personnalisé" 
+                      src={isolation} 
+                      alt="Isolation - Réduisez les déperditions thermiques" 
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
-                      <h3 className="text-white text-lg md:text-2xl font-bold">Audit Gratuit</h3>
-                      <p className="text-white/90 text-sm md:text-base">Évaluation personnalisée de votre projet</p>
+                      <h3 className="text-white text-lg md:text-2xl font-bold">Isolation Extérieur</h3>
+                      <p className="text-white/90 text-sm md:text-base">Performance énergétique et confort</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={pompeChaleur} 
+                      alt="Pompe à Chaleur - Chauffage économique et écologique" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                      <h3 className="text-white text-lg md:text-2xl font-bold">Pompe à Chaleur</h3>
+                      <p className="text-white/90 text-sm md:text-base">Chauffage économique et écologique</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={panneauxSolaires} 
+                      alt="Panneaux Solaires - Énergie renouvelable" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                      <h3 className="text-white text-lg md:text-2xl font-bold">Panneaux Solaires</h3>
+                      <p className="text-white/90 text-sm md:text-base">Produisez votre propre électricité</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="relative h-[250px] md:h-[350px] lg:h-[400px] rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                      src={brasseurAir} 
+                      alt="Brasseur d'Air - Confort thermique optimal" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
+                      <h3 className="text-white text-lg md:text-2xl font-bold">Brasseur d'Air</h3>
+                      <p className="text-white/90 text-sm md:text-base">Confort thermique été comme hiver</p>
                     </div>
                   </div>
                 </CarouselItem>

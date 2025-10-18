@@ -9,8 +9,9 @@ export const Navigation = () => {
 
   const navItems = [
     { label: "Accueil", path: "/" },
-    { label: "Professionnels", path: "/professionnels" },
+    { label: "Professionnels", path: "/pro/led" },
     { label: "Particuliers", path: "/particuliers" },
+    { label: "Ma Prime Rénov", path: "/ma-prime-renov" },
     { label: "Aides", path: "/aides" },
     { label: "Blog", path: "/blog" },
     { label: "Qui sommes-nous", path: "/qui-sommes-nous" },

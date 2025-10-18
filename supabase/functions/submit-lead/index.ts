@@ -9,8 +9,13 @@ const corsHeaders = {
 
 // Validation schema - Universal pour tous types d'aides
 const leadSchema = z.object({
-  aid_type: z.enum(["led_entrepot", "led_bureau", "led_solaire", "isolation", "pac", "brasseur_air", "housse_piscine"]),
+  aid_type: z.enum([
+    "led_entrepot", "led_bureau", "led_solaire", 
+    "multi_led_pro", "multi_particulier", "ma_prime_renov",
+    "isolation", "pac", "brasseur_air", "housse_piscine"
+  ]),
   user_type: z.enum(["particulier", "professionnel"]),
+  project_data: z.any().optional(),
   // Champs communs requis
   first_name: z.string().min(1).max(100),
   last_name: z.string().min(1).max(100),

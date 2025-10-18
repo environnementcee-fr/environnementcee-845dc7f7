@@ -18,6 +18,7 @@ import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 
 // Pages Pro
+import LEDUnifie from "./pages/pro/LEDUnifie";
 import LEDEntrepot from "./pages/pro/LEDEntrepot";
 import LEDBureau from "./pages/pro/LEDBureau";
 import LEDSolaire from "./pages/pro/LEDSolaire";
@@ -57,7 +58,7 @@ const App = () => (
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/professionnels" element={<Professionnels />} />
+          <Route path="/professionnels" element={<LEDUnifie />} />
           <Route path="/particuliers" element={<Particuliers />} />
           <Route path="/aides" element={<Aides />} />
           <Route path="/blog" element={<Blog />} />
@@ -69,7 +70,10 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/merci" element={<ThankYou />} />
           
-          {/* Routes Professionnels */}
+          {/* Routes Professionnels - Nouveau formulaire unifié */}
+          <Route path="/pro/led" element={<LEDUnifie />} />
+          
+          {/* Anciennes routes LED (garder pour compatibilité) */}
           <Route path="/pro/led-entrepot" element={<LEDEntrepot />} />
           <Route path="/pro/led-bureau" element={<LEDBureau />} />
           <Route path="/pro/led-solaire" element={<LEDSolaire />} />
@@ -78,7 +82,7 @@ const App = () => (
           <Route path="/pro/brasseur-air" element={<BrasseurAirPro />} />
           <Route path="/pro/hp-flottante" element={<HPFlottante />} />
           
-          {/* Routes Particuliers */}
+          {/* Routes Particuliers - Anciennes (redirection vers le formulaire unifié) */}
           <Route path="/particulier/isolation" element={<IsolationParticulier />} />
           <Route path="/particulier/pac" element={<PACParticulier />} />
           <Route path="/particulier/brasseur-air" element={<BrasseurAirParticulier />} />
