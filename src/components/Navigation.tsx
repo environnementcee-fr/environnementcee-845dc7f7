@@ -50,12 +50,6 @@ export const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Desktop */}
-          <div className="hidden lg:block">
-            <Button asChild size="lg" className="shadow-elegant">
-              <Link to="/simulation">Tester mon éligibilité</Link>
-            </Button>
-          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -85,11 +79,6 @@ export const Navigation = () => {
                   {item.label}
                 </Link>
               ))}
-              <Button asChild size="lg" className="mt-2">
-                <Link to="/simulation" onClick={() => setIsOpen(false)}>
-                  Tester mon éligibilité
-                </Link>
-              </Button>
             </div>
           </div>
         )}
