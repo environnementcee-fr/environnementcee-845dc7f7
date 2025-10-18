@@ -36,6 +36,7 @@ import HPFlottante from "./pages/pro/HPFlottante";
 import AidesCEE2025 from "./pages/blog/AidesCEE2025";
 import IsolationBatimentTertiaire from "./pages/blog/IsolationBatimentTertiaire";
 import PACIndustrielle from "./pages/blog/PACIndustrielle";
+import MaPrimeRenov from "./pages/MaPrimeRenov";
 
 // Pages Admin
 import Login from "./pages/Login";
@@ -91,6 +92,9 @@ const App = () => (
           <Route path="/blog/aides-cee-2025" element={<AidesCEE2025 />} />
           <Route path="/blog/isolation-batiment-tertiaire" element={<IsolationBatimentTertiaire />} />
           <Route path="/blog/pac-industrielle" element={<PACIndustrielle />} />
+          
+          {/* Ma Prime Rénov */}
+          <Route path="/ma-prime-renov" element={<MaPrimeRenov />} />
           
           {/* Routes Admin */}
           <Route path="/login" element={<Login />} />

@@ -39,6 +39,7 @@ interface LeadData {
   pac_type?: string;
   usage_type?: string;
   room_count?: number;
+  project_data?: any;
 }
 
 async function sendEmail(from: string, to: string[], subject: string, html: string) {
@@ -80,6 +81,9 @@ const handler = async (req: Request): Promise<Response> => {
       led_entrepot: "LED Entrepôt",
       led_bureau: "LED Bureau",
       led_solaire: "LED Solaire",
+      multi_led_pro: "LED Multi-Projets PRO",
+      multi_particulier: "Multi-Aides Particulier",
+      ma_prime_renov: "Ma Prime Rénov'",
       isolation: "Isolation",
       pac: "Pompe à Chaleur",
       brasseur_air: "Brasseur d'Air",
@@ -89,7 +93,79 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Construction des détails du projet selon le type d'aide
     let projectDetails = "";
-    if (leadData.aid_type === "led_entrepot" || leadData.aid_type === "led_bureau") {
+    
+    // Multi-LED Pro
+    if (leadData.aid_type === "multi_led_pro" && leadData.project_data) {
+      const ledTypes = leadData.project_data.led_types?.join(", ") || "";
+      projectDetails = `
+        <div class="info-item"><div class="label">Types de LED</div><div class="value">${ledTypes}</div></div>
+        ${leadData.project_data.total_surface ? `<div class="info-item"><div class="label">Surface totale</div><div class="value">${leadData.project_data.total_surface} m²</div></div>` : ""}
+      `;
+    }
+    // Multi-Particulier
+    else if ((leadData.aid_type === "multi_particulier" || leadData.aid_type === "ma_prime_renov") && leadData.project_data) {
+      const selectedAids = leadData.project_data.selected_aids?.join(", ") || "";
+      projectDetails = `
+        <div class="info-item"><div class="label">Aides demandées</div><div class="value">${selectedAids}</div></div>
+        ${leadData.project_data.building_type ? `<div class="info-item"><div class="label">Type de bien</div><div class="value">${leadData.project_data.building_type}</div></div>` : ""}
+        ${leadData.surface ? `<div class="info-item"><div class="label">Surface</div><div class="value">${leadData.surface} m²</div></div>` : ""}
+        ${leadData.construction_year ? `<div class="info-item"><div class="label">Année construction</div><div class="value">${leadData.construction_year}</div></div>` : ""}
+        ${leadData.income_bracket ? `<div class="info-item"><div class="label">Revenus</div><div class="value">${leadData.income_bracket}</div></div>` : ""}
+      `;
+      
+      // Détails par aide
+      if (leadData.project_data.isolation) {
+        projectDetails += `
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <div class="label">🏠 Isolation</div>
+            <div class="value">
+              ${leadData.project_data.isolation.type ? `Type: ${leadData.project_data.isolation.type}` : ""}
+              ${leadData.project_data.isolation.surface ? ` • Surface: ${leadData.project_data.isolation.surface}m²` : ""}
+              ${leadData.project_data.isolation.wall_material ? ` • Matériau: ${leadData.project_data.isolation.wall_material}` : ""}
+            </div>
+          </div>
+        `;
+      }
+      
+      if (leadData.project_data.pac) {
+        projectDetails += `
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <div class="label">🔥 Pompe à Chaleur</div>
+            <div class="value">
+              ${leadData.project_data.pac.heating_system ? `Chauffage actuel: ${leadData.project_data.pac.heating_system}` : ""}
+              ${leadData.project_data.pac.surface ? ` • Surface: ${leadData.project_data.pac.surface}m²` : ""}
+            </div>
+          </div>
+        `;
+      }
+      
+      if (leadData.project_data.panneaux_solaires) {
+        projectDetails += `
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <div class="label">☀️ Panneaux Solaires</div>
+            <div class="value">
+              ${leadData.project_data.panneaux_solaires.roof_surface ? `Toiture: ${leadData.project_data.panneaux_solaires.roof_surface}m²` : ""}
+              ${leadData.project_data.panneaux_solaires.orientation ? ` • Orientation: ${leadData.project_data.panneaux_solaires.orientation}` : ""}
+              ${leadData.project_data.panneaux_solaires.roof_type ? ` • Type: ${leadData.project_data.panneaux_solaires.roof_type}` : ""}
+            </div>
+          </div>
+        `;
+      }
+      
+      if (leadData.project_data.brasseur_air) {
+        projectDetails += `
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <div class="label">🌀 Brasseur d'Air</div>
+            <div class="value">
+              ${leadData.project_data.brasseur_air.ceiling_height ? `Hauteur: ${leadData.project_data.brasseur_air.ceiling_height}m` : ""}
+              ${leadData.project_data.brasseur_air.room_count ? ` • Pièces: ${leadData.project_data.brasseur_air.room_count}` : ""}
+            </div>
+          </div>
+        `;
+      }
+    }
+    // LED classiques
+    else if (leadData.aid_type === "led_entrepot" || leadData.aid_type === "led_bureau") {
       projectDetails = `
         ${leadData.surface ? `<div class="info-item"><div class="label">Surface</div><div class="value">${leadData.surface} m²</div></div>` : ""}
         ${leadData.ceiling_height ? `<div class="info-item"><div class="label">Hauteur sous plafond</div><div class="value">${leadData.ceiling_height} m</div></div>` : ""}
