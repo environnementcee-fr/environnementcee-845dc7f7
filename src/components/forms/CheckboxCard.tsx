@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface CheckboxCardProps {
   value: string;
-  icon: React.ReactNode;
+  icon: React.ReactNode | string;
   title: string;
   description?: string;
   checked: boolean;
@@ -12,7 +12,6 @@ interface CheckboxCardProps {
 }
 
 export const CheckboxCard = ({
-  value,
   icon,
   title,
   description,
@@ -29,15 +28,16 @@ export const CheckboxCard = ({
       )}
       onClick={() => onChange(!checked)}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex flex-col items-center text-center gap-3">
         <Checkbox
           checked={checked}
-          className="mt-1"
           onCheckedChange={onChange}
+          className="self-end"
+          onClick={(e) => e.stopPropagation()}
         />
-        <div className="flex-1">
-          <div className="text-4xl mb-3">{icon}</div>
-          <h3 className="text-xl font-bold mb-2">{title}</h3>
+        <div className="text-4xl">{icon}</div>
+        <div>
+          <h3 className="text-lg font-bold mb-1">{title}</h3>
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}

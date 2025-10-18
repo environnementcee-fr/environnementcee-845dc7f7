@@ -126,7 +126,7 @@ export const ParticulierMultiForm = () => {
           <div className="grid md:grid-cols-3 gap-4">
             <CheckboxCard
               value="isolation"
-              icon={<Home />}
+              icon="🏠"
               title="Isolation"
               description="Murs, combles, planchers"
               checked={selectedAids.includes('isolation')}
@@ -134,7 +134,7 @@ export const ParticulierMultiForm = () => {
             />
             <CheckboxCard
               value="pac"
-              icon={<Flame />}
+              icon="🔥"
               title="Pompe à Chaleur"
               description="Chauffage économique"
               checked={selectedAids.includes('pac')}
@@ -142,7 +142,7 @@ export const ParticulierMultiForm = () => {
             />
             <CheckboxCard
               value="panneaux_solaires"
-              icon={<Sun />}
+              icon="☀️"
               title="Panneaux Solaires"
               description="Énergie renouvelable"
               checked={selectedAids.includes('panneaux_solaires')}
@@ -150,7 +150,7 @@ export const ParticulierMultiForm = () => {
             />
             <CheckboxCard
               value="brasseur_air"
-              icon={<Wind />}
+              icon="🌀"
               title="Brasseur d'Air"
               description="Confort thermique"
               checked={selectedAids.includes('brasseur_air')}
@@ -158,7 +158,7 @@ export const ParticulierMultiForm = () => {
             />
             <CheckboxCard
               value="housse_piscine"
-              icon={<Droplets />}
+              icon="💧"
               title="Housse Piscine"
               description="Économie d'eau"
               checked={selectedAids.includes('housse_piscine')}
@@ -166,7 +166,7 @@ export const ParticulierMultiForm = () => {
             />
             <CheckboxCard
               value="aides_energetiques"
-              icon={<Zap />}
+              icon="⚡"
               title="Aides Énergétiques"
               description="Simulation globale"
               checked={selectedAids.includes('aides_energetiques')}
