@@ -31,6 +31,8 @@ export const CheckboxCard = ({
       <div className="flex flex-col items-center text-center gap-3">
         <Checkbox
           checked={checked}
+          onCheckedChange={onChange}
+          onClick={(e) => e.stopPropagation()}
           className="self-end"
         />
         <div className="text-4xl">{icon}</div>
