@@ -36,6 +36,10 @@ import AidesCEE2025 from "./pages/blog/AidesCEE2025";
 import IsolationBatimentTertiaire from "./pages/blog/IsolationBatimentTertiaire";
 import PACIndustrielle from "./pages/blog/PACIndustrielle";
 
+// Pages Admin
+import Login from "./pages/Login";
+import AdminDashboard from "./pages/AdminDashboard";
+
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { BackToHome } from "./components/BackToHome";
@@ -83,6 +87,10 @@ const App = () => (
           <Route path="/blog/aides-cee-2025" element={<AidesCEE2025 />} />
           <Route path="/blog/isolation-batiment-tertiaire" element={<IsolationBatimentTertiaire />} />
           <Route path="/blog/pac-industrielle" element={<PACIndustrielle />} />
+          
+          {/* Routes Admin */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
