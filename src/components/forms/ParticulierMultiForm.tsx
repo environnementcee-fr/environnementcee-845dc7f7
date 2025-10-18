@@ -182,27 +182,27 @@ export const ParticulierMultiForm = () => {
         <Card className="p-6">
           <h3 className="text-2xl font-bold mb-6">Votre logement</h3>
           <div className="grid md:grid-cols-2 gap-6">
-            <FormField
-              control={form.control}
-              name="building_type"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Type de bien *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Sélectionner" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="maison">Maison</SelectItem>
-                      <SelectItem value="appartement">Appartement</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="building_type"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Type de bien *</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Sélectionner" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="maison">Maison</SelectItem>
+                        <SelectItem value="appartement">Appartement</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             <FormField
               control={form.control}
               name="postal_code"
@@ -259,29 +259,29 @@ export const ParticulierMultiForm = () => {
           <Card className="p-6 animate-fade-in">
             <h3 className="text-2xl font-bold mb-6">🏠 Isolation Extérieur</h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="isolation_type"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Type d'isolation *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="ITE">ITE (Isolation Thermique Extérieure)</SelectItem>
-                        <SelectItem value="ITI">ITI (Isolation Thermique Intérieure)</SelectItem>
-                        <SelectItem value="Combles">Combles</SelectItem>
-                        <SelectItem value="Plancher">Plancher</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="isolation_type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Type d'isolation *</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="ITE">ITE (Isolation Thermique Extérieure)</SelectItem>
+                          <SelectItem value="ITI">ITI (Isolation Thermique Intérieure)</SelectItem>
+                          <SelectItem value="Combles">Combles</SelectItem>
+                          <SelectItem value="Plancher">Plancher</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               <FormField
                 control={form.control}
                 name="isolation_surface"
@@ -299,29 +299,29 @@ export const ParticulierMultiForm = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="isolation_wall_material"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Matériau des murs</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Parpaing">Parpaing</SelectItem>
-                        <SelectItem value="Brique">Brique</SelectItem>
-                        <SelectItem value="Béton">Béton</SelectItem>
-                        <SelectItem value="Pierre">Pierre</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="isolation_wall_material"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Matériau des murs</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Parpaing">Parpaing</SelectItem>
+                          <SelectItem value="Brique">Brique</SelectItem>
+                          <SelectItem value="Béton">Béton</SelectItem>
+                          <SelectItem value="Pierre">Pierre</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
             </div>
           </Card>
         )}
@@ -330,29 +330,29 @@ export const ParticulierMultiForm = () => {
           <Card className="p-6 animate-fade-in">
             <h3 className="text-2xl font-bold mb-6">🔥 Pompe à Chaleur</h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="pac_heating_system"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Système de chauffage actuel *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Gaz">Gaz</SelectItem>
-                        <SelectItem value="Fioul">Fioul</SelectItem>
-                        <SelectItem value="Électrique">Électrique</SelectItem>
-                        <SelectItem value="Bois">Bois</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="pac_heating_system"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Système de chauffage actuel *</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Gaz">Gaz</SelectItem>
+                          <SelectItem value="Fioul">Fioul</SelectItem>
+                          <SelectItem value="Électrique">Électrique</SelectItem>
+                          <SelectItem value="Bois">Bois</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               <FormField
                 control={form.control}
                 name="pac_surface"
@@ -395,53 +395,53 @@ export const ParticulierMultiForm = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="solar_orientation"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Orientation toiture *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Sud">Sud</SelectItem>
-                        <SelectItem value="Sud-Est">Sud-Est</SelectItem>
-                        <SelectItem value="Sud-Ouest">Sud-Ouest</SelectItem>
-                        <SelectItem value="Est">Est</SelectItem>
-                        <SelectItem value="Ouest">Ouest</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="solar_roof_type"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Type de toiture *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Tuiles">Tuiles</SelectItem>
-                        <SelectItem value="Ardoise">Ardoise</SelectItem>
-                        <SelectItem value="Bac acier">Bac acier</SelectItem>
-                        <SelectItem value="Toit plat">Toit plat</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="solar_orientation"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Orientation toiture *</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Sud">Sud</SelectItem>
+                          <SelectItem value="Sud-Est">Sud-Est</SelectItem>
+                          <SelectItem value="Sud-Ouest">Sud-Ouest</SelectItem>
+                          <SelectItem value="Est">Est</SelectItem>
+                          <SelectItem value="Ouest">Ouest</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="solar_roof_type"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Type de toiture *</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Sélectionner" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Tuiles">Tuiles</SelectItem>
+                          <SelectItem value="Ardoise">Ardoise</SelectItem>
+                          <SelectItem value="Bac acier">Bac acier</SelectItem>
+                          <SelectItem value="Toit plat">Toit plat</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               <FormField
                 control={form.control}
                 name="solar_annual_consumption"
@@ -553,7 +553,7 @@ export const ParticulierMultiForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Chauffage piscine actuel *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Sélectionner" />
@@ -614,7 +614,7 @@ export const ParticulierMultiForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Revenus fiscaux annuels *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Sélectionner" />
