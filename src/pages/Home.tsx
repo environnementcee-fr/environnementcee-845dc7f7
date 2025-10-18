@@ -149,18 +149,6 @@ const Home = () => {
             </Carousel>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-fade-in">
-            <Button asChild size="lg" className="text-base md:text-lg h-12 md:h-14 shadow-lg w-full sm:w-auto">
-              <Link to="/simulation">
-                Tester mon éligibilité
-                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="text-base md:text-lg h-12 md:h-14 w-full sm:w-auto">
-              <Link to="/qui-sommes-nous">En savoir plus</Link>
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -196,6 +184,13 @@ const Home = () => {
                 </div>
               </div>
             </Link>
+          </div>
+
+          {/* En savoir plus button */}
+          <div className="flex justify-center mt-6 md:mt-8">
+            <Button asChild size="lg" variant="outline" className="text-base md:text-lg h-12 md:h-14">
+              <Link to="/qui-sommes-nous">En savoir plus</Link>
+            </Button>
           </div>
         </div>
       </section>
