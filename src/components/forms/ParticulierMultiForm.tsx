@@ -124,6 +124,7 @@ export const ParticulierMultiForm = () => {
         {/* Section 1: Aides */}
         <Card className="p-6">
           <h3 className="text-2xl font-bold mb-6">Quelles aides vous intéressent ?</h3>
+          <p className="text-muted-foreground mb-6">Cliquez sur les cartes pour sélectionner les aides qui vous intéressent</p>
           <div className="grid md:grid-cols-3 gap-4">
             <CheckboxCard
               value="isolation"
