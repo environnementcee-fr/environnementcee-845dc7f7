@@ -25,6 +25,7 @@ export const ParticulierMultiForm = () => {
     resolver: zodResolver(particulierMultiSchema),
     defaultValues: {
       selected_aids: [],
+      postal_code: "",
       consent_privacy: false,
       consent_partner: false
     }
@@ -188,7 +189,7 @@ export const ParticulierMultiForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type de bien *</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value || ""}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Sélectionner" />
@@ -265,7 +266,7 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Type d'isolation *</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value || ""}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Sélectionner" />
@@ -305,7 +306,7 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Matériau des murs</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value || ""}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Sélectionner" />
@@ -336,7 +337,7 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Système de chauffage actuel *</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value || ""}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Sélectionner" />
@@ -401,7 +402,7 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Orientation toiture *</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value || ""}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Sélectionner" />
@@ -425,7 +426,7 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Type de toiture *</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value || ""}>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Sélectionner" />
@@ -553,7 +554,7 @@ export const ParticulierMultiForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Chauffage piscine actuel *</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value || ""}>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Sélectionner" />
@@ -614,7 +615,7 @@ export const ParticulierMultiForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Revenus fiscaux annuels *</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value || ""}>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Sélectionner" />
