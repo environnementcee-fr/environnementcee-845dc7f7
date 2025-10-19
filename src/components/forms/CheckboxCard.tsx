@@ -18,36 +18,31 @@ export const CheckboxCard = ({
   checked,
   onChange,
 }: CheckboxCardProps) => {
-  const handleCardClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    onChange(!checked);
-  };
-
   return (
-    <Card
+    <div
       className={cn(
-        "p-6 cursor-pointer transition-all border-2 hover:shadow-lg",
+        "p-6 cursor-pointer transition-all border-2 hover:shadow-lg rounded-lg bg-card text-card-foreground shadow-sm",
         checked
           ? "border-primary bg-primary/5 shadow-md"
           : "border-border hover:border-primary/50"
       )}
-      onClick={handleCardClick}
+      onClick={() => onChange(!checked)}
     >
       <div className="flex flex-col items-center text-center gap-3">
-        <Checkbox
-          checked={checked}
-          onCheckedChange={onChange}
-          onClick={(e) => e.stopPropagation()}
-          className="self-end"
-        />
-        <div className="text-4xl">{icon}</div>
-        <div>
+        <div className="self-end pointer-events-none">
+          <Checkbox
+            checked={checked}
+            className="pointer-events-none"
+          />
+        </div>
+        <div className="text-4xl pointer-events-none">{icon}</div>
+        <div className="pointer-events-none">
           <h3 className="text-lg font-bold mb-1">{title}</h3>
           {description && (
             <p className="text-sm text-muted-foreground">{description}</p>
           )}
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
