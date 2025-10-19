@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import { Home, Flame, Sun, Wind, Droplets, Zap, Info } from "lucide-react";
+import { Info } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckboxCard } from "./CheckboxCard";
+import { RadioGroupField } from "./RadioGroupField";
 import { particulierMultiSchema, type ParticulierMultiFormData } from "@/lib/validations/particulier-multi";
 
 export const ParticulierMultiForm = () => {
@@ -190,17 +190,17 @@ export const ParticulierMultiForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type de bien *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="maison">Maison</SelectItem>
-                        <SelectItem value="appartement">Appartement</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <RadioGroupField
+                        name="building_type"
+                        options={[
+                          { value: "maison", label: "Maison" },
+                          { value: "appartement", label: "Appartement" }
+                        ]}
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -267,19 +267,19 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Type d'isolation *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionner" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="ITE">ITE (Isolation Thermique Extérieure)</SelectItem>
-                          <SelectItem value="ITI">ITI (Isolation Thermique Intérieure)</SelectItem>
-                          <SelectItem value="Combles">Combles</SelectItem>
-                          <SelectItem value="Plancher">Plancher</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <RadioGroupField
+                          name="isolation_type"
+                          options={[
+                            { value: "ITE", label: "ITE (Isolation Thermique Extérieure)" },
+                            { value: "ITI", label: "ITI (Isolation Thermique Intérieure)" },
+                            { value: "Combles", label: "Combles" },
+                            { value: "Plancher", label: "Plancher" }
+                          ]}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -307,19 +307,19 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Matériau des murs</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionner" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Parpaing">Parpaing</SelectItem>
-                          <SelectItem value="Brique">Brique</SelectItem>
-                          <SelectItem value="Béton">Béton</SelectItem>
-                          <SelectItem value="Pierre">Pierre</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <RadioGroupField
+                          name="isolation_wall_material"
+                          options={[
+                            { value: "Parpaing", label: "Parpaing" },
+                            { value: "Brique", label: "Brique" },
+                            { value: "Béton", label: "Béton" },
+                            { value: "Pierre", label: "Pierre" }
+                          ]}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -338,19 +338,19 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Système de chauffage actuel *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionner" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Gaz">Gaz</SelectItem>
-                          <SelectItem value="Fioul">Fioul</SelectItem>
-                          <SelectItem value="Électrique">Électrique</SelectItem>
-                          <SelectItem value="Bois">Bois</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <RadioGroupField
+                          name="pac_heating_system"
+                          options={[
+                            { value: "Gaz", label: "Gaz" },
+                            { value: "Fioul", label: "Fioul" },
+                            { value: "Électrique", label: "Électrique" },
+                            { value: "Bois", label: "Bois" }
+                          ]}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -403,20 +403,20 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Orientation toiture *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionner" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Sud">Sud</SelectItem>
-                          <SelectItem value="Sud-Est">Sud-Est</SelectItem>
-                          <SelectItem value="Sud-Ouest">Sud-Ouest</SelectItem>
-                          <SelectItem value="Est">Est</SelectItem>
-                          <SelectItem value="Ouest">Ouest</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <RadioGroupField
+                          name="solar_orientation"
+                          options={[
+                            { value: "Sud", label: "Sud" },
+                            { value: "Sud-Est", label: "Sud-Est" },
+                            { value: "Sud-Ouest", label: "Sud-Ouest" },
+                            { value: "Est", label: "Est" },
+                            { value: "Ouest", label: "Ouest" }
+                          ]}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -427,19 +427,19 @@ export const ParticulierMultiForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Type de toiture *</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Sélectionner" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Tuiles">Tuiles</SelectItem>
-                          <SelectItem value="Ardoise">Ardoise</SelectItem>
-                          <SelectItem value="Bac acier">Bac acier</SelectItem>
-                          <SelectItem value="Toit plat">Toit plat</SelectItem>
-                        </SelectContent>
-                      </Select>
+                      <FormControl>
+                        <RadioGroupField
+                          name="solar_roof_type"
+                          options={[
+                            { value: "Tuiles", label: "Tuiles" },
+                            { value: "Ardoise", label: "Ardoise" },
+                            { value: "Bac acier", label: "Bac acier" },
+                            { value: "Toit plat", label: "Toit plat" }
+                          ]}
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -555,19 +555,19 @@ export const ParticulierMultiForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Chauffage piscine actuel *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="Aucun">Aucun</SelectItem>
-                        <SelectItem value="Électrique">Électrique</SelectItem>
-                        <SelectItem value="PAC">Pompe à chaleur</SelectItem>
-                        <SelectItem value="Solaire">Solaire</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <RadioGroupField
+                        name="piscine_heating"
+                        options={[
+                          { value: "Aucun", label: "Aucun" },
+                          { value: "Électrique", label: "Électrique" },
+                          { value: "PAC", label: "Pompe à chaleur" },
+                          { value: "Solaire", label: "Solaire" }
+                        ]}
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -616,19 +616,19 @@ export const ParticulierMultiForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Revenus fiscaux annuels *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Sélectionner" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="tres_modeste">Moins de 22 461€ (Très modeste)</SelectItem>
-                    <SelectItem value="modeste">22 461€ - 30 389€ (Modeste)</SelectItem>
-                    <SelectItem value="intermediaire">30 389€ - 38 349€ (Intermédiaire)</SelectItem>
-                    <SelectItem value="superieur">Plus de 38 349€ (Supérieur)</SelectItem>
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <RadioGroupField
+                    name="income_bracket"
+                    options={[
+                      { value: "tres_modeste", label: "Moins de 22 461€ (Très modeste)" },
+                      { value: "modeste", label: "22 461€ - 30 389€ (Modeste)" },
+                      { value: "intermediaire", label: "30 389€ - 38 349€ (Intermédiaire)" },
+                      { value: "superieur", label: "Plus de 38 349€ (Supérieur)" }
+                    ]}
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
