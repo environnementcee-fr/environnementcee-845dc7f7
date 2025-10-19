@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CheckboxCard } from "./CheckboxCard";
-import { RadioGroupField } from "./RadioGroupField";
+import { SimpleRadioGroup } from "./SimpleRadioGroup";
 import { particulierMultiSchema, type ParticulierMultiFormData } from "@/lib/validations/particulier-multi";
 
 export const ParticulierMultiForm = () => {
@@ -191,7 +191,7 @@ export const ParticulierMultiForm = () => {
                   <FormItem>
                     <FormLabel>Type de bien *</FormLabel>
                     <FormControl>
-                      <RadioGroupField
+                      <SimpleRadioGroup
                         name="building_type"
                         options={[
                           { value: "maison", label: "Maison" },
@@ -268,7 +268,7 @@ export const ParticulierMultiForm = () => {
                     <FormItem>
                       <FormLabel>Type d'isolation *</FormLabel>
                       <FormControl>
-                        <RadioGroupField
+                        <SimpleRadioGroup
                           name="isolation_type"
                           options={[
                             { value: "ITE", label: "ITE (Isolation Thermique Extérieure)" },
@@ -308,7 +308,7 @@ export const ParticulierMultiForm = () => {
                     <FormItem>
                       <FormLabel>Matériau des murs</FormLabel>
                       <FormControl>
-                        <RadioGroupField
+                        <SimpleRadioGroup
                           name="isolation_wall_material"
                           options={[
                             { value: "Parpaing", label: "Parpaing" },
@@ -339,7 +339,7 @@ export const ParticulierMultiForm = () => {
                     <FormItem>
                       <FormLabel>Système de chauffage actuel *</FormLabel>
                       <FormControl>
-                        <RadioGroupField
+                        <SimpleRadioGroup
                           name="pac_heating_system"
                           options={[
                             { value: "Gaz", label: "Gaz" },
@@ -404,7 +404,7 @@ export const ParticulierMultiForm = () => {
                     <FormItem>
                       <FormLabel>Orientation toiture *</FormLabel>
                       <FormControl>
-                        <RadioGroupField
+                        <SimpleRadioGroup
                           name="solar_orientation"
                           options={[
                             { value: "Sud", label: "Sud" },
@@ -428,7 +428,7 @@ export const ParticulierMultiForm = () => {
                     <FormItem>
                       <FormLabel>Type de toiture *</FormLabel>
                       <FormControl>
-                        <RadioGroupField
+                        <SimpleRadioGroup
                           name="solar_roof_type"
                           options={[
                             { value: "Tuiles", label: "Tuiles" },
@@ -556,7 +556,7 @@ export const ParticulierMultiForm = () => {
                   <FormItem>
                     <FormLabel>Chauffage piscine actuel *</FormLabel>
                     <FormControl>
-                      <RadioGroupField
+                      <SimpleRadioGroup
                         name="piscine_heating"
                         options={[
                           { value: "Aucun", label: "Aucun" },
@@ -617,7 +617,7 @@ export const ParticulierMultiForm = () => {
               <FormItem>
                 <FormLabel>Revenus fiscaux annuels *</FormLabel>
                 <FormControl>
-                  <RadioGroupField
+                  <SimpleRadioGroup
                     name="income_bracket"
                     options={[
                       { value: "tres_modeste", label: "Moins de 22 461€ (Très modeste)" },
