@@ -18,6 +18,11 @@ export const CheckboxCard = ({
   checked,
   onChange,
 }: CheckboxCardProps) => {
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onChange(!checked);
+  };
+
   return (
     <Card
       className={cn(
@@ -26,7 +31,7 @@ export const CheckboxCard = ({
           ? "border-primary bg-primary/5 shadow-md"
           : "border-border hover:border-primary/50"
       )}
-      onClick={() => onChange(!checked)}
+      onClick={handleCardClick}
     >
       <div className="flex flex-col items-center text-center gap-3">
         <Checkbox
