@@ -1,4 +1,3 @@
-import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 
 interface CheckboxCardProps {
@@ -33,10 +32,12 @@ export const CheckboxCard = ({
     >
       <div className="flex flex-col items-center text-center gap-3">
         <div className="self-end">
-          <Checkbox
+          <input
+            type="checkbox"
             checked={checked}
-            onCheckedChange={onChange}
+            onChange={(e) => onChange(e.target.checked)}
             onClick={(e) => e.stopPropagation()}
+            className="w-5 h-5 text-primary border-2 border-primary rounded focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer"
           />
         </div>
         <div className="text-4xl">{icon}</div>
