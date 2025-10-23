@@ -16,73 +16,130 @@ export type Database = {
     Tables: {
       lead_submissions: {
         Row: {
+          aid_type: string
           assigned_to: string | null
-          building_type: string
-          company_name: string
+          building_type: string | null
+          ceiling_height: number | null
+          cold_room_volume: number | null
+          company_name: string | null
           consent_partner: boolean
           consent_privacy: boolean
+          construction_year: number | null
           created_at: string
-          current_lighting: string
+          current_fixture_type: string | null
+          current_lighting: string | null
           email: string
-          employees: string
+          employees: string | null
           first_name: string
+          fixture_count: number | null
+          heating_system: string | null
           id: string
+          income_bracket: string | null
+          insulation_type: string | null
           ip_address: string | null
+          lamppost_height: number | null
           last_name: string
           notes: string | null
+          pac_type: string | null
           phone: string
           postal_code: string
+          project_data: Json | null
           referrer: string | null
-          siren: string
+          room_count: number | null
+          siren: string | null
           status: string
-          surface: number
+          sun_exposure: string | null
+          surface: number | null
+          target_temperature: number | null
+          usage_type: string | null
           user_agent: string | null
+          user_type: string
+          wall_material: string | null
+          zone_type: string | null
         }
         Insert: {
+          aid_type?: string
           assigned_to?: string | null
-          building_type: string
-          company_name: string
+          building_type?: string | null
+          ceiling_height?: number | null
+          cold_room_volume?: number | null
+          company_name?: string | null
           consent_partner?: boolean
           consent_privacy?: boolean
+          construction_year?: number | null
           created_at?: string
-          current_lighting: string
+          current_fixture_type?: string | null
+          current_lighting?: string | null
           email: string
-          employees: string
+          employees?: string | null
           first_name: string
+          fixture_count?: number | null
+          heating_system?: string | null
           id?: string
+          income_bracket?: string | null
+          insulation_type?: string | null
           ip_address?: string | null
+          lamppost_height?: number | null
           last_name: string
           notes?: string | null
+          pac_type?: string | null
           phone: string
           postal_code: string
+          project_data?: Json | null
           referrer?: string | null
-          siren: string
+          room_count?: number | null
+          siren?: string | null
           status?: string
-          surface: number
+          sun_exposure?: string | null
+          surface?: number | null
+          target_temperature?: number | null
+          usage_type?: string | null
           user_agent?: string | null
+          user_type?: string
+          wall_material?: string | null
+          zone_type?: string | null
         }
         Update: {
+          aid_type?: string
           assigned_to?: string | null
-          building_type?: string
-          company_name?: string
+          building_type?: string | null
+          ceiling_height?: number | null
+          cold_room_volume?: number | null
+          company_name?: string | null
           consent_partner?: boolean
           consent_privacy?: boolean
+          construction_year?: number | null
           created_at?: string
-          current_lighting?: string
+          current_fixture_type?: string | null
+          current_lighting?: string | null
           email?: string
-          employees?: string
+          employees?: string | null
           first_name?: string
+          fixture_count?: number | null
+          heating_system?: string | null
           id?: string
+          income_bracket?: string | null
+          insulation_type?: string | null
           ip_address?: string | null
+          lamppost_height?: number | null
           last_name?: string
           notes?: string | null
+          pac_type?: string | null
           phone?: string
           postal_code?: string
+          project_data?: Json | null
           referrer?: string | null
-          siren?: string
+          room_count?: number | null
+          siren?: string | null
           status?: string
-          surface?: number
+          sun_exposure?: string | null
+          surface?: number | null
+          target_temperature?: number | null
+          usage_type?: string | null
           user_agent?: string | null
+          user_type?: string
+          wall_material?: string | null
+          zone_type?: string | null
         }
         Relationships: []
       }

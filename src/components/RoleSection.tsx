@@ -1,71 +1,52 @@
-import { Info, FileText, Users, ArrowRight } from "lucide-react";
+import { Building2, Home } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const RoleSection = () => {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <Card className="p-8 bg-primary/5 border-primary/20">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <Info className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-2">Notre rôle : intermédiaire privé</h2>
-                <p className="text-muted-foreground">
-                  EnvironnementCEE.fr est un service privé d'accompagnement, indépendant du dispositif public des CEE
-                </p>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 mt-8">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mb-4">
-                  <FileText className="h-8 w-8 text-primary-foreground" />
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-center mb-12">Vous êtes...</h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Professionnel */}
+            <Link to="/pro/led">
+              <Card className="p-8 hover:shadow-2xl transition-all cursor-pointer group border-2 hover:border-primary h-full">
+                <div className="text-center">
+                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-smooth">
+                    <Building2 className="h-10 w-10 text-primary" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-smooth">PROFESSIONNEL</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Entreprises, industries, commerces : optimisez votre éclairage LED et réduisez vos coûts énergétiques
+                  </p>
+                  <Button size="lg" className="w-full">
+                    Découvrir les solutions LED Pro
+                  </Button>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Constitution du dossier</h3>
-                <p className="text-sm text-muted-foreground">
-                  Nous vous aidons à réunir tous les documents nécessaires pour votre demande CEE
-                </p>
-              </div>
+              </Card>
+            </Link>
 
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mb-4">
-                  <Users className="h-8 w-8 text-primary-foreground" />
+            {/* Particulier */}
+            <Link to="/particuliers">
+              <Card className="p-8 hover:shadow-2xl transition-all cursor-pointer group border-2 hover:border-primary h-full">
+                <div className="text-center">
+                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-smooth">
+                    <Home className="h-10 w-10 text-primary" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-smooth">PARTICULIER</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Propriétaires, locataires : rénovez votre logement avec les aides CEE et MaPrimeRénov'
+                  </p>
+                  <Button size="lg" className="w-full">
+                    Découvrir les aides disponibles
+                  </Button>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Mise en relation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Nous vous connectons avec des professionnels RGE qualifiés et des obligés CEE
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center mb-4">
-                  <ArrowRight className="h-8 w-8 text-primary-foreground" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Suivi personnalisé</h3>
-                <p className="text-sm text-muted-foreground">
-                  Accompagnement tout au long du processus jusqu'au versement de votre prime
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 p-4 bg-background rounded-lg border border-border">
-              <p className="text-sm text-muted-foreground text-center">
-                <strong>Les aides CEE proviennent des obligés</strong> (fournisseurs d'énergie) dans le cadre du dispositif public des Certificats d'Économies d'Énergie. 
-                Pour plus d'informations sur le dispositif officiel, consultez le{" "}
-                <a 
-                  href="https://www.ecologie.gouv.fr/dispositif-des-certificats-deconomies-denergie" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline"
-                >
-                  site du Ministère de la Transition Écologique
-                </a>.
-              </p>
-            </div>
-          </Card>
+              </Card>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
