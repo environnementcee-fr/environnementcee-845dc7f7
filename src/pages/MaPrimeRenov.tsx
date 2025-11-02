@@ -1,7 +1,4 @@
 import { Helmet } from "react-helmet";
-import { Navigation } from "@/components/Navigation";
-import { Footer } from "@/components/Footer";
-import { BackToHome } from "@/components/BackToHome";
 import { MaPrimeRenovForm } from "@/components/forms/MaPrimeRenovForm";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,8 +14,6 @@ const MaPrimeRenov = () => {
           content="Bénéficiez de MaPrimeRénov' 2025 pour financer vos travaux de rénovation énergétique. Jusqu'à 90% pris en charge selon vos revenus." 
         />
       </Helmet>
-
-      <Navigation />
       
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
@@ -201,9 +196,6 @@ const MaPrimeRenov = () => {
           </div>
         </section>
       </main>
-
-      <Footer />
-      <BackToHome />
     </>
   );
 };
