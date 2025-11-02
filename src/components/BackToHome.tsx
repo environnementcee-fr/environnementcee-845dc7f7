@@ -14,7 +14,7 @@ export const BackToHome = () => {
   return (
     <Button
       onClick={() => navigate("/")}
-      className="fixed top-4 right-16 lg:right-4 z-50 rounded-full shadow-lg bg-background/90 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-105 h-12 w-12"
+      className="fixed top-4 right-16 lg:hidden z-50 rounded-full shadow-lg bg-background/90 backdrop-blur-sm hover:bg-background transition-all duration-300 hover:scale-105 h-12 w-12"
       variant="outline"
       aria-label="Retour à l'accueil"
     >
