@@ -24,20 +24,20 @@ const MaPrimeRenov = () => {
               <Badge className="mb-4 text-lg px-6 py-2">
                 MaPrimeRénov' 2025
               </Badge>
-              <Button
-                size="lg"
-                onClick={() => document.getElementById('estimation-form')?.scrollIntoView({ behavior: 'smooth' })}
-                className="mb-6 gap-2"
-              >
-                <Calculator className="h-5 w-5" />
-                Estimez vos aides
-              </Button>
               <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Jusqu'à 90% de vos travaux financés
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
                 L'aide de l'État pour rénover votre logement et réduire vos factures d'énergie
               </p>
+              <Button
+                size="lg"
+                onClick={() => document.getElementById('estimation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="gap-2"
+              >
+                <Calculator className="h-5 w-5" />
+                Estimez vos aides
+              </Button>
             </div>
           </div>
         </section>
