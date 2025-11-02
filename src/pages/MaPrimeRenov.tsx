@@ -2,7 +2,8 @@ import { Helmet } from "react-helmet";
 import { MaPrimeRenovForm } from "@/components/forms/MaPrimeRenovForm";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Home, Euro, Zap, Shield } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Home, Euro, Zap, Shield, Calculator } from "lucide-react";
 
 const MaPrimeRenov = () => {
   return (
@@ -29,6 +30,14 @@ const MaPrimeRenov = () => {
               <p className="text-xl text-muted-foreground mb-8">
                 L'aide de l'État pour rénover votre logement et réduire vos factures d'énergie
               </p>
+              <Button
+                size="lg"
+                onClick={() => document.getElementById('estimation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="gap-2"
+              >
+                <Calculator className="h-5 w-5" />
+                Estimez vos aides
+              </Button>
             </div>
           </div>
         </section>
@@ -136,7 +145,7 @@ const MaPrimeRenov = () => {
         </section>
 
         {/* Form Section */}
-        <section className="py-16 bg-background">
+        <section id="estimation-form" className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold mb-4 text-center">
