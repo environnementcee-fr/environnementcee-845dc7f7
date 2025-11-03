@@ -25,7 +25,7 @@ const TrouverArtisan = () => {
         <title>Trouvez l'artisan idéal pour votre projet | EnvironnementCEE.fr</title>
         <meta 
           name="description" 
-          content="Mettez en relation avec des artisans certifiés RGE pour vos travaux de rénovation énergétique. Service gratuit pour les clients." 
+          content="Mettez-vous en relation avec des artisans qualifiés pour tous vos travaux. Service gratuit pour les clients." 
         />
       </Helmet>
 
@@ -36,7 +36,7 @@ const TrouverArtisan = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Trouvez l'artisan idéal pour votre projet de rénovation énergétique
+              Trouvez l'artisan idéal pour votre projet
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Mettez-vous en relation avec des artisans qualifiés et bénéficiez d'un accompagnement personnalisé
@@ -74,18 +74,18 @@ const TrouverArtisan = () => {
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Artisans certifiés RGE</p>
+                      <p className="font-medium">Artisans qualifiés</p>
                       <p className="text-sm text-muted-foreground">
-                        Des professionnels qualifiés et vérifiés
+                        Des professionnels vérifiés et expérimentés
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Aide CEE incluse</p>
+                      <p className="font-medium">Accompagnement personnalisé</p>
                       <p className="text-sm text-muted-foreground">
-                        Accompagnement pour vos aides financières
+                        Support et conseil tout au long de votre projet
                       </p>
                     </div>
                   </div>
@@ -144,9 +144,9 @@ const TrouverArtisan = () => {
                   <div className="flex items-start gap-3">
                     <Shield className="h-5 w-5 text-secondary mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Accompagnement CEE</p>
+                      <p className="font-medium">Support professionnel</p>
                       <p className="text-sm text-muted-foreground">
-                        Support pour maximiser vos dossiers
+                        Assistance pour développer votre activité
                       </p>
                     </div>
                   </div>
