@@ -36,7 +36,7 @@ const TrouverArtisan = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Trouvez l'artisan idéal pour votre projet
+              Trouvez l'artisan idéal pour votre projet de rénovation
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Mettez-vous en relation avec des artisans qualifiés et bénéficiez d'un accompagnement personnalisé
