@@ -42,6 +42,9 @@ import MaPrimeRenov from "./pages/MaPrimeRenov";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 
+// Pages Artisans
+import TrouverArtisan from "./pages/artisans/TrouverArtisan";
+
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { BackToHome } from "./components/BackToHome";
@@ -95,6 +98,9 @@ const App = () => (
           
           {/* Ma Prime Rénov */}
           <Route path="/ma-prime-renov" element={<MaPrimeRenov />} />
+          
+          {/* Routes Artisans */}
+          <Route path="/trouver-un-artisan" element={<TrouverArtisan />} />
           
           {/* Routes Admin */}
           <Route path="/login" element={<Login />} />

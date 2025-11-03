@@ -17,6 +17,7 @@ export const Navigation = () => {
     { label: "Professionnels", path: "/pro/led" },
     { label: "Particuliers", path: "/particuliers" },
     { label: "Ma Prime Rénov", path: "/ma-prime-renov" },
+    { label: "Trouver un artisan", path: "/trouver-un-artisan" },
     { label: "Aides", path: "/aides" },
     { label: "Blog", path: "/blog" },
     { label: "Qui sommes-nous", path: "/qui-sommes-nous" },
