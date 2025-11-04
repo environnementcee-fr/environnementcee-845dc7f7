@@ -35,8 +35,8 @@ const faqs = [
     answer: "Selon la taille du projet, l'installation peut prendre de quelques jours à plusieurs semaines. L'étude préalable nécessite 1 à 2 semaines, puis le montage du dossier CEE 2 à 3 semaines. L'installation elle-même est planifiée pour minimiser l'impact sur votre activité.",
   },
   {
-    question: "Quel est le rôle d'Hello-Travaux ?",
-    answer: "Hello-Travaux est une plateforme de mise en relation entre particuliers/professionnels ayant des projets de rénovation et des artisans qualifiés. Nous facilitons vos démarches en vous mettant en contact avec des professionnels certifiés RGE et en vous accompagnant dans l'accès aux aides financières (CEE, MaPrimeRénov', etc.).",
+    question: "Quel est le rôle d'EnvironnementCEE.fr ?",
+    answer: "EnvironnementCEE.fr est un intermédiaire privé qui facilite vos démarches CEE. Nous ne sommes pas un organisme public mais nous vous accompagnons dans la constitution du dossier, la mise en relation avec des professionnels RGE et des obligés CEE. Les aides proviennent du dispositif public des Certificats d'Économies d'Énergie.",
   },
 ];
 

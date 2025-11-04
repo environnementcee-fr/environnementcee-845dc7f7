@@ -51,7 +51,7 @@ const Professionnels = () => {
 
   return (
     <div className="min-h-screen">
-      <title>Aides CEE pour Professionnels - Hello-Travaux</title>
+      <title>Aides CEE pour Professionnels - EnvironnementCEE.fr</title>
       
       {/* Hero */}
       <section className="gradient-hero py-12 md:py-20">

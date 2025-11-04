@@ -1,6 +1,4 @@
-# Hello-Travaux - Plateforme de mise en relation pour vos travaux de rénovation
-
-Trouvez l'artisan idéal pour votre projet de rénovation. Mise en relation simplifiée avec des professionnels qualifiés RGE.
+# Welcome to your Lovable project
 
 ## Project info
 

@@ -7,7 +7,7 @@ export const Header = () => {
       <div className="container mx-auto px-4">
         <Link to="/" className="flex items-center justify-center gap-2 md:gap-3 hover:opacity-80 transition-opacity">
           <Leaf className="h-6 w-6 md:h-8 md:w-8 text-primary flex-shrink-0" />
-          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground text-center">Hello-Travaux</h1>
+          <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground text-center">EnvironnementCEE.fr</h1>
         </Link>
         <p className="text-center text-xs md:text-sm text-muted-foreground mt-1 md:mt-2">
           Plateforme d'accompagnement aux aides CEE

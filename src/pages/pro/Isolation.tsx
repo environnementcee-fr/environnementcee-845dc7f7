@@ -7,7 +7,7 @@ import { IsolationForm } from "@/components/forms/IsolationForm";
 const IsolationPro = () => {
   return (
     <div className="min-h-screen">
-      <title>Isolation Professionnelle - CEE Professionnels | Hello-Travaux</title>
+      <title>Isolation Professionnelle - CEE Professionnels | EnvironnementCEE.fr</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">

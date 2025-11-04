@@ -42,7 +42,7 @@ const PrivacyPolicy = () => {
             <li>Droit à la portabilité</li>
             <li>Droit d'opposition</li>
           </ul>
-          <p>Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@hello-travaux.fr" className="text-primary underline">contact@hello-travaux.fr</a></p>
+          <p>Pour exercer ces droits, contactez-nous à : <a href="mailto:contact@environnementcee.fr" className="text-primary underline">contact@environnementcee.fr</a></p>
         </section>
 
         <section className="mb-8">

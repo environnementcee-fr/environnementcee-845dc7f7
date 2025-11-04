@@ -7,7 +7,7 @@ import { LEDSolaireForm } from "@/components/forms/LEDSolaireForm";
 const LEDSolaire = () => {
   return (
     <div className="min-h-screen">
-      <title>Éclairage LED Solaire - CEE Professionnels | Hello-Travaux</title>
+      <title>Éclairage LED Solaire - CEE Professionnels | EnvironnementCEE.fr</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">
