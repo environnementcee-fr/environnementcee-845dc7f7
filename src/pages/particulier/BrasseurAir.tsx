@@ -7,7 +7,7 @@ import { BrasseurAirForm } from "@/components/forms/BrasseurAirForm";
 const BrasseurAirParticulier = () => {
   return (
     <div className="min-h-screen">
-      <title>Brasseur d'Air - Aides Particuliers | EnvironnementCEE.fr</title>
+      <title>Brasseur d'Air - Aides Particuliers | Hello-Travaux</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">

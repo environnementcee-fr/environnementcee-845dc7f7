@@ -25,7 +25,7 @@ const CookiePolicy = () => {
           <ul className="list-disc pl-6 mb-4">
             <li>Via le bandeau qui s'affiche lors de votre première visite</li>
             <li>En configurant votre navigateur pour refuser les cookies</li>
-            <li>En nous contactant à : <a href="mailto:contact@environnementcee.fr" className="text-primary underline">contact@environnementcee.fr</a></li>
+            <li>En nous contactant à : <a href="mailto:contact@hello-travaux.fr" className="text-primary underline">contact@hello-travaux.fr</a></li>
           </ul>
         </section>
 

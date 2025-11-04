@@ -23,7 +23,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       {/* SEO Meta Tags */}
-      <title>Éclairage LED CEE - Prime pour Entreprises | EnvironnementCEE.fr</title>
+      <title>Trouvez l'artisan idéal pour votre projet de rénovation | Hello-Travaux</title>
       
       <Header />
       <InfoBanner />

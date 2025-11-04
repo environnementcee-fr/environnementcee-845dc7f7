@@ -63,7 +63,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen">
-      <title>Blog & Actualités - EnvironnementCEE.fr</title>
+      <title>Blog & Actualités - Hello-Travaux</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">

@@ -3,7 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/NewHome";
+import OldHome from "./pages/Home";
 import Professionnels from "./pages/Professionnels";
 import Particuliers from "./pages/Particuliers";
 import Aides from "./pages/Aides";
@@ -62,6 +63,7 @@ const App = () => (
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/ancienne-home" element={<OldHome />} />
           <Route path="/professionnels" element={<LEDUnifie />} />
           <Route path="/particuliers" element={<Particuliers />} />
           <Route path="/aides" element={<Aides />} />

@@ -34,7 +34,7 @@ export const Navigation = () => {
           <Link to="/" className="flex items-center gap-3 group">
             <Leaf className="h-8 w-8 text-primary transition-smooth group-hover:scale-110" />
             <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-bold text-foreground">EnvironnementCEE.fr</span>
+              <span className="text-xl md:text-2xl font-bold text-foreground">Hello-Travaux</span>
               <span className="text-xs text-muted-foreground hidden md:block">Transition énergétique simplifiée</span>
             </div>
           </Link>

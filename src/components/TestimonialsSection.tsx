@@ -5,7 +5,7 @@ const testimonials = [
   {
     company: "Restaurant Le Gourmet",
     sector: "Hôtellerie-Restauration",
-    quote: "Grâce à l'accompagnement d'EnvironnementCEE.fr, nous avons pu remplacer tous nos luminaires. La facture d'électricité a baissé de 65% dès le premier mois.",
+    quote: "Grâce à Hello-Travaux, nous avons trouvé rapidement un artisan RGE de confiance. Les travaux d'isolation ont été réalisés en 2 semaines et nous avons bénéficié des aides CEE.",
     author: "Sophie M., Gérante"
   },
   {

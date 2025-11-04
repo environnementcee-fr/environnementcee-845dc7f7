@@ -6,7 +6,7 @@ import { Leaf, Users, Award, Target, Shield, ArrowRight } from "lucide-react";
 const QuiSommesNous = () => {
   return (
     <div className="min-h-screen">
-      <title>Qui sommes-nous - EnvironnementCEE.fr</title>
+      <title>Qui sommes-nous - Hello-Travaux</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">
@@ -17,7 +17,7 @@ const QuiSommesNous = () => {
               Votre partenaire de confiance pour la transition énergétique
             </h1>
             <p className="text-xl text-muted-foreground">
-              EnvironnementCEE.fr facilite l'accès aux aides écologiques pour tous.
+              Hello-Travaux facilite l'accès aux aides écologiques pour tous.
             </p>
           </div>
         </div>
@@ -38,10 +38,10 @@ const QuiSommesNous = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
-                <strong className="text-foreground">EnvironnementCEE.fr</strong> est un <strong className="text-foreground">intermédiaire privé</strong> spécialisé dans la mise en relation entre bénéficiaires d'aides à la transition énergétique et installateurs certifiés RGE (Reconnu Garant de l'Environnement).
+                <strong className="text-foreground">Hello-Travaux</strong> est une <strong className="text-foreground">plateforme de mise en relation</strong> entre particuliers/professionnels ayant des projets de rénovation et artisans qualifiés. Nous vous accompagnons dans l'accès aux aides financières (CEE, MaPrimeRénov', etc.) et facilitons la mise en relation avec des professionnels certifiés RGE.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Notre objectif est simple : <strong className="text-foreground">rendre accessible à tous les aides CEE</strong> (Certificats d'Économies d'Énergie) et autres dispositifs publics, en vous accompagnant de A à Z dans vos démarches.
+                Notre objectif est simple : <strong className="text-foreground">rendre accessible à tous la rénovation énergétique</strong> en simplifiant vos démarches de A à Z.
               </p>
             </CardContent>
           </Card>
@@ -139,12 +139,12 @@ const QuiSommesNous = () => {
           
           <Card>
             <CardContent className="pt-6 space-y-3 text-sm">
-              <p><strong className="text-foreground">Raison sociale :</strong> FJLC ENVIRONNEMENT</p>
-              <p><strong className="text-foreground">SIREN :</strong> 849 863 535</p>
-              <p><strong className="text-foreground">Siège social :</strong> 8 B RUE ABEL, 75012 PARIS</p>
-              <p><strong className="text-foreground">E-mail :</strong> contact@environnementcee.fr</p>
+              <p><strong className="text-foreground">Raison sociale :</strong> Hello-Travaux</p>
+              <p><strong className="text-foreground">SIREN :</strong> [À compléter]</p>
+              <p><strong className="text-foreground">Siège social :</strong> 20 Rue de la Paix, 75002 Paris</p>
+              <p><strong className="text-foreground">E-mail :</strong> contact@hello-travaux.fr</p>
               <p className="text-muted-foreground italic pt-4">
-                EnvironnementCEE.fr est un intermédiaire privé de mise en relation entre bénéficiaires d'aides à la rénovation énergétique et installateurs agréés RGE. Nous ne réalisons pas les travaux directement.
+                Hello-Travaux est une plateforme de mise en relation entre particuliers/professionnels et artisans qualifiés pour vos projets de rénovation énergétique. Nous facilitons l'accès aux aides financières et ne réalisons pas les travaux directement.
               </p>
             </CardContent>
           </Card>

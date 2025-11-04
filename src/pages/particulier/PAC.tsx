@@ -7,7 +7,7 @@ import PACForm from "@/components/forms/PACForm";
 const PACParticulier = () => {
   return (
     <div className="min-h-screen">
-      <title>Pompe à Chaleur - Aides Particuliers | EnvironnementCEE.fr</title>
+      <title>Pompe à Chaleur - Aides Particuliers | Hello-Travaux</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">

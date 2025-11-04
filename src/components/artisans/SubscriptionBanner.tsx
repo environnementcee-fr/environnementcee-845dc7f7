@@ -55,7 +55,7 @@ export const SubscriptionBanner = () => {
                 </Button>
                 <Button 
                   onClick={() => {
-                    window.location.href = "mailto:contact@environnementcee.fr?subject=Activation abonnement artisan";
+                    window.location.href = "mailto:contact@hello-travaux.fr?subject=Activation abonnement artisan";
                   }}
                   className="flex-1"
                 >
