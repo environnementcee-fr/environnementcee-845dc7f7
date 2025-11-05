@@ -7,7 +7,7 @@ import { LEDEntrepotForm } from "@/components/forms/LEDEntrepotForm";
 const LEDEntrepot = () => {
   return (
     <div className="min-h-screen">
-      <title>Éclairage LED Entrepôt - CEE Professionnels | Hello-Travaux</title>
+      <title>Éclairage LED Entrepôt - CEE Professionnels | EnvironnementCEE.fr</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">

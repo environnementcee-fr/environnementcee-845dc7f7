@@ -3,7 +3,7 @@ import { ParticulierMultiForm } from "@/components/forms/ParticulierMultiForm";
 const Particuliers = () => {
   return (
     <div className="min-h-screen">
-      <title>Aides pour Particuliers - Hello-Travaux</title>
+      <title>Aides pour Particuliers - EnvironnementCEE.fr</title>
 
       {/* Hero */}
       <section className="gradient-hero py-20">

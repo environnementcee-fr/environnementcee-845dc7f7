@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 const LEDUnifie = () => {
   return (
     <div className="min-h-screen">
-      <title>Éclairage LED Professionnel - Hello-Travaux</title>
+      <title>Éclairage LED Professionnel - EnvironnementCEE.fr</title>
 
       <Header />
 

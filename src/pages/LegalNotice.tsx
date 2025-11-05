@@ -6,9 +6,9 @@ const LegalNotice = () => {
         
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">1. Éditeur du site</h2>
-          <p className="mb-2"><strong>Raison sociale :</strong> Hello-Travaux</p>
-          <p className="mb-2"><strong>Adresse :</strong> 20 Rue de la Paix, 75002 Paris</p>
-          <p className="mb-2"><strong>Email :</strong> contact@hello-travaux.fr</p>
+          <p className="mb-2"><strong>Raison sociale :</strong> EnvironnementCEE.fr</p>
+          <p className="mb-2"><strong>Adresse :</strong> [Adresse à compléter]</p>
+          <p className="mb-2"><strong>Email :</strong> contact@environnementcee.fr</p>
           <p className="mb-2"><strong>Téléphone :</strong> [Numéro à compléter]</p>
           <p className="mb-2"><strong>SIRET :</strong> [SIRET à compléter]</p>
         </section>

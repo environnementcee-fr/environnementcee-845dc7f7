@@ -5,7 +5,7 @@ const HPFlottante = () => {
   return (
     <>
       <Helmet>
-        <title>HP Flottante - Régulateur Chambre Froide | Aide CEE | Hello-Travaux</title>
+        <title>HP Flottante - Régulateur Chambre Froide | Aide CEE | EnvironnementCEE.fr</title>
         <meta 
           name="description" 
           content="Optimisez vos chambres froides avec un régulateur HP Flottante. Jusqu'à 20% d'économies d'énergie. Aide CEE disponible pour les professionnels. Testez votre éligibilité." 
