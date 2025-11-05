@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="font-bold text-lg mb-4">EnvironnementCEE.fr</h3>
+            <h3 className="font-bold text-lg mb-4">Hello-Travaux</h3>
             <p className="text-sm text-muted-foreground">
               Votre partenaire pour les Certificats d'Économies d'Énergie
             </p>
@@ -50,10 +50,10 @@ export const Footer = () => {
               <strong>Hébergeur :</strong> IONOS SARL - 7 Place de la Gare, 57200 Sarreguemines, France
             </p>
             <p className="pt-2">
-              © 2025 EnvironnementCEE.fr - Tous droits réservés
+              © 2025 Hello-Travaux - Tous droits réservés
             </p>
             <p className="text-xs leading-relaxed">
-              Les données collectées via ce formulaire sont traitées par FJLC ENVIRONNEMENT et ses partenaires dans le but de vous recontacter concernant votre demande d&apos;éligibilité CEE. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données. Les données sont conservées pendant 3 ans maximum. Pour toute question : <a href="mailto:contact@environnementcee.fr" className="text-primary hover:underline">contact@environnementcee.fr</a>
+              Les données collectées via ce formulaire sont traitées par Hello-Travaux et ses partenaires dans le but de vous recontacter concernant votre demande de mise en relation. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données. Les données sont conservées pendant 3 ans maximum. Pour toute question : <a href="mailto:contact@hello-travaux.fr" className="text-primary hover:underline">contact@hello-travaux.fr</a>
             </p>
           </div>
         </div>

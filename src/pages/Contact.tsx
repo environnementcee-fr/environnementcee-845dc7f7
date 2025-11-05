@@ -13,8 +13,8 @@ const Contact = () => {
           <div className="text-center p-6 rounded-lg border bg-card">
             <Mail className="w-12 h-12 mx-auto mb-4 text-primary" />
             <h3 className="text-lg font-semibold mb-2">Email</h3>
-            <a href="mailto:contact@environnementcee.fr" className="text-primary hover:underline">
-              contact@environnementcee.fr
+            <a href="mailto:contact@hello-travaux.fr" className="text-primary hover:underline">
+              contact@hello-travaux.fr
             </a>
           </div>
           
@@ -41,7 +41,7 @@ const Contact = () => {
             Pour une réponse plus rapide, utilisez notre <a href="/simulation" className="text-primary underline">formulaire de simulation</a> qui nous permettra de mieux comprendre votre projet.
           </p>
           <p className="text-muted-foreground">
-            Sinon, vous pouvez nous écrire directement à <a href="mailto:contact@environnementcee.fr" className="text-primary underline">contact@environnementcee.fr</a>
+            Sinon, vous pouvez nous écrire directement à <a href="mailto:contact@hello-travaux.fr" className="text-primary underline">contact@hello-travaux.fr</a>
           </p>
         </div>
       </div>

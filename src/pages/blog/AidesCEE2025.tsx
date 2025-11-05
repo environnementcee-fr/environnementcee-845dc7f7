@@ -85,7 +85,7 @@ const AidesCEE2025 = () => {
 
           <h2>Comment en profiter ?</h2>
           <p>
-            EnvironnementCEE.fr vous accompagne dans toutes vos démarches pour bénéficier des aides CEE 2025. 
+            Hello-Travaux vous accompagne dans toutes vos démarches pour bénéficier des aides CEE 2025. 
             Notre équipe d'experts vous aide à :
           </p>
           <ul>

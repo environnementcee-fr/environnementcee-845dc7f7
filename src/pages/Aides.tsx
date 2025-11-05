@@ -6,7 +6,7 @@ import { FileText, Euro, CheckCircle, ArrowRight } from "lucide-react";
 const Aides = () => {
   return (
     <div className="min-h-screen">
-      <title>Les Aides CEE Disponibles - EnvironnementCEE.fr</title>
+      <title>Les Aides à la Rénovation - Hello-Travaux</title>
       
       {/* Hero */}
       <section className="gradient-hero py-20">

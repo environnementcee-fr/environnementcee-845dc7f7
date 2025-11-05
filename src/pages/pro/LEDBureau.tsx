@@ -8,7 +8,7 @@ import { StickyCTA } from "@/components/StickyCTA";
 const LEDBureau = () => {
   return (
     <div className="min-h-screen">
-      <title>Éclairage LED Bureau - CEE Professionnels | EnvironnementCEE.fr</title>
+      <title>Éclairage LED Bureau - CEE Professionnels | Hello-Travaux</title>
       <StickyCTA targetId="eligibility-form" estimatedTime="2 min" />
       
       {/* Hero */}

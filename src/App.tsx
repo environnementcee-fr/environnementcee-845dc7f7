@@ -3,7 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/NewHome";
+import OldHome from "./pages/Home";
 import Professionnels from "./pages/Professionnels";
 import Particuliers from "./pages/Particuliers";
 import Aides from "./pages/Aides";
@@ -42,6 +43,9 @@ import MaPrimeRenov from "./pages/MaPrimeRenov";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 
+// Pages Artisans
+import TrouverArtisan from "./pages/artisans/TrouverArtisan";
+
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { BackToHome } from "./components/BackToHome";
@@ -59,6 +63,7 @@ const App = () => (
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/ancienne-home" element={<OldHome />} />
           <Route path="/professionnels" element={<LEDUnifie />} />
           <Route path="/particuliers" element={<Particuliers />} />
           <Route path="/aides" element={<Aides />} />
@@ -95,6 +100,9 @@ const App = () => (
           
           {/* Ma Prime Rénov */}
           <Route path="/ma-prime-renov" element={<MaPrimeRenov />} />
+          
+          {/* Routes Artisans */}
+          <Route path="/trouver-un-artisan" element={<TrouverArtisan />} />
           
           {/* Routes Admin */}
           <Route path="/login" element={<Login />} />

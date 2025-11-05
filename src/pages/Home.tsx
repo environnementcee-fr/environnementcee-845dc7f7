@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* SEO Meta Tags */}
-      <title>EnvironnementCEE.fr - Toutes vos aides écologiques et CEE sur une plateforme</title>
+      <title>Hello-Travaux - Mise en relation simplifiée avec des artisans qualifiés</title>
       
       {/* Hero Section with Carousel */}
       <section className="relative min-h-[500px] md:min-h-[600px] flex items-center bg-gradient-to-br from-primary/10 via-background to-secondary/10 overflow-hidden">
@@ -201,7 +201,7 @@ const Home = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="mb-4 md:mb-6 text-foreground text-2xl md:text-3xl lg:text-4xl">Notre rôle</h2>
             <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-              <strong className="text-foreground">EnvironnementCEE.fr</strong> est un <strong>intermédiaire privé</strong> spécialisé dans la mise en relation entre bénéficiaires d'aides CEE et installateurs certifiés RGE.
+              <strong className="text-foreground">Hello-Travaux</strong> est une <strong>plateforme de mise en relation</strong> entre particuliers/professionnels et artisans qualifiés pour vos projets de rénovation.
             </p>
             <div className="grid md:grid-cols-3 gap-4 md:gap-6">
               <Card className="border-2 border-primary/20 hover:border-primary transition-smooth">
@@ -276,7 +276,7 @@ const Home = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground italic">
-                  "Isolation + pompe à chaleur financées à 95% ! Notre facture énergétique a été divisée par deux. Merci EnvironnementCEE.fr."
+                  "Isolation + pompe à chaleur financées à 95% ! Notre facture énergétique a été divisée par deux. Merci Hello-Travaux."
                 </p>
               </CardContent>
             </Card>
