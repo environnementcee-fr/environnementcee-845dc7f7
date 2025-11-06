@@ -1,4 +1,4 @@
-import { Leaf, Menu } from "lucide-react";
+import { Leaf, Menu, ArrowUpRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
@@ -53,6 +53,17 @@ export const Navigation = () => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* CTA TravauxLinks */}
+            <a 
+              href="https://travauxlinks.fr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="ml-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
+            >
+              Trouver un artisan
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
 
 
@@ -86,6 +97,17 @@ export const Navigation = () => {
                     {item.label}
                   </Link>
                 ))}
+                
+                {/* CTA TravauxLinks Mobile */}
+                <a 
+                  href="https://travauxlinks.fr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-4 px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                >
+                  Trouver un artisan RGE
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
               </div>
             </SheetContent>
           </Sheet>

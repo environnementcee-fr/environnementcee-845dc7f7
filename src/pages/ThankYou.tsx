@@ -2,6 +2,7 @@ import { CheckCircle, Home, Phone, Mail, FileText, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { RecommendedNext } from "@/components/RecommendedNext";
 
 const ThankYou = () => {
   const navigate = useNavigate();
@@ -105,6 +106,8 @@ const ThankYou = () => {
               Découvrir nos articles
             </Button>
           </div>
+
+          <RecommendedNext />
         </CardContent>
       </Card>
     </div>
