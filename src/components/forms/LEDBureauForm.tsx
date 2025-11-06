@@ -23,8 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-const batimentProImg = "/visuels/batiment-professionnel.svg";
-const ledBureauImg = "/visuels/led-bureau.svg";
+import ledBureauHero from "@/assets/forms/led-bureau-hero.jpg";
 
 export const LEDBureauForm = () => {
   const [step, setStep] = useState(1);
@@ -55,10 +54,10 @@ export const LEDBureauForm = () => {
   const buildingType = form1.watch("building_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment 🏢", emoji: "🏠", illustration: "🏢" },
-    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: "💡" },
-    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: "🏢" },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "💡" },
+    { id: 1, title: "Type de bâtiment", emoji: "🏠", illustration: ledBureauHero },
+    { id: 2, title: "Détails de l'éclairage", emoji: "💡", illustration: ledBureauHero },
+    { id: 3, title: "Votre entreprise", emoji: "📊", illustration: ledBureauHero },
+    { id: 4, title: "On vous recontacte", emoji: "📧", illustration: ledBureauHero },
   ];
 
   return (
@@ -97,10 +96,20 @@ export const LEDBureauForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration="🏢" title="Bureaux"
-                isSelected={buildingType === "bureaux"} onClick={() => form1.setValue("building_type", "bureaux")} />
-              <VisualChoiceCard illustration="🏪" title="Commerce"
-                isSelected={buildingType === "commerce"} onClick={() => form1.setValue("building_type", "commerce")} />
+              <VisualChoiceCard 
+                illustration="🏢" 
+                title="Bureaux"
+                isSelected={buildingType === "bureaux"} 
+                onClick={() => form1.setValue("building_type", "bureaux")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
+              <VisualChoiceCard 
+                illustration="🏪" 
+                title="Commerce"
+                isSelected={buildingType === "commerce"} 
+                onClick={() => form1.setValue("building_type", "commerce")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
             </div>
           </Form>
         )}

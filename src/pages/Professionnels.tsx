@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Lightbulb, Building, Sun, Layers, Thermometer, Fan } from "lucide-react";
+import { ArrowRight, Lightbulb, Building, Sun } from "lucide-react";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const Professionnels = () => {
   const aides = [
@@ -26,33 +27,14 @@ const Professionnels = () => {
       path: "/pro/led-solaire",
       tag: "Autonome"
     },
-    {
-      icon: Layers,
-      title: "Isolation Professionnelle",
-      description: "Isolation thermique de vos locaux professionnels",
-      path: "/pro/isolation",
-      tag: "Performance thermique"
-    },
-    {
-      icon: Thermometer,
-      title: "Pompe à Chaleur Pro",
-      description: "Chauffage et climatisation économiques pour vos locaux",
-      path: "/pro/pac",
-      tag: "Haute efficacité"
-    },
-    {
-      icon: Fan,
-      title: "Brasseur d'Air Professionnel",
-      description: "Optimisation du confort thermique dans les grands volumes",
-      path: "/pro/brasseur-air",
-      tag: "Grand volume"
-    },
   ];
 
   return (
     <div className="min-h-screen">
       <title>Aides CEE pour Professionnels - EnvironnementCEE.fr</title>
       
+      <StickyCTA targetId="solutions-section" estimatedTime="2 min" />
+
       {/* Hero */}
       <section className="gradient-hero py-12 md:py-20">
         <div className="container mx-auto px-4">
@@ -74,9 +56,12 @@ const Professionnels = () => {
       </section>
 
       {/* Aides disponibles */}
-      <section className="py-12 md:py-16">
+      <section id="solutions-section" className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-8 md:mb-12 text-foreground text-2xl md:text-3xl lg:text-4xl">Nos solutions pour professionnels</h2>
+          <h2 className="text-center mb-4 md:mb-6 text-foreground text-2xl md:text-3xl lg:text-4xl">Nos solutions pour professionnels</h2>
+          <p className="text-center text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto">
+            Sélectionnez la solution adaptée à vos besoins et testez votre éligibilité en 2 minutes
+          </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
             {aides.map((aide, index) => (

@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import HPFlottanteForm from "@/components/forms/HPFlottanteForm";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const HPFlottante = () => {
   return (
@@ -12,8 +13,10 @@ const HPFlottante = () => {
         />
       </Helmet>
       
+      <StickyCTA targetId="eligibility-form" estimatedTime="2 min" />
+      
       <div className="min-h-screen">
-        <section className="py-16">
+        <section id="eligibility-form" className="py-16">
           <div className="container mx-auto px-4">
             <HPFlottanteForm />
           </div>

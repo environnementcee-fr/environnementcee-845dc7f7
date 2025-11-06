@@ -23,8 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-const ledSolairePiquerImg = "/visuels/led-solaire-piquer.svg";
-const ledSolaireMuralImg = "/visuels/led-solaire-mural.svg";
+import ledSolaireHero from "@/assets/forms/led-solaire-hero.jpg";
 
 export const LEDSolaireForm = () => {
   const [step, setStep] = useState(1);
@@ -55,10 +54,10 @@ export const LEDSolaireForm = () => {
   const installationType = form1.watch("installation_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type d'installation ☀️", emoji: "🏠", illustration: "☀️" },
-    { id: 2, title: "Détails de l'éclairage 💡", emoji: "💡", illustration: "💡" },
-    { id: 3, title: "Votre entreprise 🏢", emoji: "📊", illustration: "🏢" },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "☀️" },
+    { id: 1, title: "Type d'installation", emoji: "🏠", illustration: ledSolaireHero },
+    { id: 2, title: "Détails de l'éclairage", emoji: "💡", illustration: ledSolaireHero },
+    { id: 3, title: "Votre entreprise", emoji: "📊", illustration: ledSolaireHero },
+    { id: 4, title: "On vous recontacte", emoji: "📧", illustration: ledSolaireHero },
   ];
 
   return (
@@ -97,10 +96,20 @@ export const LEDSolaireForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration="💡" title="Lampadaires à piquer"
-                isSelected={installationType === "piquer"} onClick={() => form1.setValue("installation_type", "piquer")} />
-              <VisualChoiceCard illustration="🌙" title="Appliques murales"
-                isSelected={installationType === "mural"} onClick={() => form1.setValue("installation_type", "mural")} />
+              <VisualChoiceCard 
+                illustration="💡" 
+                title="Lampadaires à piquer"
+                isSelected={installationType === "piquer"} 
+                onClick={() => form1.setValue("installation_type", "piquer")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
+              <VisualChoiceCard 
+                illustration="🌙" 
+                title="Appliques murales"
+                isSelected={installationType === "mural"} 
+                onClick={() => form1.setValue("installation_type", "mural")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
             </div>
           </Form>
         )}

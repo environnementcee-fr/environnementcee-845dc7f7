@@ -9,6 +9,7 @@ interface VisualChoiceCardProps {
   icon?: string;
   isSelected: boolean;
   onClick: () => void;
+  onAutoAdvance?: () => void;
   disabled?: boolean;
 }
 
@@ -19,12 +20,20 @@ export const VisualChoiceCard = ({
   icon,
   isSelected,
   onClick,
+  onAutoAdvance,
   disabled = false,
 }: VisualChoiceCardProps) => {
+  const handleClick = () => {
+    onClick();
+    if (onAutoAdvance) {
+      setTimeout(() => onAutoAdvance(), 300);
+    }
+  };
+
   return (
     <motion.button
       type="button"
-      onClick={onClick}
+      onClick={handleClick}
       disabled={disabled}
       whileHover={!disabled ? { scale: 1.03 } : {}}
       whileTap={!disabled ? { scale: 0.98 } : {}}

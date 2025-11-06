@@ -23,8 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-const batimentProImg = "/visuels/batiment-professionnel.svg";
-const ledEntrepotImg = "/visuels/led-entrepot.svg";
+import ledEntrepotHero from "@/assets/forms/led-entrepot-hero.jpg";
 
 export const LEDEntrepotForm = () => {
   const [step, setStep] = useState(1);
@@ -55,10 +54,10 @@ export const LEDEntrepotForm = () => {
   const buildingType = form1.watch("building_type");
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment", subtitle: "Quel est votre type de local ?", emoji: "🏭", illustration: "🏭" },
-    { id: 2, title: "Détails de l'éclairage", subtitle: "Parlez-nous de votre installation actuelle", emoji: "💡", illustration: "💡" },
-    { id: 3, title: "Votre entreprise", subtitle: "Quelques informations sur votre société", emoji: "🏢", illustration: "🏢" },
-    { id: 4, title: "Vos coordonnées", subtitle: "Pour vous recontacter rapidement", emoji: "📧", illustration: "💡" },
+    { id: 1, title: "Type de bâtiment", subtitle: "Quel est votre type de local ?", emoji: "🏭", illustration: ledEntrepotHero },
+    { id: 2, title: "Détails de l'éclairage", subtitle: "Parlez-nous de votre installation actuelle", emoji: "💡", illustration: ledEntrepotHero },
+    { id: 3, title: "Votre entreprise", subtitle: "Quelques informations sur votre société", emoji: "🏢", illustration: ledEntrepotHero },
+    { id: 4, title: "Vos coordonnées", subtitle: "Pour vous recontacter rapidement", emoji: "📧", illustration: ledEntrepotHero },
   ];
 
   return (
@@ -97,10 +96,20 @@ export const LEDEntrepotForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration="🏭" title="Entrepôt"
-                isSelected={buildingType === "entrepot"} onClick={() => form1.setValue("building_type", "entrepot")} />
-              <VisualChoiceCard illustration="🏗️" title="Usine"
-                isSelected={buildingType === "usine"} onClick={() => form1.setValue("building_type", "usine")} />
+              <VisualChoiceCard 
+                illustration="🏭" 
+                title="Entrepôt"
+                isSelected={buildingType === "entrepot"} 
+                onClick={() => form1.setValue("building_type", "entrepot")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
+              <VisualChoiceCard 
+                illustration="🏗️" 
+                title="Usine"
+                isSelected={buildingType === "usine"} 
+                onClick={() => form1.setValue("building_type", "usine")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
             </div>
           </Form>
         )}

@@ -23,9 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-const maisonImg = "/visuels/maison-individuelle.svg";
-const appartementImg = "/visuels/appartement.svg";
-const pacImg = "/visuels/pac-particulier.svg";
+import pacHero from "@/assets/forms/pac-hero.jpg";
 
 const PACForm = () => {
   const [step, setStep] = useState(1);
@@ -54,10 +52,10 @@ const PACForm = () => {
   });
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Parlez-nous de votre projet 🏠", emoji: "🏠", illustration: "🏠" },
-    { id: 2, title: "Quelques détails pour calculer vos aides 💶", emoji: "💡", illustration: "♨️" },
-    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: "♨️" },
-    { id: 4, title: "On vous recontacte rapidement 🚀", emoji: "📧", illustration: "♨️" },
+    { id: 1, title: "Parlez-nous de votre projet", emoji: "🏠", illustration: pacHero },
+    { id: 2, title: "Quelques détails pour calculer vos aides", emoji: "💡", illustration: pacHero },
+    { id: 3, title: "Votre situation", emoji: "📊", illustration: pacHero },
+    { id: 4, title: "On vous recontacte rapidement", emoji: "📧", illustration: pacHero },
   ];
 
   const buildingType = form1.watch("building_type");
@@ -98,10 +96,20 @@ const PACForm = () => {
         {step === 1 && (
           <Form {...form1}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <VisualChoiceCard illustration="🏡" title="Maison individuelle"
-                isSelected={buildingType === "maison"} onClick={() => form1.setValue("building_type", "maison")} />
-              <VisualChoiceCard illustration="🏢" title="Appartement"
-                isSelected={buildingType === "appartement"} onClick={() => form1.setValue("building_type", "appartement")} />
+              <VisualChoiceCard 
+                illustration="🏡" 
+                title="Maison individuelle"
+                isSelected={buildingType === "maison"} 
+                onClick={() => form1.setValue("building_type", "maison")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
+              <VisualChoiceCard 
+                illustration="🏢" 
+                title="Appartement"
+                isSelected={buildingType === "appartement"} 
+                onClick={() => form1.setValue("building_type", "appartement")}
+                onAutoAdvance={() => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()} 
+              />
             </div>
           </Form>
         )}
