@@ -3,11 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Layers, Euro, CheckCircle, Thermometer } from "lucide-react";
 import { IsolationForm } from "@/components/forms/IsolationForm";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const IsolationPro = () => {
   return (
     <div className="min-h-screen">
       <title>Isolation Professionnelle - CEE Professionnels | EnvironnementCEE.fr</title>
+      
+      <StickyCTA targetId="eligibility-form" estimatedTime="3 min" />
       
       {/* Hero */}
       <section className="gradient-hero py-20">
@@ -33,7 +36,7 @@ const IsolationPro = () => {
       </section>
 
       {/* Formulaire d'éligibilité */}
-      <section className="py-16">
+      <section id="eligibility-form" className="py-16">
         <div className="container mx-auto px-4">
           <IsolationForm />
         </div>
@@ -138,6 +141,15 @@ const IsolationPro = () => {
               Nos conseillers évaluent gratuitement votre projet d'isolation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="shadow-lg"
+                onClick={() => document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              >
+                Tester mon éligibilité
+                <ArrowRight className="ml-2" />
+              </Button>
               <Button asChild size="lg" variant="outline" className="shadow-lg bg-primary-foreground">
                 <Link to="/professionnels">Voir toutes les aides pro</Link>
               </Button>

@@ -79,7 +79,10 @@ const Professionnels = () => {
       {/* Aides disponibles */}
       <section id="solutions-section" className="py-12 md:py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-center mb-8 md:mb-12 text-foreground text-2xl md:text-3xl lg:text-4xl">Nos solutions pour professionnels</h2>
+          <h2 className="text-center mb-4 md:mb-6 text-foreground text-2xl md:text-3xl lg:text-4xl">Nos solutions pour professionnels</h2>
+          <p className="text-center text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto">
+            Sélectionnez la solution adaptée à vos besoins et testez votre éligibilité en 2 minutes
+          </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
             {aides.map((aide, index) => (

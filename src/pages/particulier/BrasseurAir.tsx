@@ -3,11 +3,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Fan, Euro, CheckCircle, Wind } from "lucide-react";
 import { BrasseurAirForm } from "@/components/forms/BrasseurAirForm";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const BrasseurAirParticulier = () => {
   return (
     <div className="min-h-screen">
       <title>Brasseur d'Air - Aides Particuliers | EnvironnementCEE.fr</title>
+      
+      <StickyCTA targetId="eligibility-form" estimatedTime="2 min" />
       
       {/* Hero */}
       <section className="gradient-hero py-20">
@@ -33,7 +36,7 @@ const BrasseurAirParticulier = () => {
       </section>
 
       {/* Formulaire d'éligibilité */}
-      <section className="py-16">
+      <section id="eligibility-form" className="py-16">
         <div className="container mx-auto px-4">
           <BrasseurAirForm />
         </div>
@@ -168,6 +171,15 @@ const BrasseurAirParticulier = () => {
               Un conseiller vous accompagne dans votre projet de brasseur d'air.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                variant="secondary" 
+                className="shadow-lg"
+                onClick={() => document.getElementById('eligibility-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              >
+                Tester mon éligibilité
+                <ArrowRight className="ml-2" />
+              </Button>
               <Button asChild size="lg" variant="outline" className="shadow-lg bg-primary-foreground">
                 <Link to="/particuliers">Voir toutes les aides particuliers</Link>
               </Button>
