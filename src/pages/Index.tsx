@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { InfoBanner } from "@/components/InfoBanner";
 import { HeroSection } from "@/components/HeroSection";
 import { RoleSection } from "@/components/RoleSection";
+import { TravauxLinksPromo } from "@/components/TravauxLinksPromo";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { ConditionsSection } from "@/components/ConditionsSection";
 import { EligibilitySection } from "@/components/EligibilitySection";
@@ -29,6 +30,7 @@ const Index = () => {
       <InfoBanner />
       <HeroSection onCTAClick={scrollToForm} />
       <RoleSection />
+      <TravauxLinksPromo />
       
       <section id="comment-ca-marche">
         <HowItWorksSection />
