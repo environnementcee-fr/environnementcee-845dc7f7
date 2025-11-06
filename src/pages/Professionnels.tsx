@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Lightbulb, Building, Sun, Layers, Thermometer, Fan } from "lucide-react";
+import { ArrowRight, Lightbulb, Building, Sun } from "lucide-react";
 import { StickyCTA } from "@/components/StickyCTA";
 
 const Professionnels = () => {
@@ -26,27 +26,6 @@ const Professionnels = () => {
       description: "Éclairage autonome et écologique pour extérieurs",
       path: "/pro/led-solaire",
       tag: "Autonome"
-    },
-    {
-      icon: Layers,
-      title: "Isolation Professionnelle",
-      description: "Isolation thermique de vos locaux professionnels",
-      path: "/pro/isolation",
-      tag: "Performance thermique"
-    },
-    {
-      icon: Thermometer,
-      title: "Pompe à Chaleur Pro",
-      description: "Chauffage et climatisation économiques pour vos locaux",
-      path: "/pro/pac",
-      tag: "Haute efficacité"
-    },
-    {
-      icon: Fan,
-      title: "Brasseur d'Air Professionnel",
-      description: "Optimisation du confort thermique dans les grands volumes",
-      path: "/pro/brasseur-air",
-      tag: "Grand volume"
     },
   ];
 
