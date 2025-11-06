@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, Home as HomeIcon, CheckCircle, Users, FileText, Award } from "lucide-react";
+import { ArrowRight, Building2, Home as HomeIcon, CheckCircle, Users, FileText, Award, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -149,6 +149,30 @@ const Home = () => {
             </Carousel>
           </div>
 
+        </div>
+      </section>
+
+      {/* Bannière TravauxLinks */}
+      <section className="py-8 bg-gradient-to-r from-primary/10 to-secondary/10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Vous avez besoin d'un artisan RGE pour vos travaux ?
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Découvrez TravauxLinks : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
+            </p>
+            <a 
+              href="https://travauxlinks.fr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="gap-2">
+                Trouver un artisan RGE
+                <ArrowUpRight className="h-5 w-5" />
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
 

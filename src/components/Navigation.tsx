@@ -1,4 +1,4 @@
-import { Leaf, Menu } from "lucide-react";
+import { Leaf, Menu, ArrowUpRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import {
@@ -33,8 +33,8 @@ export const Navigation = () => {
           <Link to="/" className="flex items-center gap-3 group">
             <Leaf className="h-8 w-8 text-primary transition-smooth group-hover:scale-110" />
             <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-bold text-foreground">EnvironnementCEE.fr</span>
-              <span className="text-xs text-muted-foreground hidden md:block">Transition énergétique simplifiée</span>
+              <span className="text-xl md:text-2xl font-bold text-green-600">EnvironnementCEE</span>
+              <span className="text-xs text-muted-foreground hidden md:block">by <a href="https://travauxlinks.fr" target="_blank" rel="noopener noreferrer" className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity">TravauxLinks</a></span>
             </div>
           </Link>
 
@@ -53,6 +53,17 @@ export const Navigation = () => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* CTA TravauxLinks */}
+            <a 
+              href="https://travauxlinks.fr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="ml-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
+            >
+              Trouver un artisan
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
 
 
@@ -86,6 +97,17 @@ export const Navigation = () => {
                     {item.label}
                   </Link>
                 ))}
+                
+                {/* CTA TravauxLinks Mobile */}
+                <a 
+                  href="https://travauxlinks.fr" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="mt-4 px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                >
+                  Trouver un artisan RGE
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
               </div>
             </SheetContent>
           </Sheet>

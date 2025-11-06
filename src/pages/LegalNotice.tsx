@@ -6,11 +6,15 @@ const LegalNotice = () => {
         
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">1. Éditeur du site</h2>
-          <p className="mb-2"><strong>Raison sociale :</strong> EnvironnementCEE.fr</p>
-          <p className="mb-2"><strong>Adresse :</strong> [Adresse à compléter]</p>
+          <p className="mb-2"><strong>EnvironnementCEE.fr</strong> est exploité par <strong>TravauxLinks SAS</strong></p>
+          <p className="mb-2"><strong>Raison sociale :</strong> FJLC ENVIRONNEMENT</p>
+          <p className="mb-2"><strong>SIREN :</strong> 849 863 535</p>
+          <p className="mb-2"><strong>Adresse :</strong> 8 B RUE ABEL, 75012 PARIS</p>
           <p className="mb-2"><strong>Email :</strong> contact@environnementcee.fr</p>
           <p className="mb-2"><strong>Téléphone :</strong> [Numéro à compléter]</p>
-          <p className="mb-2"><strong>SIRET :</strong> [SIRET à compléter]</p>
+          <p className="mt-4 text-muted-foreground text-sm">
+            EnvironnementCEE.fr est une marque de TravauxLinks, plateforme de mise en relation entre particuliers et artisans certifiés RGE.
+          </p>
         </section>
 
         <section className="mb-8">

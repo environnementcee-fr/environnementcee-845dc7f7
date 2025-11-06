@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -10,6 +11,34 @@ export const Footer = () => {
             <p className="text-sm text-muted-foreground">
               Votre partenaire pour les Certificats d'Économies d'Énergie
             </p>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold mb-4">Nos Services</h4>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a 
+                  href="https://travauxlinks.fr" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-muted-foreground hover:text-primary flex items-center gap-1"
+                >
+                  Trouver un artisan RGE
+                  <ArrowUpRight className="h-3 w-3" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://travauxlinks.fr/deposer-projet" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-muted-foreground hover:text-primary flex items-center gap-1"
+                >
+                  Déposer un projet de travaux
+                  <ArrowUpRight className="h-3 w-3" />
+                </a>
+              </li>
+            </ul>
           </div>
           
           <div>
@@ -50,7 +79,7 @@ export const Footer = () => {
               <strong>Hébergeur :</strong> IONOS SARL - 7 Place de la Gare, 57200 Sarreguemines, France
             </p>
             <p className="pt-2">
-              © 2025 EnvironnementCEE.fr - Tous droits réservés
+              © 2025 EnvironnementCEE.fr | Une marque de <a href="https://travauxlinks.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">TravauxLinks</a> - Tous droits réservés
             </p>
             <p className="text-xs leading-relaxed">
               Les données collectées via ce formulaire sont traitées par FJLC ENVIRONNEMENT et ses partenaires dans le but de vous recontacter concernant votre demande d&apos;éligibilité CEE. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données. Les données sont conservées pendant 3 ans maximum. Pour toute question : <a href="mailto:contact@environnementcee.fr" className="text-primary hover:underline">contact@environnementcee.fr</a>
