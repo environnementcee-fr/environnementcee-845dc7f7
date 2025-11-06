@@ -1,9 +1,12 @@
 import { ParticulierMultiForm } from "@/components/forms/ParticulierMultiForm";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const Particuliers = () => {
   return (
     <div className="min-h-screen">
       <title>Aides pour Particuliers - EnvironnementCEE.fr</title>
+
+      <StickyCTA targetId="eligibility-form" estimatedTime="3 min" />
 
       {/* Hero */}
       <section className="gradient-hero py-20">
@@ -18,7 +21,7 @@ const Particuliers = () => {
       </section>
 
       {/* Formulaire Unique */}
-      <section className="py-20 bg-background">
+      <section id="eligibility-form" className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="mb-4">Testez votre éligibilité aux aides</h2>

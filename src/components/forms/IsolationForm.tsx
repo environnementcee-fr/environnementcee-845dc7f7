@@ -27,10 +27,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
-const maisonImg = "/visuels/maison-individuelle.svg";
-const batimentProImg = "/visuels/batiment-professionnel.svg";
-const isolationPartImg = "/visuels/isolation-particulier.svg";
-const isolationProImg = "/visuels/isolation-pro.svg";
+import isolationHero from "@/assets/forms/isolation-hero.jpg";
 
 export const IsolationForm = () => {
   const [step, setStep] = useState(1);
@@ -71,10 +68,10 @@ export const IsolationForm = () => {
   const isPart = userType === "particulier";
 
   const wizardSteps: WizardStep[] = [
-    { id: 1, title: "Type de bâtiment 🏠", emoji: "🏠", illustration: isPart ? "🏠" : "🏢" },
-    { id: 2, title: "Détails de l'isolation 📋", emoji: "💡", illustration: "🏗️" },
-    { id: 3, title: "Votre situation 📊", emoji: "📊", illustration: isPart ? "🏠" : "🏢" },
-    { id: 4, title: "On vous recontacte 🚀", emoji: "📧", illustration: "🏗️" },
+    { id: 1, title: "Type de bâtiment", emoji: "🏠", illustration: isolationHero },
+    { id: 2, title: "Détails de l'isolation", emoji: "💡", illustration: isolationHero },
+    { id: 3, title: "Votre situation", emoji: "📊", illustration: isolationHero },
+    { id: 4, title: "On vous recontacte", emoji: "📧", illustration: isolationHero },
   ];
 
   return (
@@ -137,10 +134,18 @@ export const IsolationForm = () => {
               <div>
                 <h3 className="text-lg font-semibold mb-4">Vous êtes :</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <VisualChoiceCard illustration="👤" title="Particulier"
-                    isSelected={userType === "particulier"} onClick={() => form1.setValue("user_type", "particulier")} />
-                  <VisualChoiceCard illustration="🏢" title="Professionnel"
-                    isSelected={userType === "professionnel"} onClick={() => form1.setValue("user_type", "professionnel")} />
+                  <VisualChoiceCard 
+                    illustration="👤" 
+                    title="Particulier"
+                    isSelected={userType === "particulier"} 
+                    onClick={() => form1.setValue("user_type", "particulier")} 
+                  />
+                  <VisualChoiceCard 
+                    illustration="🏢" 
+                    title="Professionnel"
+                    isSelected={userType === "professionnel"} 
+                    onClick={() => form1.setValue("user_type", "professionnel")} 
+                  />
                 </div>
               </div>
 
@@ -148,10 +153,20 @@ export const IsolationForm = () => {
                 <div>
                   <h3 className="text-lg font-semibold mb-4">Type de bâtiment :</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <VisualChoiceCard illustration="🏡" title={isPart ? "Maison individuelle" : "Bureau/Commerce"}
-                      isSelected={buildingType === "maison"} onClick={() => form1.setValue("building_type", "maison")} />
-                    <VisualChoiceCard illustration="🏢" title={isPart ? "Appartement" : "Immeuble tertiaire"}
-                      isSelected={buildingType === "immeuble"} onClick={() => form1.setValue("building_type", "immeuble")} />
+                    <VisualChoiceCard 
+                      illustration="🏡" 
+                      title={isPart ? "Maison individuelle" : "Bureau/Commerce"}
+                      isSelected={buildingType === "maison"} 
+                      onClick={() => form1.setValue("building_type", "maison")}
+                      onAutoAdvance={buildingType === "maison" ? undefined : () => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()}
+                    />
+                    <VisualChoiceCard 
+                      illustration="🏢" 
+                      title={isPart ? "Appartement" : "Immeuble tertiaire"}
+                      isSelected={buildingType === "immeuble"} 
+                      onClick={() => form1.setValue("building_type", "immeuble")}
+                      onAutoAdvance={buildingType === "immeuble" ? undefined : () => form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })()}
+                    />
                   </div>
                 </div>
               )}

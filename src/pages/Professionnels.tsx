@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Lightbulb, Building, Sun, Layers, Thermometer, Fan } from "lucide-react";
+import { StickyCTA } from "@/components/StickyCTA";
 
 const Professionnels = () => {
   const aides = [
@@ -53,6 +54,8 @@ const Professionnels = () => {
     <div className="min-h-screen">
       <title>Aides CEE pour Professionnels - EnvironnementCEE.fr</title>
       
+      <StickyCTA targetId="solutions-section" estimatedTime="2 min" />
+
       {/* Hero */}
       <section className="gradient-hero py-12 md:py-20">
         <div className="container mx-auto px-4">
@@ -74,7 +77,7 @@ const Professionnels = () => {
       </section>
 
       {/* Aides disponibles */}
-      <section className="py-12 md:py-16">
+      <section id="solutions-section" className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-center mb-8 md:mb-12 text-foreground text-2xl md:text-3xl lg:text-4xl">Nos solutions pour professionnels</h2>
           

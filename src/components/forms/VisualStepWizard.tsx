@@ -89,6 +89,22 @@ export const VisualStepWizard = ({
             transition={{ duration: 0.3, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
+            {/* Hero Image */}
+            {currentStepData?.illustration && typeof currentStepData.illustration === 'string' && currentStepData.illustration.startsWith('/') === false && currentStepData.illustration.includes('.jpg') && (
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.4 }}
+                className="mb-8 rounded-2xl overflow-hidden shadow-xl"
+              >
+                <img 
+                  src={currentStepData.illustration} 
+                  alt={currentStepData.title}
+                  className="w-full h-48 md:h-64 object-cover"
+                />
+              </motion.div>
+            )}
+
             {/* Trust Signals */}
             {currentStep === 1 && (
               <div className="mb-6">
