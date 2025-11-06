@@ -14,7 +14,7 @@ export const Navigation = () => {
 
   const navItems = [
     { label: "Accueil", path: "/" },
-    { label: "Professionnels", path: "/pro/led" },
+    { label: "Professionnels", path: "/professionnels" },
     { label: "Particuliers", path: "/particuliers" },
     { label: "Ma Prime Rénov", path: "/ma-prime-renov" },
     { label: "Aides", path: "/aides" },
@@ -34,7 +34,9 @@ export const Navigation = () => {
             <Leaf className="h-8 w-8 text-primary transition-smooth group-hover:scale-110" />
             <div className="flex flex-col">
               <span className="text-xl md:text-2xl font-bold text-green-600">EnvironnementCEE</span>
-              <span className="text-xs text-muted-foreground hidden md:block">by <a href="https://travauxlinks.fr" target="_blank" rel="noopener noreferrer" className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity">TravauxLinks</a></span>
+              <span className="text-xs text-muted-foreground hidden md:block">
+                by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxLinks</span>
+              </span>
             </div>
           </Link>
 
