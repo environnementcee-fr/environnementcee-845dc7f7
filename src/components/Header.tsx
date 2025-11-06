@@ -9,7 +9,7 @@ export const Header = () => {
       <Leaf className="h-6 w-6 md:h-8 md:w-8 text-primary flex-shrink-0" />
       <div className="flex flex-col">
         <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground text-center">
-          EnvironnementCEE.fr
+          EnvironnementCEE
         </h1>
         <p className="text-xs text-muted-foreground text-center">
           by <a href="https://travauxlinks.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">TravauxLinks</a>
