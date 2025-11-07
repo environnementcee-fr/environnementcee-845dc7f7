@@ -21,6 +21,22 @@ export default function AdminDashboard() {
       navigate("/login");
       return;
     }
+
+    // Verify admin role
+    const { data: roleData, error } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', session.user.id)
+      .eq('role', 'admin')
+      .single();
+    
+    if (error || !roleData) {
+      toast.error("Accès non autorisé");
+      await supabase.auth.signOut();
+      navigate("/login");
+      return;
+    }
+
     setIsLoading(false);
   };
 

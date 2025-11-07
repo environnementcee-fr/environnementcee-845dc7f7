@@ -7,7 +7,12 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="font-bold text-lg mb-4">EnvironnementCEE.fr</h3>
+            <div className="flex flex-col mb-4">
+              <h3 className="font-bold text-lg text-green-600">EnvironnementCEE</h3>
+              <span className="text-xs text-muted-foreground">
+                by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxHub</span>
+              </span>
+            </div>
             <p className="text-sm text-muted-foreground">
               Votre partenaire pour les Certificats d'Économies d'Énergie
             </p>
@@ -18,7 +23,7 @@ export const Footer = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a 
-                  href="https://travauxlinks.fr" 
+                  href="https://travauxhub.fr" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-muted-foreground hover:text-primary flex items-center gap-1"
@@ -29,7 +34,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://travauxlinks.fr/deposer-projet" 
+                  href="https://travauxhub.fr/deposer-projet" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-muted-foreground hover:text-primary flex items-center gap-1"
@@ -79,7 +84,7 @@ export const Footer = () => {
               <strong>Hébergeur :</strong> IONOS SARL - 7 Place de la Gare, 57200 Sarreguemines, France
             </p>
             <p className="pt-2">
-              © 2025 EnvironnementCEE.fr | Une marque de <a href="https://travauxlinks.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">TravauxLinks</a> - Tous droits réservés
+              © 2025 EnvironnementCEE.fr | Une marque de <a href="https://travauxhub.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">TravauxHub</a> - Tous droits réservés
             </p>
             <p className="text-xs leading-relaxed">
               Les données collectées via ce formulaire sont traitées par FJLC ENVIRONNEMENT et ses partenaires dans le but de vous recontacter concernant votre demande d&apos;éligibilité CEE. Conformément au RGPD, vous disposez d&apos;un droit d&apos;accès, de rectification et de suppression de vos données. Les données sont conservées pendant 3 ans maximum. Pour toute question : <a href="mailto:contact@environnementcee.fr" className="text-primary hover:underline">contact@environnementcee.fr</a>

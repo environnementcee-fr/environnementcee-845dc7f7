@@ -152,30 +152,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Bannière TravauxLinks */}
-      <section className="py-8 bg-gradient-to-r from-primary/10 to-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Vous avez besoin d'un artisan RGE pour vos travaux ?
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Découvrez TravauxLinks : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
-            </p>
-            <a 
-              href="https://travauxlinks.fr" 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button size="lg" className="gap-2">
-                Trouver un artisan RGE
-                <ArrowUpRight className="h-5 w-5" />
-              </Button>
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Nos Solutions - Choix Pro/Particuliers */}
       <section className="py-12 md:py-20 bg-gradient-to-br from-background via-background to-muted/20">
         <div className="container mx-auto px-4">
@@ -215,6 +191,30 @@ const Home = () => {
             <Button asChild size="lg" variant="outline" className="text-base md:text-lg h-12 md:h-14">
               <Link to="/qui-sommes-nous">En savoir plus</Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Bannière TravauxHub */}
+      <section className="py-8 bg-gradient-to-r from-primary/10 to-secondary/10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Vous avez besoin d'un artisan RGE pour vos travaux ?
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Découvrez TravauxHub : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
+            </p>
+            <a 
+              href="https://travauxhub.fr" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="gap-2">
+                Trouver un artisan RGE
+                <ArrowUpRight className="h-5 w-5" />
+              </Button>
+            </a>
           </div>
         </div>
       </section>

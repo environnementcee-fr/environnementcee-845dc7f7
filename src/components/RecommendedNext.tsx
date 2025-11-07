@@ -12,12 +12,12 @@ export const RecommendedNext = () => (
     </CardHeader>
     <CardContent>
       <a 
-        href="https://travauxlinks.fr/deposer-projet" 
+        href="https://travauxhub.fr/deposer-projet" 
         target="_blank" 
         rel="noopener noreferrer"
       >
         <Button className="w-full gap-2">
-          Déposer un projet sur TravauxLinks
+          Déposer un projet sur TravauxHub
           <ArrowUpRight className="h-4 w-4" />
         </Button>
       </a>

@@ -157,19 +157,19 @@ const MaPrimeRenov = () => {
               
               <MaPrimeRenovForm />
               
-              {/* CTA TravauxLinks après formulaire */}
+              {/* CTA TravauxHub après formulaire */}
               <div className="mt-8 p-6 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg border border-primary/20">
                 <p className="text-sm text-muted-foreground mb-3 text-center">
                   💡 <strong>Prochaine étape :</strong> Trouvez un artisan RGE certifié pour réaliser vos travaux et débloquer ces aides.
                 </p>
                 <div className="flex justify-center">
                   <a 
-                    href="https://travauxlinks.fr/deposer-projet?type=renovation_energetique" 
+                    href="https://travauxhub.fr/deposer-projet?type=renovation_energetique" 
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
                     <Button variant="outline" className="gap-2">
-                      Déposer mon projet sur TravauxLinks
+                      Déposer mon projet sur TravauxHub
                       <ArrowUpRight className="h-4 w-4" />
                     </Button>
                   </a>
