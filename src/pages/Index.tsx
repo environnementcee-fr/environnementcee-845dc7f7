@@ -29,8 +29,8 @@ const Index = () => {
       <Header />
       <InfoBanner />
       <HeroSection onCTAClick={scrollToForm} />
-      <RoleSection />
       <TravauxLinksPromo />
+      <RoleSection />
       
       <section id="comment-ca-marche">
         <HowItWorksSection />
