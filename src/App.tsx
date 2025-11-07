@@ -10,6 +10,8 @@ import Aides from "./pages/Aides";
 import Blog from "./pages/Blog";
 import QuiSommesNous from "./pages/QuiSommesNous";
 import Simulation from "./pages/Simulation";
+import SimulationParticuliers from "./pages/simulation/Particuliers";
+import SimulationProfessionnels from "./pages/simulation/Professionnels";
 import NotFound from "./pages/NotFound";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -65,6 +67,8 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
           <Route path="/simulation" element={<Simulation />} />
+          <Route path="/simulation/particuliers" element={<SimulationParticuliers />} />
+          <Route path="/simulation/professionnels" element={<SimulationProfessionnels />} />
           <Route path="/mentions-legales" element={<LegalNotice />} />
           <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
           <Route path="/gestion-cookies" element={<CookiePolicy />} />
