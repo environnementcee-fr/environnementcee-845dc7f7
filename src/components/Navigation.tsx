@@ -30,11 +30,11 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3 group">
-            <Leaf className="h-6 w-6 md:h-8 md:w-8 text-primary transition-smooth group-hover:scale-110" />
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group mr-8">
+            <Leaf className="h-6 w-6 md:h-7 md:w-7 text-primary transition-smooth group-hover:scale-110" />
             <div className="flex flex-col">
-              <span className="text-lg md:text-2xl font-bold text-green-600">EnvironnementCEE</span>
-              <span className="text-[10px] md:text-xs text-muted-foreground">
+              <span className="text-sm md:text-lg font-bold text-green-600">EnvironnementCEE</span>
+              <span className="text-[9px] md:text-[10px] text-muted-foreground">
                 by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxHub</span>
               </span>
             </div>
