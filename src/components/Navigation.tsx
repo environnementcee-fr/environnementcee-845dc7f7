@@ -30,18 +30,18 @@ export const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 md:gap-3 group">
-            <Leaf className="h-6 w-6 md:h-8 md:w-8 text-primary transition-smooth group-hover:scale-110" />
+          <Link to="/" className="flex items-center gap-2 md:gap-3 group mr-8">
+            <Leaf className="h-6 w-6 md:h-7 md:w-7 text-primary transition-smooth group-hover:scale-110" />
             <div className="flex flex-col">
-              <span className="text-lg md:text-2xl font-bold text-green-600">EnvironnementCEE</span>
-              <span className="text-[10px] md:text-xs text-muted-foreground">
+              <span className="text-sm md:text-lg font-bold text-green-600">EnvironnementCEE</span>
+              <span className="text-[9px] md:text-[10px] text-muted-foreground">
                 by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxHub</span>
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1 ml-auto">
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -62,7 +62,7 @@ export const Navigation = () => {
                 href="https://travauxhub.fr" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-smooth flex items-center gap-2"
               >
                 Trouver un artisan
                 <ArrowUpRight className="h-4 w-4" />
@@ -71,7 +71,7 @@ export const Navigation = () => {
                 href="https://travauxhub.fr" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-2 border border-primary text-primary rounded-md text-sm font-medium hover:bg-primary/10 transition-smooth flex items-center gap-2"
+                className="px-4 py-2 bg-green-600 text-white rounded-md text-sm font-medium hover:bg-green-700 transition-smooth flex items-center gap-2"
               >
                 Trouver un partenaire RGE
                 <ArrowUpRight className="h-4 w-4" />
@@ -117,7 +117,7 @@ export const Navigation = () => {
                     href="https://travauxhub.fr" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                    className="px-4 py-3 bg-blue-600 text-white rounded-md text-sm font-medium text-center flex items-center justify-center gap-2 hover:bg-blue-700 transition-smooth"
                   >
                     Trouver un artisan
                     <ArrowUpRight className="h-4 w-4" />
@@ -126,7 +126,7 @@ export const Navigation = () => {
                     href="https://travauxhub.fr" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-3 border border-primary text-primary rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                    className="px-4 py-3 bg-green-600 text-white rounded-md text-sm font-medium text-center flex items-center justify-center gap-2 hover:bg-green-700 transition-smooth"
                   >
                     Trouver un partenaire RGE
                     <ArrowUpRight className="h-4 w-4" />
