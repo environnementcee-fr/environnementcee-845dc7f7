@@ -35,7 +35,7 @@ export const Navigation = () => {
             <div className="flex flex-col">
               <span className="text-lg md:text-2xl font-bold text-green-600">EnvironnementCEE</span>
               <span className="text-[10px] md:text-xs text-muted-foreground">
-                by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxLinks</span>
+                by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxHub</span>
               </span>
             </div>
           </Link>
@@ -59,7 +59,7 @@ export const Navigation = () => {
             {/* CTA Buttons */}
             <div className="flex items-center gap-2 ml-2">
               <a 
-                href="https://travauxlinks.fr" 
+                href="https://travauxhub.fr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
@@ -68,7 +68,7 @@ export const Navigation = () => {
                 <ArrowUpRight className="h-4 w-4" />
               </a>
               <a 
-                href="https://travauxlinks.fr" 
+                href="https://travauxhub.fr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="px-4 py-2 border border-primary text-primary rounded-md text-sm font-medium hover:bg-primary/10 transition-smooth flex items-center gap-2"
@@ -114,7 +114,7 @@ export const Navigation = () => {
                 {/* CTA Buttons Mobile */}
                 <div className="flex flex-col gap-2 mt-4">
                   <a 
-                    href="https://travauxlinks.fr" 
+                    href="https://travauxhub.fr" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
@@ -123,7 +123,7 @@ export const Navigation = () => {
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                   <a 
-                    href="https://travauxlinks.fr" 
+                    href="https://travauxhub.fr" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="px-4 py-3 border border-primary text-primary rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"

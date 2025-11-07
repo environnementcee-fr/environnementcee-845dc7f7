@@ -12,7 +12,7 @@ export const Header = () => {
           EnvironnementCEE
         </h1>
         <p className="text-xs text-muted-foreground text-center">
-          by <a href="https://travauxlinks.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">TravauxLinks</a>
+          by <a href="https://travauxhub.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">TravauxHub</a>
         </p>
       </div>
     </Link>

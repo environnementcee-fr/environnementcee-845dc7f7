@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
-export const TravauxLinksPromo = () => {
+export const TravauxHubPromo = () => {
   return (
     <section className="py-12 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -11,10 +11,10 @@ export const TravauxLinksPromo = () => {
             Vous avez besoin d'un artisan RGE pour vos travaux ?
           </h2>
           <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Découvrez TravauxLinks : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
+            Découvrez TravauxHub : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
           </p>
           <a 
-            href="https://travauxlinks.fr/deposer-projet" 
+            href="https://travauxhub.fr/deposer-projet" 
             target="_blank" 
             rel="noopener noreferrer"
           >

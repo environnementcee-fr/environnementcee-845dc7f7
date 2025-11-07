@@ -195,7 +195,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Bannière TravauxLinks */}
+      {/* Bannière TravauxHub */}
       <section className="py-8 bg-gradient-to-r from-primary/10 to-secondary/10">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -203,10 +203,10 @@ const Home = () => {
               Vous avez besoin d'un artisan RGE pour vos travaux ?
             </h2>
             <p className="text-muted-foreground mb-6">
-              Découvrez TravauxLinks : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
+              Découvrez TravauxHub : trouvez des professionnels certifiés près de chez vous et comparez les devis gratuitement.
             </p>
             <a 
-              href="https://travauxlinks.fr" 
+              href="https://travauxhub.fr" 
               target="_blank" 
               rel="noopener noreferrer"
             >
