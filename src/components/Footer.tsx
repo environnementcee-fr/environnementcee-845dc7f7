@@ -7,7 +7,12 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="font-bold text-lg mb-4">EnvironnementCEE.fr</h3>
+            <div className="flex flex-col mb-4">
+              <h3 className="font-bold text-lg text-green-600">EnvironnementCEE</h3>
+              <span className="text-xs text-muted-foreground">
+                by <span className="font-medium bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">TravauxLinks</span>
+              </span>
+            </div>
             <p className="text-sm text-muted-foreground">
               Votre partenaire pour les Certificats d'Économies d'Énergie
             </p>

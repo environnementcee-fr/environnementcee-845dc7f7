@@ -56,16 +56,27 @@ export const Navigation = () => {
               </Link>
             ))}
             
-            {/* CTA TravauxLinks */}
-            <a 
-              href="https://travauxlinks.fr" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="ml-2 px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
-            >
-              Trouver un artisan
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {/* CTA Buttons */}
+            <div className="flex items-center gap-2 ml-2">
+              <a 
+                href="https://travauxlinks.fr" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
+              >
+                Trouver un artisan
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+              <a 
+                href="https://travauxlinks.fr" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-4 py-2 border border-primary text-primary rounded-md text-sm font-medium hover:bg-primary/10 transition-smooth flex items-center gap-2"
+              >
+                Trouver un partenaire RGE
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
           </div>
 
 
@@ -100,16 +111,27 @@ export const Navigation = () => {
                   </Link>
                 ))}
                 
-                {/* CTA TravauxLinks Mobile */}
-                <a 
-                  href="https://travauxlinks.fr" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="mt-4 px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
-                >
-                  Trouver un artisan RGE
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
+                {/* CTA Buttons Mobile */}
+                <div className="flex flex-col gap-2 mt-4">
+                  <a 
+                    href="https://travauxlinks.fr" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                  >
+                    Trouver un artisan
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                  <a 
+                    href="https://travauxlinks.fr" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-3 border border-primary text-primary rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                  >
+                    Trouver un partenaire RGE
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
               </div>
             </SheetContent>
           </Sheet>
