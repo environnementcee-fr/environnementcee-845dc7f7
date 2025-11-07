@@ -8,7 +8,7 @@ export const Header = () => {
     <Link to="/" className="flex items-center justify-center gap-2 md:gap-3 hover:opacity-80 transition-opacity">
       <Leaf className="h-6 w-6 md:h-8 md:w-8 text-primary flex-shrink-0" />
       <div className="flex flex-col">
-        <h1 className="text-lg md:text-2xl lg:text-3xl font-bold text-foreground text-center">
+        <h1 className="text-base md:text-xl lg:text-2xl font-bold text-foreground text-center">
           EnvironnementCEE
         </h1>
         <p className="text-xs text-muted-foreground text-center">

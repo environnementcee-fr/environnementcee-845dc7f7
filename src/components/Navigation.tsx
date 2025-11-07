@@ -62,7 +62,7 @@ export const Navigation = () => {
                 href="https://travauxhub.fr" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-smooth flex items-center gap-2"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-smooth flex items-center gap-2"
               >
                 Trouver un artisan
                 <ArrowUpRight className="h-4 w-4" />
@@ -71,7 +71,7 @@ export const Navigation = () => {
                 href="https://travauxhub.fr" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="px-4 py-2 border border-primary text-primary rounded-md text-sm font-medium hover:bg-primary/10 transition-smooth flex items-center gap-2"
+                className="px-4 py-2 bg-green-600 text-white rounded-md text-sm font-medium hover:bg-green-700 transition-smooth flex items-center gap-2"
               >
                 Trouver un partenaire RGE
                 <ArrowUpRight className="h-4 w-4" />
@@ -117,7 +117,7 @@ export const Navigation = () => {
                     href="https://travauxhub.fr" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-3 bg-primary text-primary-foreground rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                    className="px-4 py-3 bg-blue-600 text-white rounded-md text-sm font-medium text-center flex items-center justify-center gap-2 hover:bg-blue-700 transition-smooth"
                   >
                     Trouver un artisan
                     <ArrowUpRight className="h-4 w-4" />
@@ -126,7 +126,7 @@ export const Navigation = () => {
                     href="https://travauxhub.fr" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-3 border border-primary text-primary rounded-md text-sm font-medium text-center flex items-center justify-center gap-2"
+                    className="px-4 py-3 bg-green-600 text-white rounded-md text-sm font-medium text-center flex items-center justify-center gap-2 hover:bg-green-700 transition-smooth"
                   >
                     Trouver un partenaire RGE
                     <ArrowUpRight className="h-4 w-4" />
