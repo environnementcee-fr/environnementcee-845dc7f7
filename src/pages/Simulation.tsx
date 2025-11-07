@@ -1,191 +1,123 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Lightbulb, 
-  Warehouse, 
-  Building2, 
-  Sun, 
-  Layers, 
-  Thermometer, 
-  Fan, 
-  Droplets 
-} from "lucide-react";
-
-type UserFilter = "tous" | "particulier" | "professionnel";
-
-interface Aid {
-  id: string;
-  title: string;
-  description: string;
-  icon: React.ElementType;
-  path: string;
-  userTypes: ("particulier" | "professionnel")[];
-}
-
-const aids: Aid[] = [
-  {
-    id: "led-entrepot",
-    title: "LED Entrepôt",
-    description: "Éclairage LED haute performance pour entrepôts et zones industrielles",
-    icon: Warehouse,
-    path: "/pro/led-entrepot",
-    userTypes: ["professionnel"],
-  },
-  {
-    id: "led-bureau",
-    title: "LED Bureau",
-    description: "Éclairage LED économique pour bureaux et espaces tertiaires",
-    icon: Building2,
-    path: "/pro/led-bureau",
-    userTypes: ["professionnel"],
-  },
-  {
-    id: "led-solaire",
-    title: "LED Solaire",
-    description: "Éclairage autonome solaire pour espaces extérieurs",
-    icon: Sun,
-    path: "/pro/led-solaire",
-    userTypes: ["professionnel"],
-  },
-  {
-    id: "isolation",
-    title: "Isolation",
-    description: "Isolation thermique des murs, combles et planchers",
-    icon: Layers,
-    path: "/particulier/isolation",
-    userTypes: ["particulier", "professionnel"],
-  },
-  {
-    id: "pac",
-    title: "Pompe à Chaleur",
-    description: "Chauffage et climatisation haute efficacité",
-    icon: Thermometer,
-    path: "/particulier/pac",
-    userTypes: ["particulier", "professionnel"],
-  },
-  {
-    id: "brasseur-air",
-    title: "Brasseur d'Air",
-    description: "Optimisation du confort thermique dans les grands volumes",
-    icon: Fan,
-    path: "/particulier/brasseur-air",
-    userTypes: ["particulier", "professionnel"],
-  },
-  {
-    id: "hp-flottante",
-    title: "HP Flottante",
-    description: "Régulateur haute pression pour chambres froides professionnelles",
-    icon: Thermometer,
-    path: "/pro/hp-flottante",
-    userTypes: ["professionnel"],
-  },
-];
+import { Home, Building2, ArrowRight } from "lucide-react";
 
 const Simulation = () => {
-  const [filter, setFilter] = useState<UserFilter>("tous");
-
-  const filteredAids = aids.filter((aid) => {
-    if (filter === "tous") return true;
-    return aid.userTypes.includes(filter);
-  });
-
   return (
-    <div className="min-h-screen py-20 bg-card">
-      <title>Choisissez votre aide - EnvironnementCEE.fr</title>
+    <div className="min-h-screen">
+      <title>Choisissez votre profil - EnvironnementCEE.fr</title>
       
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="mb-4 text-foreground">Quelle aide recherchez-vous ?</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Sélectionnez l'aide qui correspond à votre projet et testez votre éligibilité en 2 minutes
-          </p>
+      {/* Hero */}
+      <section className="gradient-hero py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
+            <h1 className="mb-6 text-foreground text-4xl md:text-5xl">
+              Quel est votre profil ?
+            </h1>
+            <p className="text-xl text-muted-foreground mb-12">
+              Choisissez votre parcours pour découvrir les aides adaptées à votre situation
+            </p>
 
-          {/* Filter Buttons */}
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Button
-              variant={filter === "tous" ? "default" : "outline"}
-              onClick={() => setFilter("tous")}
-            >
-              Toutes les aides
-            </Button>
-            <Button
-              variant={filter === "particulier" ? "default" : "outline"}
-              onClick={() => setFilter("particulier")}
-            >
-              Particulier
-            </Button>
-            <Button
-              variant={filter === "professionnel" ? "default" : "outline"}
-              onClick={() => setFilter("professionnel")}
-            >
-              Professionnel
+            {/* Deux grandes cartes CTA */}
+            <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+              <Link to="/simulation/particuliers" className="group">
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 hover:border-primary cursor-pointer p-8">
+                  <div className="text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Home className="h-12 w-12 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold mb-3">Je suis particulier</h2>
+                    <p className="text-muted-foreground mb-6">
+                      MaPrimeRénov', CEE, Éco-PTZ... Jusqu'à 100% de financement
+                    </p>
+                    <Button size="lg" className="w-full group-hover:bg-primary/90">
+                      Voir mes aides
+                      <ArrowRight className="ml-2" />
+                    </Button>
+                  </div>
+                </Card>
+              </Link>
+
+              <Link to="/simulation/professionnels" className="group">
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 hover:border-primary cursor-pointer p-8">
+                  <div className="text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <Building2 className="h-12 w-12 text-white" />
+                    </div>
+                    <h2 className="text-2xl font-bold mb-3">Je suis professionnel</h2>
+                    <p className="text-muted-foreground mb-6">
+                      CEE, crédit d'impôt 30%, Fonds Chaleur... Zéro investissement
+                    </p>
+                    <Button size="lg" className="w-full group-hover:bg-primary/90">
+                      Voir mes aides
+                      <ArrowRight className="ml-2" />
+                    </Button>
+                  </div>
+                </Card>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section avantages */}
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">
+            Pourquoi passer par EnvironnementCEE.fr ?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">🎯</span>
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Accompagnement personnalisé</h3>
+              <p className="text-sm text-muted-foreground">
+                Un conseiller dédié pour vous guider dans le choix des aides et le montage de votre dossier
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">💰</span>
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Maximisation des aides</h3>
+              <p className="text-sm text-muted-foreground">
+                Nous combinons toutes les aides disponibles pour financer jusqu'à 100% de vos travaux
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">✅</span>
+              </div>
+              <h3 className="font-semibold text-lg mb-2">Artisans certifiés RGE</h3>
+              <p className="text-sm text-muted-foreground">
+                Réseau de professionnels qualifiés dans toute la France pour garantir la qualité
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Contact */}
+      <section className="py-12 bg-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4 text-foreground">
+              Des questions sur les aides disponibles ?
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Nos experts sont à votre disposition pour vous conseiller gratuitement
+            </p>
+            <Button asChild size="lg">
+              <Link to="/contact">
+                Contacter un conseiller
+                <ArrowRight className="ml-2" />
+              </Link>
             </Button>
           </div>
         </div>
-
-        {/* Aids Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {filteredAids.map((aid) => {
-            const Icon = aid.icon;
-            return (
-              <Card 
-                key={aid.id} 
-                className="border-2 border-primary/20 hover:border-primary/40 transition-all hover:shadow-lg"
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-4">
-                    <Icon className="h-10 w-10 text-primary" />
-                    <div className="flex gap-2 flex-wrap">
-                      {aid.userTypes.map((type) => (
-                        <Badge key={type} variant="secondary" className="text-xs">
-                          {type === "particulier" ? "Particulier" : "Professionnel"}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl">{aid.title}</CardTitle>
-                  <CardDescription className="text-sm">
-                    {aid.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button asChild className="w-full">
-                    <Link to={aid.path}>
-                      Tester mon éligibilité
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Info Banner */}
-        <div className="max-w-4xl mx-auto mt-16">
-          <Card className="bg-primary/5 border-primary/20">
-            <CardContent className="pt-6">
-              <div className="flex gap-4 items-start">
-                <Lightbulb className="h-8 w-8 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg mb-2 text-foreground">
-                    Vous ne savez pas quelle aide choisir ?
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    Nos conseillers vous orientent gratuitement vers les aides les plus adaptées à votre projet et vous accompagnent dans vos démarches.
-                  </p>
-                  <Button asChild variant="outline">
-                    <Link to="/contact">Être contacté par un conseiller</Link>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

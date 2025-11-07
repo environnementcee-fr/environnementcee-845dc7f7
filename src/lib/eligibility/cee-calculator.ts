@@ -122,20 +122,35 @@ export function calculateCEEParticulier(
   }
 ): number {
   const modeste = isModeste(params.revenuFiscal, params.nbPersonnes, params.region);
-  const calculator = CEE_PRIMES_PARTICULIERS[workType];
 
-  if (!calculator) return 0;
-
-  // Appeler le calculateur avec les bons paramètres
-  if (workType.includes('isolation')) {
-    return calculator(params.surface || 0, modeste);
+  // Branches type-safe pour chaque catégorie de calcul
+  if (workType === 'isolation_combles_perdus') {
+    return CEE_PRIMES_PARTICULIERS.isolation_combles_perdus(params.surface || 0, modeste);
+  } else if (workType === 'isolation_murs') {
+    return CEE_PRIMES_PARTICULIERS.isolation_murs(params.surface || 0, modeste);
+  } else if (workType === 'isolation_plancher') {
+    return CEE_PRIMES_PARTICULIERS.isolation_plancher(params.surface || 0, modeste);
   } else if (workType === 'fenetres') {
-    return calculator(params.nombre || 0, modeste);
+    return CEE_PRIMES_PARTICULIERS.fenetres(params.nombre || 0, modeste);
   } else if (workType === 'brasseur_air') {
-    return calculator(params.hauteur || 0);
-  } else {
-    return calculator(modeste);
+    return CEE_PRIMES_PARTICULIERS.brasseur_air(params.hauteur || 0);
+  } else if (workType === 'pac_air_eau_remplacement_fioul') {
+    return CEE_PRIMES_PARTICULIERS.pac_air_eau_remplacement_fioul(modeste);
+  } else if (workType === 'pac_air_eau_remplacement_gaz') {
+    return CEE_PRIMES_PARTICULIERS.pac_air_eau_remplacement_gaz(modeste);
+  } else if (workType === 'pac_geothermique') {
+    return CEE_PRIMES_PARTICULIERS.pac_geothermique(modeste);
+  } else if (workType === 'chaudiere_bois') {
+    return CEE_PRIMES_PARTICULIERS.chaudiere_bois(modeste);
+  } else if (workType === 'chauffe_eau_thermodynamique') {
+    return CEE_PRIMES_PARTICULIERS.chauffe_eau_thermodynamique(modeste);
+  } else if (workType === 'chauffe_eau_solaire') {
+    return CEE_PRIMES_PARTICULIERS.chauffe_eau_solaire(modeste);
+  } else if (workType === 'vmc_double_flux') {
+    return CEE_PRIMES_PARTICULIERS.vmc_double_flux(modeste);
   }
+
+  return 0;
 }
 
 /**
@@ -150,26 +165,28 @@ export function calculateCEEProfessionnel(
     hauteur?: number;
   }
 ): number {
-  const calculator = CEE_PRIMES_PROFESSIONNELS[workType];
-
-  if (!calculator) return 0;
-
-  // Appeler le calculateur avec les bons paramètres
-  if (workType === 'led_bureau' || workType === 'led_solaire') {
-    return (calculator as any)(params.nbLuminaires || 0);
+  // Branches type-safe pour chaque catégorie de calcul
+  if (workType === 'led_bureau') {
+    return CEE_PRIMES_PROFESSIONNELS.led_bureau(params.nbLuminaires || 0);
   } else if (workType === 'led_entrepot') {
-    return (calculator as any)(params.nbLuminaires || 0, params.puissance || 0);
-  } else if (workType.includes('isolation')) {
-    return (calculator as any)(params.surface || 0);
-  } else if (workType === 'pac_industrielle' || workType === 'recuperateur_chaleur') {
-    return (calculator as any)(params.puissance || 0);
+    return CEE_PRIMES_PROFESSIONNELS.led_entrepot(params.nbLuminaires || 0, params.puissance || 0);
+  } else if (workType === 'led_solaire') {
+    return CEE_PRIMES_PROFESSIONNELS.led_solaire(params.nbLuminaires || 0);
+  } else if (workType === 'isolation_toiture_pro') {
+    return CEE_PRIMES_PROFESSIONNELS.isolation_toiture_pro(params.surface || 0);
+  } else if (workType === 'isolation_murs_pro') {
+    return CEE_PRIMES_PROFESSIONNELS.isolation_murs_pro(params.surface || 0);
+  } else if (workType === 'pac_industrielle') {
+    return CEE_PRIMES_PROFESSIONNELS.pac_industrielle(params.puissance || 0);
   } else if (workType === 'brasseur_air_pro') {
-    return (calculator as any)(params.hauteur || 0, params.surface || 0);
+    return CEE_PRIMES_PROFESSIONNELS.brasseur_air_pro(params.hauteur || 0, params.surface || 0);
   } else if (workType === 'systeme_regulation_chauffage') {
-    return (calculator as any)();
-  } else {
-    return 0;
+    return CEE_PRIMES_PROFESSIONNELS.systeme_regulation_chauffage();
+  } else if (workType === 'recuperateur_chaleur') {
+    return CEE_PRIMES_PROFESSIONNELS.recuperateur_chaleur(params.puissance || 0);
   }
+
+  return 0;
 }
 
 /**

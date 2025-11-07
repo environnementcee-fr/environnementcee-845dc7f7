@@ -156,40 +156,18 @@ const Home = () => {
       <section className="py-12 md:py-20 bg-gradient-to-br from-background via-background to-muted/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8 md:mb-12 animate-fade-in">
-            <h2 className="mb-3 md:mb-4 text-foreground text-2xl md:text-3xl lg:text-4xl">Nos solutions adaptées à votre profil</h2>
+            <h2 className="mb-3 md:mb-4 text-foreground text-2xl md:text-3xl lg:text-4xl">Découvrez les aides disponibles</h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Choisissez votre parcours pour découvrir les aides qui vous correspondent
+              Testez votre éligibilité en 2 minutes et découvrez le montant des aides que vous pouvez obtenir
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
-            {/* Button Professionnels */}
-            <Link to="/professionnels" className="group">
-              <div className="relative h-20 md:h-24 rounded-xl md:rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative flex items-center gap-2 md:gap-3 px-4 md:px-6">
-                  <Building2 className="h-6 w-6 md:h-8 md:w-8 text-white flex-shrink-0" />
-                  <span className="text-lg md:text-2xl font-bold text-white">Je suis professionnel</span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Button Particuliers */}
-            <Link to="/particuliers" className="group">
-              <div className="relative h-20 md:h-24 rounded-xl md:rounded-2xl bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative flex items-center gap-2 md:gap-3 px-4 md:px-6">
-                  <HomeIcon className="h-6 w-6 md:h-8 md:w-8 text-white flex-shrink-0" />
-                  <span className="text-lg md:text-2xl font-bold text-white">Je suis particulier</span>
-                </div>
-              </div>
-            </Link>
-          </div>
-
-          {/* En savoir plus button */}
-          <div className="flex justify-center mt-6 md:mt-8">
-            <Button asChild size="lg" variant="outline" className="text-base md:text-lg h-12 md:h-14">
-              <Link to="/qui-sommes-nous">En savoir plus</Link>
+          <div className="flex justify-center">
+            <Button asChild size="lg" className="text-base md:text-lg h-12 md:h-14 px-8">
+              <Link to="/simulation">
+                Tester mon éligibilité
+                <ArrowRight className="ml-2" />
+              </Link>
             </Button>
           </div>
         </div>
