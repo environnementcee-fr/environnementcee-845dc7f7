@@ -149,6 +149,22 @@ const Home = () => {
             </Carousel>
           </div>
 
+          {/* Boutons Particuliers / Professionnels */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
+            <Button asChild size="lg" variant="default" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
+              <Link to="/simulation/particuliers">
+                <HomeIcon className="mr-2 h-5 w-5" />
+                Je suis particulier
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
+              <Link to="/simulation/professionnels">
+                <Building2 className="mr-2 h-5 w-5" />
+                Je suis professionnel
+              </Link>
+            </Button>
+          </div>
+
         </div>
       </section>
 
