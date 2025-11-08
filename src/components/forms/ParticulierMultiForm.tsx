@@ -88,7 +88,7 @@ export const ParticulierMultiForm = () => {
         };
       }
 
-      const { error } = await supabase.functions.invoke('submit-lead', {
+      const { data: response, error } = await supabase.functions.invoke('submit-lead', {
         body: {
           aid_type: 'multi_particulier',
           user_type: 'particulier',
@@ -109,7 +109,22 @@ export const ParticulierMultiForm = () => {
 
       confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
       toast.success("Demande envoyée avec succès !");
-      setTimeout(() => navigate('/merci'), 1500);
+      
+      setTimeout(() => {
+        navigate('/simulation/resultats', {
+          state: {
+            results: {
+              eligibility_score: response?.eligibility_score || 0,
+              estimated_aids: response?.estimated_aids || {},
+              mpr_category: response?.mpr_category,
+              user_type: "particulier",
+              aid_type: "multi_particulier",
+              first_name: data.first_name,
+              estimated_cost: 15000
+            }
+          }
+        });
+      }, 1500);
     } catch (error: any) {
       console.error('Erreur:', error);
       toast.error(error.message || "Une erreur est survenue");

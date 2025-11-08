@@ -68,7 +68,19 @@ export const FenetresForm = () => {
       });
 
       setTimeout(() => {
-        navigate("/merci");
+        navigate("/simulation/resultats", {
+          state: {
+            results: {
+              eligibility_score: result?.eligibility_score || 0,
+              estimated_aids: result?.estimated_aids || {},
+              mpr_category: result?.mpr_category,
+              user_type: "particulier",
+              aid_type: "fenetres",
+              first_name: data.first_name,
+              estimated_cost: data.nb_fenetres * 600
+            }
+          }
+        });
       }, 2000);
 
     } catch (error: any) {

@@ -80,12 +80,37 @@ export const LEDSolaireForm = () => {
           if (!step1Data || !step2Data || !step3Data) return;
           setIsSubmitting(true);
           try {
-            await supabase.functions.invoke("submit-lead", {
-              body: { type: "led_solaire", user_type: "professionnel", ...step1Data, ...step2Data, ...step3Data, ...data },
+            const { data: response, error } = await supabase.functions.invoke("submit-lead", {
+              body: { 
+                aid_type: "led_solaire", 
+                user_type: "professionnel", 
+                ...step1Data, 
+                ...step2Data, 
+                ...step3Data, 
+                ...data 
+              },
             });
+
+            if (error) throw error;
+
             setShowConfetti(true);
             toast.success("Votre demande a été envoyée avec succès !");
-            setTimeout(() => navigate("/merci"), 2000);
+            
+            setTimeout(() => {
+              navigate("/simulation/resultats", {
+                state: {
+                  results: {
+                    eligibility_score: response?.eligibility_score || 0,
+                    estimated_aids: response?.estimated_aids || {},
+                    mpr_category: response?.mpr_category,
+                    user_type: "professionnel",
+                    aid_type: "led_solaire",
+                    first_name: data.first_name,
+                    estimated_cost: 20000
+                  }
+                }
+              });
+            }, 2000);
           } catch (error) {
             toast.error("Une erreur est survenue.");
           } finally {

@@ -96,7 +96,21 @@ export const MaPrimeRenovForm = () => {
         description: "Nous vous contacterons sous 48h pour votre estimation.",
       });
 
-      navigate("/merci");
+      setTimeout(() => {
+        navigate("/simulation/resultats", {
+          state: {
+            results: {
+              eligibility_score: leadData?.eligibility_score || 0,
+              estimated_aids: leadData?.estimated_aids || {},
+              mpr_category: leadData?.mpr_category,
+              user_type: "particulier",
+              aid_type: "ma_prime_renov",
+              first_name: data.first_name,
+              estimated_cost: 20000
+            }
+          }
+        });
+      }, 1500);
     } catch (error) {
       console.error("Erreur:", error);
       toast({

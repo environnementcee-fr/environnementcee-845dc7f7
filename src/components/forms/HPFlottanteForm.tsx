@@ -80,20 +80,35 @@ const HPFlottanteForm = () => {
     setIsSubmitting(true);
     try {
       const leadData = {
-        type: "hp_flottante",
+        aid_type: "housse_piscine",
         user_type: "professionnel",
         ...step1Data,
         ...data,
       };
 
-      const { error } = await supabase.functions.invoke("submit-lead", {
+      const { data: response, error } = await supabase.functions.invoke("submit-lead", {
         body: leadData,
       });
 
       if (error) throw error;
 
       toast.success("Votre demande a été envoyée avec succès !");
-      navigate("/merci");
+      
+      setTimeout(() => {
+        navigate("/simulation/resultats", {
+          state: {
+            results: {
+              eligibility_score: response?.eligibility_score || 0,
+              estimated_aids: response?.estimated_aids || {},
+              mpr_category: response?.mpr_category,
+              user_type: "professionnel",
+              aid_type: "housse_piscine",
+              first_name: data.first_name,
+              estimated_cost: 2000
+            }
+          }
+        });
+      }, 1500);
     } catch (error) {
       console.error("Error:", error);
       toast.error("Une erreur est survenue. Veuillez réessayer.");
