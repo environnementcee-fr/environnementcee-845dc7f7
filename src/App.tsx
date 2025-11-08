@@ -12,6 +12,7 @@ import QuiSommesNous from "./pages/QuiSommesNous";
 import Simulation from "./pages/Simulation";
 import SimulationParticuliers from "./pages/simulation/Particuliers";
 import SimulationProfessionnels from "./pages/simulation/Professionnels";
+import ResultatsSimulation from "./pages/ResultatsSimulation";
 import NotFound from "./pages/NotFound";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/simulation" element={<Simulation />} />
           <Route path="/simulation/particuliers" element={<SimulationParticuliers />} />
           <Route path="/simulation/professionnels" element={<SimulationProfessionnels />} />
+          <Route path="/simulation/resultats" element={<ResultatsSimulation />} />
           <Route path="/mentions-legales" element={<LegalNotice />} />
           <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />
           <Route path="/gestion-cookies" element={<CookiePolicy />} />
