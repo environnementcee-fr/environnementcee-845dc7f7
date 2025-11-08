@@ -2,6 +2,183 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.38.4";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
+// ==================== ELIGIBILITY CALCULATIONS ====================
+
+type MPRCategory = 'bleu' | 'jaune' | 'violet' | 'rose';
+type Region = 'idf' | 'autre';
+
+const MPR_REVENUE_BRACKETS: Record<string, Record<MPRCategory, number>> = {
+  "1_personne_idf": { bleu: 23541, jaune: 28657, violet: 40018, rose: Infinity },
+  "1_personne_autre": { bleu: 17009, jaune: 21805, violet: 29148, rose: Infinity },
+  "2_personnes_idf": { bleu: 34551, jaune: 42058, violet: 58827, rose: Infinity },
+  "2_personnes_autre": { bleu: 24875, jaune: 31889, violet: 42848, rose: Infinity },
+  "3_personnes_idf": { bleu: 41493, jaune: 50513, violet: 70382, rose: Infinity },
+  "3_personnes_autre": { bleu: 29917, jaune: 38349, violet: 51592, rose: Infinity },
+  "4_personnes_idf": { bleu: 48447, jaune: 58981, violet: 82839, rose: Infinity },
+  "4_personnes_autre": { bleu: 34948, jaune: 44802, violet: 60336, rose: Infinity },
+  "5_personnes_idf": { bleu: 55427, jaune: 67473, violet: 94844, rose: Infinity },
+  "5_personnes_autre": { bleu: 40002, jaune: 51281, violet: 69081, rose: Infinity },
+};
+
+const MPR_FORFAITS: Record<string, Record<MPRCategory, number>> = {
+  isolation_murs_ext: { bleu: 75, jaune: 60, violet: 40, rose: 0 },
+  isolation_combles: { bleu: 25, jaune: 20, violet: 15, rose: 0 },
+  pac_air_eau: { bleu: 5000, jaune: 4000, violet: 3000, rose: 0 },
+  pac_geothermique: { bleu: 11000, jaune: 9000, violet: 5000, rose: 0 },
+  chauffe_eau_thermodynamique: { bleu: 1200, jaune: 800, violet: 400, rose: 0 },
+  vmc_double_flux: { bleu: 4000, jaune: 3000, violet: 2000, rose: 0 },
+  fenetres: { bleu: 100, jaune: 80, violet: 40, rose: 0 },
+};
+
+function calculateMPRCategory(revenuFiscal: number, nbPersonnes: number, region: Region): MPRCategory {
+  const key = `${Math.min(nbPersonnes, 5)}_${nbPersonnes === 1 ? 'personne' : 'personnes'}_${region}`;
+  const brackets = MPR_REVENUE_BRACKETS[key];
+  
+  if (!brackets) return 'rose';
+  
+  if (revenuFiscal <= brackets.bleu) return 'bleu';
+  if (revenuFiscal <= brackets.jaune) return 'jaune';
+  if (revenuFiscal <= brackets.violet) return 'violet';
+  return 'rose';
+}
+
+function isModeste(revenuFiscal: number, nbPersonnes: number, region: Region): boolean {
+  const category = calculateMPRCategory(revenuFiscal, nbPersonnes, region);
+  return category === 'bleu' || category === 'jaune';
+}
+
+function calculateCEEParticulier(aidType: string, surface: number, modeste: boolean): number {
+  if (aidType === 'isolation' && surface) {
+    return surface * 12 * (modeste ? 1.2 : 1);
+  }
+  if (aidType === 'pac') {
+    return modeste ? 4500 : 3000;
+  }
+  if (aidType === 'brasseur_air') {
+    return 200;
+  }
+  return 0;
+}
+
+function calculateCEEProfessionnel(aidType: string, data: any): number {
+  if (aidType.includes('led_entrepot') && data.fixture_count) {
+    return data.fixture_count * 20;
+  }
+  if (aidType.includes('led_bureau') && data.fixture_count) {
+    return data.fixture_count * 15;
+  }
+  if (aidType.includes('led_solaire') && data.fixture_count) {
+    return data.fixture_count * 100;
+  }
+  if (aidType.includes('isolation') && data.surface) {
+    return data.surface * 22;
+  }
+  if (aidType.includes('pac') && data.surface) {
+    const puissance = (data.surface * 100) / 1000;
+    return puissance * 150;
+  }
+  if (aidType === 'brasseur_air' && data.surface) {
+    return data.surface * 5;
+  }
+  return 0;
+}
+
+function calculateEligibility(leadData: any): { score: number; aids: any; mprCategory?: string } {
+  const aids: any = {};
+  let score = 0;
+  let mprCategory: MPRCategory | undefined;
+
+  if (leadData.user_type === 'particulier') {
+    // Extraire les données nécessaires
+    const revenuFiscal = leadData.project_data?.revenu_fiscal || 
+                        (leadData.income_bracket ? parseIncomeBracket(leadData.income_bracket) : 30000);
+    const nbPersonnes = leadData.project_data?.nb_personnes || 
+                       (leadData.room_count ? Math.ceil(leadData.room_count / 2) : 2);
+    const region: Region = leadData.postal_code?.startsWith('75') || 
+                          leadData.postal_code?.startsWith('77') ||
+                          leadData.postal_code?.startsWith('78') ||
+                          leadData.postal_code?.startsWith('91') ||
+                          leadData.postal_code?.startsWith('92') ||
+                          leadData.postal_code?.startsWith('93') ||
+                          leadData.postal_code?.startsWith('94') ||
+                          leadData.postal_code?.startsWith('95') ? 'idf' : 'autre';
+
+    mprCategory = calculateMPRCategory(revenuFiscal, nbPersonnes, region);
+    const modeste = isModeste(revenuFiscal, nbPersonnes, region);
+
+    // MaPrimeRénov'
+    if (mprCategory !== 'rose' && leadData.construction_year && 
+        (new Date().getFullYear() - leadData.construction_year) >= 15) {
+      
+      let mprAmount = 0;
+      if (leadData.aid_type === 'isolation' && leadData.surface) {
+        mprAmount = (MPR_FORFAITS.isolation_combles[mprCategory] || 0) * leadData.surface;
+      } else if (leadData.aid_type === 'pac') {
+        mprAmount = MPR_FORFAITS.pac_air_eau[mprCategory] || 0;
+      }
+      
+      if (mprAmount > 0) {
+        aids.mpr = mprAmount;
+        score += 30;
+      }
+    }
+
+    // CEE Particulier
+    const ceeAmount = calculateCEEParticulier(leadData.aid_type, leadData.surface || 0, modeste);
+    if (ceeAmount > 0) {
+      aids.cee = ceeAmount;
+      score += 25;
+    }
+
+    // Éco-PTZ
+    aids.ecoptz = 15000;
+    score += 15;
+
+    // TVA réduite
+    aids.tva = 'Taux réduit 5,5%';
+    score += 10;
+
+  } else if (leadData.user_type === 'professionnel') {
+    // CEE Professionnel
+    const ceeAmount = calculateCEEProfessionnel(leadData.aid_type, {
+      fixture_count: leadData.fixture_count,
+      surface: leadData.surface,
+      ceiling_height: leadData.ceiling_height
+    });
+    
+    if (ceeAmount > 0) {
+      aids.cee = ceeAmount;
+      score += 35;
+    }
+
+    // Crédit d'impôt PME
+    if (leadData.employees) {
+      const effectif = parseEmployees(leadData.employees);
+      if (effectif < 250) {
+        aids.credit_impot_pme = '30% des travaux (max 25 000€)';
+        score += 20;
+      }
+    }
+  }
+
+  return { score, aids, mprCategory };
+}
+
+function parseIncomeBracket(bracket: string): number {
+  if (bracket.includes('20000')) return 20000;
+  if (bracket.includes('30000')) return 30000;
+  if (bracket.includes('40000')) return 40000;
+  if (bracket.includes('50000')) return 50000;
+  return 35000;
+}
+
+function parseEmployees(employees: string): number {
+  if (employees.includes('10')) return 5;
+  if (employees.includes('50')) return 25;
+  if (employees.includes('250')) return 100;
+  return 500;
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -133,6 +310,10 @@ const handler = async (req: Request): Promise<Response> => {
       referrer: req.headers.get("referer") || null,
     };
 
+    // Calculate eligibility
+    const eligibilityResult = calculateEligibility(validatedData);
+    console.log(`Eligibility calculated: score=${eligibilityResult.score}, category=${eligibilityResult.mprCategory}`);
+
     // Insert lead into database using admin client (bypasses RLS)
     const { data: lead, error: insertError } = await supabaseAdmin
       .from("lead_submissions")
@@ -140,6 +321,9 @@ const handler = async (req: Request): Promise<Response> => {
         ...validatedData,
         ...metadata,
         status: "nouveau",
+        eligibility_score: eligibilityResult.score,
+        estimated_aids: eligibilityResult.aids,
+        mpr_category: eligibilityResult.mprCategory || null,
       })
       .select()
       .single();
