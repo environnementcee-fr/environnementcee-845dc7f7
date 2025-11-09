@@ -21,6 +21,7 @@ import Contact from "./pages/Contact";
 import ThankYou from "./pages/ThankYou";
 
 // Pages Pro
+import DeposerProjet from "./pages/pro/DeposerProjet";
 import LEDUnifie from "./pages/pro/LEDUnifie";
 import LEDEntrepot from "./pages/pro/LEDEntrepot";
 import LEDBureau from "./pages/pro/LEDBureau";
@@ -77,10 +78,11 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/merci" element={<ThankYou />} />
           
-          {/* Routes Professionnels - Nouveau formulaire unifié */}
-          <Route path="/pro/led" element={<LEDUnifie />} />
+          {/* Routes Professionnels */}
+          <Route path="/pro/deposer-projet" element={<DeposerProjet />} />
           
-          {/* Anciennes routes LED (garder pour compatibilité) */}
+          {/* Anciennes routes individuelles (garder pour compatibilité) */}
+          <Route path="/pro/led" element={<LEDUnifie />} />
           <Route path="/pro/led-entrepot" element={<LEDEntrepot />} />
           <Route path="/pro/led-bureau" element={<LEDBureau />} />
           <Route path="/pro/led-solaire" element={<LEDSolaire />} />
