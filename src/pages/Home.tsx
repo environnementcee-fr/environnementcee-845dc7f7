@@ -157,7 +157,7 @@ const Home = () => {
                 Je suis particulier
               </Link>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
+            <Button asChild size="lg" variant="blue" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
               <Link to="/simulation/professionnels">
                 <Building2 className="mr-2 h-5 w-5" />
                 Je suis professionnel
