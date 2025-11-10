@@ -12,6 +12,9 @@ import QuiSommesNous from "./pages/QuiSommesNous";
 import Simulation from "./pages/Simulation";
 import SimulationParticuliers from "./pages/simulation/Particuliers";
 import SimulationProfessionnels from "./pages/simulation/Professionnels";
+import AidesParticulier from "./pages/particulier/Aides";
+import DemandeParticulier from "./pages/particulier/Demande";
+import AidesPro from "./pages/pro/Aides";
 import ResultatsSimulation from "./pages/ResultatsSimulation";
 import NotFound from "./pages/NotFound";
 import LegalNotice from "./pages/LegalNotice";
@@ -71,6 +74,9 @@ const App = () => (
           <Route path="/simulation" element={<Simulation />} />
           <Route path="/simulation/particuliers" element={<SimulationParticuliers />} />
           <Route path="/simulation/professionnels" element={<SimulationProfessionnels />} />
+          <Route path="/particuliers/aides" element={<AidesParticulier />} />
+          <Route path="/particuliers/demande" element={<DemandeParticulier />} />
+          <Route path="/pro/aides" element={<AidesPro />} />
           <Route path="/simulation/resultats" element={<ResultatsSimulation />} />
           <Route path="/mentions-legales" element={<LegalNotice />} />
           <Route path="/politique-confidentialite" element={<PrivacyPolicy />} />

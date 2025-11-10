@@ -62,8 +62,8 @@ const Particuliers = () => {
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-4">Vous avez plusieurs projets ?</p>
             <Button asChild variant="outline" size="lg">
-              <Link to="/simulation/particuliers">
-                Faire une simulation complète
+              <Link to="/particuliers/aides">
+                Voir toutes les aides disponibles
                 <ArrowRight className="ml-2" />
               </Link>
             </Button>

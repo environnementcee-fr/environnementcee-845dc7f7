@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Lightbulb, Building, Sun, Home, Fan, Thermometer, Snowflake } from "lucide-react";
+import { ArrowRight, Lightbulb, Building, Sun, Home, Fan, Thermometer, Snowflake, Flame, Wind, Droplet } from "lucide-react";
 import { getTravauxBySegment, TravauxItem } from "@/data/travauxCatalog";
 
 interface CategoryGridProps {
@@ -17,6 +17,9 @@ const iconMap: Record<string, any> = {
   Fan,
   Thermometer,
   Snowflake,
+  Flame,
+  Wind,
+  Droplet,
 };
 
 export const CategoryGrid = ({ segment, basePath }: CategoryGridProps) => {

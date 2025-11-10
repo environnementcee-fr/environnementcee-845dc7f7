@@ -41,6 +41,16 @@ const Professionnels = () => {
           </p>
           
           <CategoryGrid segment="pro" basePath="/pro/deposer-projet" />
+
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-4">Vous avez plusieurs projets ?</p>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/pro/aides">
+                Voir toutes les aides disponibles
+                <ArrowRight className="ml-2" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 

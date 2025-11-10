@@ -218,7 +218,7 @@ export const LeadFormPro = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {TRAVAUX_CATALOG.filter(t => t.segment === 'pro' || t.segment === 'pro_part').map((item) => (
+                      {TRAVAUX_CATALOG.filter(t => t.segment === 'pro' || t.segment === 'mixte').map((item) => (
                         <SelectItem key={item.id} value={item.id}>
                           {item.label}
                         </SelectItem>
