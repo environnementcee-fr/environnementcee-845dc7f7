@@ -29,7 +29,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { FormLabel } from "@/components/ui/form";
 import isolationHero from "@/assets/forms/isolation-hero.jpg";
 
-export const IsolationForm = () => {
+export const IsolationForm = ({ userType = "particulier" }: { userType?: "particulier" | "professionnel" }) => {
   const [step, setStep] = useState(1);
   const [step1Data, setStep1Data] = useState<IsolationStep1Data | null>(null);
   const [step2Data, setStep2Data] = useState<IsolationStep2Data | null>(null);
@@ -40,7 +40,7 @@ export const IsolationForm = () => {
 
   const form1 = useForm<IsolationStep1Data>({
     resolver: zodResolver(isolationStep1Schema),
-    defaultValues: { building_type: "", user_type: "" },
+    defaultValues: { building_type: "", user_type: userType },
   });
 
   const form2 = useForm<IsolationStep2Data>({
@@ -64,7 +64,6 @@ export const IsolationForm = () => {
   });
 
   const buildingType = form1.watch("building_type");
-  const userType = form1.watch("user_type");
   const isPart = userType === "particulier";
 
   const wizardSteps: WizardStep[] = [
@@ -83,7 +82,7 @@ export const IsolationForm = () => {
         totalSteps={4}
         isLastStep={step === 4}
         isSubmitting={isSubmitting}
-        canContinue={step === 1 ? !!buildingType && !!userType : true}
+        canContinue={step === 1 ? !!buildingType : true}
         onNext={() => {
           if (step === 1) form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })();
           else if (step === 2) form2.handleSubmit((data) => { setStep2Data(data); setStep(3); })();
@@ -182,26 +181,7 @@ export const IsolationForm = () => {
           <Form {...form1}>
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Vous êtes :</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <VisualChoiceCard 
-                    illustration="👤" 
-                    title="Particulier"
-                    isSelected={userType === "particulier"} 
-                    onClick={() => form1.setValue("user_type", "particulier")} 
-                  />
-                  <VisualChoiceCard 
-                    illustration="🏢" 
-                    title="Professionnel"
-                    isSelected={userType === "professionnel"} 
-                    onClick={() => form1.setValue("user_type", "professionnel")} 
-                  />
-                </div>
-              </div>
-
-              {userType && (
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Type de bâtiment :</h3>
+                <h3 className="text-lg font-semibold mb-4">Type de bâtiment :</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <VisualChoiceCard 
                       illustration="🏡" 
@@ -219,7 +199,6 @@ export const IsolationForm = () => {
                     />
                   </div>
                 </div>
-              )}
             </div>
           </Form>
         )}

@@ -35,7 +35,7 @@ const BrasseurAirPro = () => {
       {/* Formulaire d'éligibilité */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <BrasseurAirForm />
+          <BrasseurAirForm userType="professionnel" />
         </div>
       </section>
 

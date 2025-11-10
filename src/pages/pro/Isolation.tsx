@@ -38,7 +38,7 @@ const IsolationPro = () => {
       {/* Formulaire d'éligibilité */}
       <section id="eligibility-form" className="py-16">
         <div className="container mx-auto px-4">
-          <IsolationForm />
+          <IsolationForm userType="professionnel" />
         </div>
       </section>
 

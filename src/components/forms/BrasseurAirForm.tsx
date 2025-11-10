@@ -31,7 +31,7 @@ const maisonImg = "/visuels/maison-individuelle.svg";
 const batimentProImg = "/visuels/batiment-professionnel.svg";
 const brasseurAirImg = "/visuels/brasseur-air.svg";
 
-export const BrasseurAirForm = () => {
+export const BrasseurAirForm = ({ userType = "particulier" }: { userType?: "particulier" | "professionnel" }) => {
   const [step, setStep] = useState(1);
   const [step1Data, setStep1Data] = useState<BrasseurAirStep1Data | null>(null);
   const [step2Data, setStep2Data] = useState<BrasseurAirStep2Data | null>(null);
@@ -42,7 +42,7 @@ export const BrasseurAirForm = () => {
 
   const form1 = useForm<BrasseurAirStep1Data>({
     resolver: zodResolver(brasseurAirStep1Schema),
-    defaultValues: { usage_type: "", user_type: "" },
+    defaultValues: { usage_type: "", user_type: userType },
   });
 
   const form2 = useForm<BrasseurAirStep2Data>({
@@ -66,7 +66,6 @@ export const BrasseurAirForm = () => {
   });
 
   const usageType = form1.watch("usage_type");
-  const userType = form1.watch("user_type");
   const isPart = userType === "particulier";
 
   const wizardSteps: WizardStep[] = [
@@ -85,7 +84,7 @@ export const BrasseurAirForm = () => {
         totalSteps={4}
         isLastStep={step === 4}
         isSubmitting={isSubmitting}
-        canContinue={step === 1 ? !!usageType && !!userType : true}
+        canContinue={step === 1 ? !!usageType : true}
         onNext={() => {
           if (step === 1) form1.handleSubmit((data) => { setStep1Data(data); setStep(2); })();
           else if (step === 2) form2.handleSubmit((data) => { setStep2Data(data); setStep(3); })();
@@ -184,18 +183,7 @@ export const BrasseurAirForm = () => {
           <Form {...form1}>
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold mb-4">Vous êtes :</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <VisualChoiceCard illustration="👤" title="Particulier"
-                    isSelected={userType === "particulier"} onClick={() => form1.setValue("user_type", "particulier")} />
-                  <VisualChoiceCard illustration="🏢" title="Professionnel"
-                    isSelected={userType === "professionnel"} onClick={() => form1.setValue("user_type", "professionnel")} />
-                </div>
-              </div>
-
-              {userType && (
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Type d'usage :</h3>
+                <h3 className="text-lg font-semibold mb-4">Type d'usage :</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <VisualChoiceCard illustration="🏡" title="Domestique"
                       isSelected={usageType === "domestique"} onClick={() => form1.setValue("usage_type", "domestique")} />
@@ -203,7 +191,6 @@ export const BrasseurAirForm = () => {
                       isSelected={usageType === "industriel"} onClick={() => form1.setValue("usage_type", "industriel")} />
                   </div>
                 </div>
-              )}
             </div>
           </Form>
         )}
