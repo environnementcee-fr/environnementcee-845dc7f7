@@ -271,7 +271,7 @@ const leadSchema = z.object({
   phone: z.string().regex(/^\+?[0-9\s\-\(\)]{6,20}$/),
   postal_code: z.string().regex(/^[0-9]{5}$/),
   consent_privacy: z.boolean().refine(val => val === true),
-  consent_partner: z.boolean(),
+  consent_partner: z.boolean().default(false),
   // Champs optionnels (selon le type d'aide)
   building_type: z.string().optional(),
   surface: z.number().optional(),

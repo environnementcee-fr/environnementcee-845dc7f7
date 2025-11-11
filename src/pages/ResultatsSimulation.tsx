@@ -13,7 +13,8 @@ import {
   Euro,
   Award,
   Home,
-  Building2
+  Building2,
+  AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -64,54 +65,67 @@ const ResultatsSimulation = () => {
   }
 
   const aids: Aid[] = [];
+  const subventions: Aid[] = [];
+  const prets: Aid[] = [];
+  const avantagesFiscaux: Aid[] = [];
   let totalAids = 0;
 
-  // Construire la liste des aides
+  // Construire la liste des aides par catégorie
   if (results.estimated_aids.mpr) {
-    aids.push({
+    const aide = {
       name: "MaPrimeRénov'",
       type: "MPR",
       amount: results.estimated_aids.mpr,
       description: results.mpr_category ? `Catégorie ${results.mpr_category.toUpperCase()}` : undefined
-    });
+    };
+    subventions.push(aide);
+    aids.push(aide);
     totalAids += results.estimated_aids.mpr;
   }
 
   if (results.estimated_aids.cee) {
-    aids.push({
+    const aide = {
       name: "Prime CEE",
       type: "CEE",
       amount: results.estimated_aids.cee,
       description: results.user_type === 'particulier' ? "Certificats d'Économies d'Énergie" : "Prime CEE Entreprise"
-    });
+    };
+    subventions.push(aide);
+    aids.push(aide);
     totalAids += results.estimated_aids.cee;
   }
 
   if (results.estimated_aids.ecoptz) {
-    aids.push({
+    const aide = {
       name: "Éco-PTZ",
       type: "ECOPTZ",
       amount: results.estimated_aids.ecoptz,
       description: "Prêt à taux zéro"
-    });
+    };
+    prets.push(aide);
+    aids.push(aide);
   }
 
   if (results.estimated_aids.tva) {
-    aids.push({
+    const aide = {
       name: "TVA Réduite",
       type: "TVA",
       amount: results.estimated_aids.tva,
       description: "Taux réduit 5,5%"
-    });
+    };
+    avantagesFiscaux.push(aide);
+    aids.push(aide);
   }
 
   if (results.estimated_aids.credit_impot_pme) {
-    aids.push({
+    const aide = {
       name: "Crédit d'impôt PME",
       type: "FISCAL",
       amount: results.estimated_aids.credit_impot_pme,
       description: "Déduction fiscale"
-    });
+    };
+    avantagesFiscaux.push(aide);
+    aids.push(aide);
   }
 
   const estimatedCost = results.estimated_cost || 15000;
@@ -163,6 +177,26 @@ const ResultatsSimulation = () => {
             <p className="text-xl text-muted-foreground">
               Découvrez les aides auxquelles vous êtes éligible
             </p>
+          </motion.div>
+
+          {/* Bandeau ESTIMATION */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="mb-8"
+          >
+            <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <AlertCircle className="w-5 h-5 text-amber-600" />
+                <p className="font-semibold text-amber-900">Estimation préliminaire</p>
+              </div>
+              <p className="text-sm text-amber-800">
+                Ces montants sont des estimations basées sur vos réponses. 
+                Un conseiller vous contactera sous 48h pour confirmer votre éligibilité 
+                finale après étude de votre dossier complet.
+              </p>
+            </div>
           </motion.div>
 
           {/* Score d'éligibilité */}
@@ -257,6 +291,88 @@ const ResultatsSimulation = () => {
             </Card>
           </motion.div>
 
+          {/* Conditions d'éligibilité vérifiées */}
+          {results.user_type === 'particulier' && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="mb-8"
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <CheckCircle2 className="w-6 h-6 text-green-600" />
+                    Conditions d'éligibilité vérifiées
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid gap-4">
+                    {results.mpr_category && results.mpr_category !== 'rose' && (
+                      <div className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <CheckCircle2 className="w-5 h-5 text-green-600 shrink-0" />
+                        <div>
+                          <p className="font-semibold text-green-900">
+                            Catégorie MaPrimeRénov' : {results.mpr_category.toUpperCase()}
+                          </p>
+                          <p className="text-sm text-green-700">
+                            Vos revenus vous permettent d'accéder aux aides MaPrimeRénov'
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0" />
+                      <div>
+                        <p className="font-semibold text-blue-900">Logement de plus de 15 ans</p>
+                        <p className="text-sm text-blue-700">
+                          Condition nécessaire pour MaPrimeRénov' (sauf remplacement chaudière fioul)
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-purple-200">
+                      <CheckCircle2 className="w-5 h-5 text-purple-600 shrink-0" />
+                      <div>
+                        <p className="font-semibold text-purple-900">Artisan RGE obligatoire</p>
+                        <p className="text-sm text-purple-700">
+                          Les travaux doivent être réalisés par un professionnel certifié RGE
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          )}
+
+          {/* Récapitulatif du projet */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.27 }}
+            className="mb-8"
+          >
+            <Card>
+              <CardHeader>
+                <CardTitle>📋 Récapitulatif de votre projet</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Type de travaux</p>
+                    <p className="font-semibold">{results.aid_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Profil</p>
+                    <p className="font-semibold">
+                      {results.user_type === 'particulier' ? 'Particulier' : 'Professionnel'}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
           {/* Liste des aides */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -268,39 +384,119 @@ const ResultatsSimulation = () => {
               <CheckCircle2 className="w-6 h-6 text-primary" />
               Vos aides disponibles
             </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {aids.map((aid, index) => (
-                <motion.div
-                  key={aid.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                >
-                  <Card className="hover:shadow-lg transition-shadow">
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <CardTitle className="text-xl mb-1">{aid.name}</CardTitle>
-                          {aid.description && (
-                            <CardDescription>{aid.description}</CardDescription>
-                          )}
+
+            {/* Subventions */}
+            {subventions.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                  💰 Subventions directes
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {subventions.map((aid, index) => (
+                    <Card key={aid.name} className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <CardTitle className="text-xl mb-1">{aid.name}</CardTitle>
+                            {aid.description && (
+                              <CardDescription>{aid.description}</CardDescription>
+                            )}
+                          </div>
+                          <Badge variant="outline" className="shrink-0">
+                            {aid.type}
+                          </Badge>
                         </div>
-                        <Badge variant="outline" className="shrink-0">
-                          {aid.type}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="text-3xl font-bold text-primary">
-                        {typeof aid.amount === 'number' 
-                          ? `${aid.amount.toLocaleString()} €`
-                          : aid.amount
-                        }
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-3xl font-bold text-primary">
+                          {typeof aid.amount === 'number' 
+                            ? `${aid.amount.toLocaleString()} €`
+                            : aid.amount
+                          }
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Prêts */}
+            {prets.length > 0 && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                  🏦 Prêts sans intérêts
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {prets.map((aid, index) => (
+                    <Card key={aid.name} className="hover:shadow-lg transition-shadow border-blue-200">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <CardTitle className="text-xl mb-1">{aid.name}</CardTitle>
+                            {aid.description && (
+                              <CardDescription>{aid.description}</CardDescription>
+                            )}
+                          </div>
+                          <Badge variant="outline" className="shrink-0">
+                            {aid.type}
+                          </Badge>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-3xl font-bold text-blue-600">
+                          {typeof aid.amount === 'number' 
+                            ? `jusqu'à ${aid.amount.toLocaleString()} €`
+                            : aid.amount
+                          }
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Avantages fiscaux */}
+            {avantagesFiscaux.length > 0 && (
+              <div>
+                <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
+                  📊 Avantages fiscaux
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {avantagesFiscaux.map((aid, index) => (
+                    <Card key={aid.name} className="hover:shadow-lg transition-shadow border-purple-200">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <CardTitle className="text-xl mb-1">{aid.name}</CardTitle>
+                            {aid.description && (
+                              <CardDescription>{aid.description}</CardDescription>
+                            )}
+                          </div>
+                          <Badge variant="outline" className="shrink-0">
+                            {aid.type}
+                          </Badge>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-2xl font-bold text-purple-600">
+                          {typeof aid.amount === 'number' 
+                            ? `${aid.amount.toLocaleString()} €`
+                            : aid.amount
+                          }
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-sm text-blue-900">
+                <strong>💡 Bon à savoir :</strong> Ces aides sont <strong>cumulables</strong> et peuvent être combinées pour maximiser le financement de votre projet.
+              </p>
             </div>
           </motion.div>
 

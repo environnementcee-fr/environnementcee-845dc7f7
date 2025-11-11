@@ -18,6 +18,18 @@ interface LeadData {
   phone: string;
   postal_code: string;
   created_at: string;
+  // Champs d'éligibilité
+  eligibility_score?: number;
+  estimated_aids?: {
+    mpr?: number;
+    cee?: number;
+    ecoptz?: number | string;
+    tva?: string;
+    credit_impot_pme?: string;
+    prime_autoconso?: any;
+    rachat_edf?: string;
+  };
+  mpr_category?: string;
   // Champs optionnels
   building_type?: string;
   surface?: number;
@@ -268,6 +280,33 @@ const handler = async (req: Request): Promise<Response> => {
           </div>
         </div>
         ` : ""}
+        ${leadData.eligibility_score ? `
+        <div class="section">
+          <div class="section-title">🎯 Éligibilité</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="label">Score</div>
+              <div class="value">${leadData.eligibility_score}/100</div>
+            </div>
+            ${leadData.mpr_category ? `
+              <div class="info-item">
+                <div class="label">Catégorie MPR</div>
+                <div class="value">${leadData.mpr_category.toUpperCase()}</div>
+              </div>
+            ` : ''}
+          </div>
+          ${leadData.estimated_aids ? `
+            <div style="margin-top: 15px; padding: 15px; background: #f0f9f4; border-radius: 6px;">
+              <p style="font-weight: 600; margin: 0 0 10px 0;">Aides estimées :</p>
+              ${leadData.estimated_aids.mpr ? `<p style="margin: 5px 0;">• MPR : ${leadData.estimated_aids.mpr}€</p>` : ''}
+              ${leadData.estimated_aids.cee ? `<p style="margin: 5px 0;">• CEE : ${leadData.estimated_aids.cee}€</p>` : ''}
+              ${leadData.estimated_aids.ecoptz ? `<p style="margin: 5px 0;">• Éco-PTZ : jusqu'à ${leadData.estimated_aids.ecoptz}</p>` : ''}
+              ${leadData.estimated_aids.tva ? `<p style="margin: 5px 0;">• TVA réduite : ${leadData.estimated_aids.tva}</p>` : ''}
+              ${leadData.estimated_aids.credit_impot_pme ? `<p style="margin: 5px 0;">• Crédit impôt : ${leadData.estimated_aids.credit_impot_pme}</p>` : ''}
+            </div>
+          ` : ''}
+        </div>
+        ` : ''}
         <div class="section">
           <div class="section-title">👤 Contact</div>
           <div class="info-grid">
@@ -348,6 +387,33 @@ const handler = async (req: Request): Promise<Response> => {
             <span class="label">Code postal :</span> ${leadData.postal_code}
           </div>
         </div>
+
+        ${leadData.estimated_aids && (leadData.estimated_aids.mpr || leadData.estimated_aids.cee) ? `
+        <div class="highlight-box" style="background: #f0f9f4; border-color: #19B86A;">
+          <h3 style="margin-top: 0; color: #19B86A;">💰 Estimation de vos aides</h3>
+          <p style="margin: 0 0 15px 0; color: #666; font-size: 14px;">
+            ⚠️ Estimation préliminaire - à confirmer après étude complète
+          </p>
+          ${leadData.estimated_aids.mpr ? `
+            <div class="recap-item">
+              <span class="label">MaPrimeRénov' ${leadData.mpr_category ? `(${leadData.mpr_category.toUpperCase()})` : ''} :</span> ~${leadData.estimated_aids.mpr}€
+            </div>
+          ` : ''}
+          ${leadData.estimated_aids.cee ? `
+            <div class="recap-item">
+              <span class="label">Prime CEE :</span> ~${leadData.estimated_aids.cee}€
+            </div>
+          ` : ''}
+          ${leadData.estimated_aids.ecoptz ? `
+            <div class="recap-item">
+              <span class="label">Éco-PTZ :</span> jusqu'à ${leadData.estimated_aids.ecoptz}
+            </div>
+          ` : ''}
+          <p style="margin-top: 10px; font-size: 13px; color: #666;">
+            💡 Ces montants sont indicatifs et seront confirmés par nos experts
+          </p>
+        </div>
+        ` : ''}
 
         <h3 style="color: #0E1B25;">🔄 Prochaines étapes</h3>
         <ol style="padding-left: 20px;">
