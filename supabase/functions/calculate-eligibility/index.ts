@@ -48,7 +48,8 @@ const CEE_MONTANTS = {
 };
 
 interface LeadData {
-  aid_type: string;
+  aid_type?: string;
+  travaux_ids?: string[]; // Support multi-travaux
   user_type: "particulier" | "professionnel";
   building_type?: string;
   postal_code: string;
@@ -132,9 +133,98 @@ function calculateEligibility(data: LeadData) {
     }
   }
 
+  // Support multi-travaux : si travaux_ids est fourni, calculer pour chaque travaux
+  const travauxToCalculate = data.travaux_ids || (data.aid_type ? [data.aid_type] : []);
+  const eligibiliteParTravaux: Record<string, any> = {};
+
+  travauxToCalculate.forEach((aidType: string) => {
+    const travauxEligibilite = calculateSingleAidEligibility(
+      aidType,
+      data,
+      isOldBuilding,
+      revenuCat,
+      isModeste,
+      buildingAge
+    );
+    eligibiliteParTravaux[aidType] = travauxEligibilite;
+    
+    // Cumuler les montants dans eligibilite global
+    if (travauxEligibilite.mpr.eligible) {
+      eligibilite.mpr.eligible = true;
+      eligibilite.mpr.montant += travauxEligibilite.mpr.montant;
+      eligibilite.mpr.details = "Montants cumulés pour plusieurs travaux";
+    }
+    if (travauxEligibilite.cee.eligible) {
+      eligibilite.cee.eligible = true;
+      eligibilite.cee.montant += travauxEligibilite.cee.montant;
+      eligibilite.cee.details = "Primes cumulées pour plusieurs travaux";
+    }
+    
+    score += travauxEligibilite.score;
+  });
+
+  // === Éco-PTZ (Particuliers uniquement) ===
+  if (data.user_type === "particulier" && isOldBuilding) {
+    eligibilite.eco_ptz.eligible = true;
+    eligibilite.eco_ptz.montant = travauxToCalculate.length >= 2 ? 50000 : 30000;
+    eligibilite.eco_ptz.details = travauxToCalculate.length >= 2 
+      ? "Prêt à taux zéro jusqu'à 50 000€ (rénovation globale ou 2+ travaux)"
+      : "Prêt à taux zéro jusqu'à 30 000€";
+    score += 10;
+  }
+
+  // === TVA réduite ===
+  if (buildingAge >= 2) {
+    eligibilite.tva_reduite.eligible = true;
+    eligibilite.tva_reduite.details = "TVA à 5,5% sur travaux et équipements";
+    score += 5;
+  }
+
+  // === Crédit d'impôt 30% (Professionnels PME uniquement) ===
+  if (data.user_type === "professionnel") {
+    const eligibleForCredit = travauxToCalculate.some(aid => 
+      ["led_bureaux", "led_entrepot", "isolation_pro", "pac_pro"].includes(aid)
+    );
+    if (eligibleForCredit) {
+      eligibilite.credit_impot.eligible = true;
+      eligibilite.credit_impot.details = "Crédit d'impôt PME 30% (jusqu'à fin 2024)";
+      score += 25;
+    }
+  }
+
+  // === Aides locales ===
+  eligibilite.aides_locales.eligible = true;
+  eligibilite.aides_locales.details = "Aides locales possibles selon votre commune/région";
+
+  const totalAides = Object.values(eligibilite)
+    .reduce((sum: number, aide: any) => sum + (aide.montant || 0), 0);
+
+  return {
+    eligibilite,
+    eligibilite_par_travaux: eligibiliteParTravaux,
+    score,
+    total_aides_estimees: totalAides,
+    revenu_category: revenuCat,
+  };
+}
+
+function calculateSingleAidEligibility(
+  aidType: string,
+  data: LeadData,
+  isOldBuilding: boolean,
+  revenuCat: "bleu" | "jaune" | "violet" | "rose" | null,
+  isModeste: boolean,
+  buildingAge: number
+) {
+  const eligibilite: any = {
+    mpr: { eligible: false, montant: 0, details: "" },
+    cee: { eligible: false, montant: 0, details: "" },
+  };
+  let score = 0;
+
   // === MaPrimeRénov' (Particuliers uniquement) ===
   if (data.user_type === "particulier" && isOldBuilding && revenuCat && revenuCat !== "rose") {
-    switch (data.aid_type) {
+    switch (aidType) {
       case "pac_part":
         if (data.heating_system !== "pac") {
           eligibilite.mpr.eligible = true;
@@ -207,13 +297,13 @@ function calculateEligibility(data: LeadData) {
   // === CEE (Particuliers et Professionnels) ===
   eligibilite.cee.eligible = true;
 
-  if (data.aid_type === "pac_part" || data.aid_type === "pac_pro") {
+  if (aidType === "pac_part" || aidType === "pac_pro") {
     eligibilite.cee.montant = isModeste 
       ? CEE_MONTANTS.pac_air_eau.modeste 
       : CEE_MONTANTS.pac_air_eau.standard;
     eligibilite.cee.details = "Prime Coup de Pouce Chauffage";
     score += 20;
-  } else if (data.aid_type.includes("isolation")) {
+  } else if (aidType.includes("isolation")) {
     const surface = data.surface || 0;
     const montantM2 = isModeste 
       ? CEE_MONTANTS.isolation_toiture.modeste 
@@ -221,25 +311,25 @@ function calculateEligibility(data: LeadData) {
     eligibilite.cee.montant = montantM2 * surface;
     eligibilite.cee.details = "Prime Coup de Pouce Isolation";
     score += 20;
-  } else if (data.aid_type === "led_bureaux" || data.aid_type === "led_entrepot") {
+  } else if (aidType === "led_bureaux" || aidType === "led_entrepot") {
     const nbLuminaires = parseInt(data.project_data?.nbLuminaires || "10");
-    const montant = data.aid_type === "led_entrepot"
+    const montant = aidType === "led_entrepot"
       ? CEE_MONTANTS.led_entrepot.standard
       : CEE_MONTANTS.led_bureaux.standard;
     eligibilite.cee.montant = montant * nbLuminaires;
     eligibilite.cee.details = "CEE Éclairage performant";
     score += 30;
-  } else if (data.aid_type === "brasseur_air") {
+  } else if (aidType === "brasseur_air") {
     eligibilite.cee.montant = CEE_MONTANTS.brasseur_air.standard * (data.surface || 0);
     eligibilite.cee.details = "CEE Destratification air";
     score += 20;
-  } else if (data.aid_type === "chaudiere_biomasse") {
+  } else if (aidType === "chaudiere_biomasse") {
     eligibilite.cee.montant = isModeste
       ? CEE_MONTANTS.chaudiere_biomasse.modeste
       : CEE_MONTANTS.chaudiere_biomasse.standard;
     eligibilite.cee.details = "CEE Chauffage biomasse";
     score += 20;
-  } else if (data.aid_type === "vmc_double_flux") {
+  } else if (aidType === "vmc_double_flux") {
     eligibilite.cee.montant = isModeste
       ? CEE_MONTANTS.vmc_double_flux.modeste
       : CEE_MONTANTS.vmc_double_flux.standard;
@@ -251,36 +341,8 @@ function calculateEligibility(data: LeadData) {
     score += 15;
   }
 
-  // === Éco-PTZ (Particuliers uniquement) ===
-  if (data.user_type === "particulier" && isOldBuilding) {
-    eligibilite.eco_ptz.eligible = true;
-    eligibilite.eco_ptz.montant = 30000;
-    eligibilite.eco_ptz.details = "Prêt à taux zéro jusqu'à 30 000€ (ou 50 000€ si rénovation globale)";
-    score += 10;
-  }
-
-  // === TVA réduite ===
-  if (buildingAge >= 2) {
-    eligibilite.tva_reduite.eligible = true;
-    eligibilite.tva_reduite.details = "TVA à 5,5% sur travaux et équipements";
-    score += 5;
-  }
-
-  // === Crédit d'impôt 30% (Professionnels PME uniquement) ===
-  if (data.user_type === "professionnel") {
-    if (["led_bureaux", "led_entrepot", "isolation_pro", "pac_pro"].includes(data.aid_type)) {
-      eligibilite.credit_impot.eligible = true;
-      eligibilite.credit_impot.details = "Crédit d'impôt PME 30% (jusqu'à fin 2024)";
-      score += 25;
-    }
-  }
-
-  // === Aides locales ===
-  eligibilite.aides_locales.eligible = true;
-  eligibilite.aides_locales.details = "Aides locales possibles selon votre commune/région";
-
   // === Photovoltaïque (cas particulier) ===
-  if (data.aid_type === "pv_part") {
+  if (aidType === "pv_part") {
     eligibilite.mpr.eligible = false;
     eligibilite.mpr.details = "Non éligible MPR (production d'énergie)";
     eligibilite.cee.eligible = false;
@@ -299,12 +361,7 @@ function calculateEligibility(data: LeadData) {
     score += 30;
   }
 
-  return {
-    eligibilite,
-    score,
-    total_aides_estimees: Object.values(eligibilite)
-      .reduce((sum: number, aide: any) => sum + (aide.montant || 0), 0),
-  };
+  return { ...eligibilite, score };
 }
 
 serve(async (req) => {

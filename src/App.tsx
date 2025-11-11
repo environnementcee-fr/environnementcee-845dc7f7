@@ -16,6 +16,7 @@ import AidesParticulier from "./pages/particulier/Aides";
 import DemandeParticulier from "./pages/particulier/Demande";
 import AidesPro from "./pages/pro/Aides";
 import ResultatsSimulation from "./pages/ResultatsSimulation";
+import ParcoursRapide from "./pages/ParcoursRapide";
 import NotFound from "./pages/NotFound";
 import LegalNotice from "./pages/LegalNotice";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -74,6 +75,7 @@ const App = () => (
           <Route path="/simulation" element={<Simulation />} />
           <Route path="/simulation/particuliers" element={<SimulationParticuliers />} />
           <Route path="/simulation/professionnels" element={<SimulationProfessionnels />} />
+          <Route path="/parcours-rapide" element={<ParcoursRapide />} />
           <Route path="/particuliers/aides" element={<AidesParticulier />} />
           <Route path="/particuliers/demande" element={<DemandeParticulier />} />
           <Route path="/pro/aides" element={<AidesPro />} />
