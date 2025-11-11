@@ -258,7 +258,7 @@ const leadSchema = z.object({
     // Anciens (rétrocompatibilité)
     "isolation", "pac", "led_bureau", "led_solaire",
     // Multi-travaux
-    "multi_led_pro", "multi_particulier", "ma_prime_renov",
+    "multi_led_pro", "multi_particulier", "ma_prime_renov", "renovation_globale",
     // Autres
     "housse_piscine"
   ]),

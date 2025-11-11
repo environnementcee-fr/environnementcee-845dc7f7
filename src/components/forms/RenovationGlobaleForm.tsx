@@ -178,7 +178,7 @@ export const RenovationGlobaleForm = () => {
 
     setIsSubmitting(true);
     try {
-      // Calculer l'éligibilité multi-travaux
+      // Calculer l'éligibilité multi-travaux d'abord
       const { data: eligibilityData, error: eligibilityError } = await supabase.functions.invoke(
         "calculate-eligibility",
         {
@@ -205,59 +205,46 @@ export const RenovationGlobaleForm = () => {
         console.error("Erreur calcul éligibilité:", eligibilityError);
       }
 
-      // Créer le lead
-      const payload = {
-        user_type: formData.segment === "part" ? "particulier" : "professionnel",
-        aid_type: "renovation_globale",
-        first_name: formData.first_name,
-        last_name: formData.last_name,
-        email: formData.email,
-        phone: formData.phone,
-        postal_code: formData.postal_code,
-        building_type: formData.building_type,
-        construction_year: parseInt(formData.construction_year),
-        surface: parseFloat(formData.surface),
-        consent_privacy: formData.consent_privacy,
-        consent_partner: formData.consent_partner,
-        status: "nouveau",
-        eligibility_score: eligibilityData?.score || 50,
-        estimated_aids: eligibilityData?.eligibilite || {},
-        mpr_category: eligibilityData?.revenu_category || null,
-        project_data: {
-          aides_souhaitees: formData.aides_souhaitees,
-          travaux_selectionnes: formData.travaux_selectionnes,
-          ville: formData.ville,
-          nb_personnes: formData.nb_personnes,
-          revenu_fiscal: formData.revenu_fiscal,
-          siret: formData.siret,
-          raison_sociale: formData.raison_sociale,
-          type_site: formData.type_site,
-          statut_occupant: formData.statut_occupant,
-          details_travaux: formData.details_travaux,
-          description: formData.description,
-          budget: formData.budget,
-          delai: formData.delai,
-          total_aides_estimees: eligibilityData?.total_aides_estimees || 0,
-        },
-      };
+      // Soumettre le lead via submit-lead (unifié avec tous les autres formulaires)
+      const { data: submitData, error: submitError } = await supabase.functions.invoke(
+        "submit-lead",
+        {
+          body: {
+            user_type: formData.segment === "part" ? "particulier" : "professionnel",
+            aid_type: "renovation_globale",
+            first_name: formData.first_name,
+            last_name: formData.last_name,
+            email: formData.email,
+            phone: formData.phone,
+            postal_code: formData.postal_code,
+            building_type: formData.building_type,
+            construction_year: parseInt(formData.construction_year),
+            surface: parseFloat(formData.surface),
+            consent_privacy: formData.consent_privacy,
+            consent_partner: formData.consent_partner,
+            project_data: {
+              aides_souhaitees: formData.aides_souhaitees,
+              travaux_selectionnes: formData.travaux_selectionnes,
+              ville: formData.ville,
+              nb_personnes: formData.nb_personnes,
+              revenu_fiscal: formData.revenu_fiscal,
+              siret: formData.siret,
+              raison_sociale: formData.raison_sociale,
+              type_site: formData.type_site,
+              statut_occupant: formData.statut_occupant,
+              details_travaux: formData.details_travaux,
+              description: formData.description,
+              budget: formData.budget,
+              delai: formData.delai,
+              // Inclure les résultats du calcul d'éligibilité
+              eligibility_results: eligibilityData,
+              total_aides_estimees: eligibilityData?.total_aides_estimees || 0,
+            },
+          },
+        }
+      );
 
-      const { error: insertError } = await supabase
-        .from("lead_submissions")
-        .insert([payload]);
-
-      if (insertError) throw insertError;
-
-      // Notification
-      try {
-        await supabase.functions.invoke("notify-new-lead", {
-          body: { 
-            leadData: payload, 
-            segment: formData.segment === "part" ? "particulier" : "professionnel",
-          }
-        });
-      } catch (fnError) {
-        console.error("Erreur notification:", fnError);
-      }
+      if (submitError) throw submitError;
 
       toast.success("Demande envoyée avec succès !");
       localStorage.removeItem("lead_global_draft");
