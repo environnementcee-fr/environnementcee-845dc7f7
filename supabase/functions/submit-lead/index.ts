@@ -73,6 +73,9 @@ function calculateCEEParticulier(aidType: string, surface: number, modeste: bool
   if (aidType === 'cet_part') {
     return modeste ? 200 : 150;
   }
+  if (aidType === 'housse_piscine') {
+    return modeste ? 200 : 150;
+  }
   return 0;
 }
 
@@ -86,12 +89,18 @@ function calculateCEEProfessionnel(aidType: string, data: any): number {
   if (aidType.includes('led_solaire') && data.fixture_count) {
     return data.fixture_count * 100;
   }
+  if (aidType === 'led_unifie' && data.fixture_count) {
+    return data.fixture_count * 18;
+  }
   if (aidType.includes('isolation') && data.surface) {
     return data.surface * 22;
   }
   if (aidType.includes('pac') && data.surface) {
     const puissance = (data.surface * 100) / 1000;
     return puissance * 150;
+  }
+  if (aidType === 'hp_flottante' && data.surface) {
+    return data.surface * 3;
   }
   if (aidType === 'brasseur_air' && data.surface) {
     return data.surface * 5;
@@ -103,6 +112,96 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
   const aids: any = {};
   let score = 0;
   let mprCategory: MPRCategory | undefined;
+
+  // Mapper les anciens types vers les nouveaux
+  let effectiveAidType = leadData.aid_type;
+  if (effectiveAidType === 'multi_particulier') {
+    effectiveAidType = 'renovation_globale';
+  } else if (effectiveAidType === 'multi_led_pro') {
+    effectiveAidType = 'led_unifie';
+  } else if (effectiveAidType === 'ma_prime_renov') {
+    // Utiliser la logique existante - ma_prime_renov reste tel quel
+  }
+
+  // Gestion spéciale pour renovation_globale (multi-travaux)
+  if (effectiveAidType === 'renovation_globale' && leadData.project_data?.travaux_ids?.length > 0) {
+    const revenuFiscal = leadData.project_data?.revenu_fiscal || 30000;
+    const nbPersonnes = leadData.project_data?.nb_personnes || 2;
+    const region: Region = leadData.postal_code?.startsWith('75') || 
+                          leadData.postal_code?.startsWith('77') ||
+                          leadData.postal_code?.startsWith('78') ||
+                          leadData.postal_code?.startsWith('91') ||
+                          leadData.postal_code?.startsWith('92') ||
+                          leadData.postal_code?.startsWith('93') ||
+                          leadData.postal_code?.startsWith('94') ||
+                          leadData.postal_code?.startsWith('95') ? 'idf' : 'autre';
+
+    mprCategory = calculateMPRCategory(revenuFiscal, nbPersonnes, region);
+    const modeste = isModeste(revenuFiscal, nbPersonnes, region);
+
+    let totalMPR = 0;
+    let totalCEE = 0;
+
+    // Parcourir tous les travaux sélectionnés
+    for (const travauxId of leadData.project_data.travaux_ids) {
+      const travauxDetails = leadData.project_data.details_travaux?.[travauxId] || {};
+      
+      // Calculer MPR pour ce type de travaux
+      if (mprCategory !== 'rose' && leadData.construction_year && 
+          (new Date().getFullYear() - leadData.construction_year) >= 15) {
+        
+        if (travauxId.includes('isolation') && travauxDetails.surfaceIso) {
+          const surface = parseInt(travauxDetails.surfaceIso);
+          if (travauxId === 'isolation_murs_part') {
+            totalMPR += (MPR_FORFAITS.isolation_murs_ext[mprCategory] || 0) * surface;
+          } else {
+            totalMPR += (MPR_FORFAITS.isolation_toiture[mprCategory] || 0) * surface;
+          }
+          totalCEE += surface * 12 * (modeste ? 1.2 : 1);
+        } else if (travauxId.includes('pac')) {
+          totalMPR += MPR_FORFAITS.pac_air_eau[mprCategory] || 0;
+          totalCEE += modeste ? 4500 : 3000;
+        } else if (travauxId === 'fenetres_part' && travauxDetails.nb_fenetres) {
+          const nbFenetres = parseInt(travauxDetails.nb_fenetres);
+          totalMPR += (MPR_FORFAITS.fenetres[mprCategory] || 0) * nbFenetres;
+          totalCEE += nbFenetres * (modeste ? 100 : 80);
+        } else if (travauxId === 'chaudiere_biomasse') {
+          totalMPR += MPR_FORFAITS.chaudiere_biomasse_auto[mprCategory] || 0;
+          totalCEE += modeste ? 1000 : 800;
+        } else if (travauxId === 'vmc_double_flux') {
+          totalMPR += MPR_FORFAITS.vmc_double_flux[mprCategory] || 0;
+          totalCEE += modeste ? 500 : 400;
+        } else if (travauxId === 'cet_part') {
+          const typeCET = travauxDetails.type_chauffe_eau;
+          if (typeCET === 'thermodynamique') {
+            totalMPR += MPR_FORFAITS.chauffe_eau_thermodynamique[mprCategory] || 0;
+          } else if (typeCET === 'solaire') {
+            totalMPR += MPR_FORFAITS.chauffe_eau_solaire[mprCategory] || 0;
+          }
+          totalCEE += modeste ? 200 : 150;
+        }
+      }
+    }
+
+    if (totalMPR > 0) {
+      aids.mpr = totalMPR;
+      score += 30;
+    }
+    if (totalCEE > 0) {
+      aids.cee = totalCEE;
+      score += 25;
+    }
+
+    // Éco-PTZ augmenté pour multi-travaux
+    aids.ecoptz = 30000;
+    score += 20;
+
+    // TVA réduite
+    aids.tva = 'Taux réduit 5,5%';
+    score += 15;
+
+    return { score, aids, mprCategory };
+  }
 
   if (leadData.user_type === 'particulier') {
     // Extraire les données nécessaires
@@ -129,37 +228,37 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
       let mprAmount = 0;
       
       // Isolation
-      if (leadData.aid_type === 'isolation' && leadData.surface) {
+      if (effectiveAidType === 'isolation' && leadData.surface) {
         mprAmount = (MPR_FORFAITS.isolation_combles[mprCategory] || 0) * leadData.surface;
-      } else if (leadData.aid_type === 'isolation_toiture' && leadData.surface) {
+      } else if (effectiveAidType === 'isolation_toiture' && leadData.surface) {
         mprAmount = (MPR_FORFAITS.isolation_toiture[mprCategory] || 0) * leadData.surface;
-      } else if (leadData.aid_type === 'isolation_murs_part' && leadData.surface) {
+      } else if (effectiveAidType === 'isolation_murs_part' && leadData.surface) {
         mprAmount = (MPR_FORFAITS.isolation_murs_ext[mprCategory] || 0) * leadData.surface;
       }
       
       // Pompes à chaleur
-      else if (leadData.aid_type === 'pac' || leadData.aid_type === 'pac_part') {
+      else if (effectiveAidType === 'pac' || effectiveAidType === 'pac_part') {
         mprAmount = MPR_FORFAITS.pac_air_eau[mprCategory] || 0;
       }
       
       // Fenêtres
-      else if (leadData.aid_type === 'fenetres_part' && leadData.project_data?.nb_fenetres) {
+      else if (effectiveAidType === 'fenetres_part' && leadData.project_data?.nb_fenetres) {
         const nbFenetres = parseInt(leadData.project_data.nb_fenetres);
         mprAmount = (MPR_FORFAITS.fenetres[mprCategory] || 0) * nbFenetres;
       }
       
       // Chaudière biomasse
-      else if (leadData.aid_type === 'chaudiere_biomasse') {
+      else if (effectiveAidType === 'chaudiere_biomasse') {
         mprAmount = MPR_FORFAITS.chaudiere_biomasse_auto[mprCategory] || 0;
       }
       
       // VMC double flux
-      else if (leadData.aid_type === 'vmc_double_flux') {
+      else if (effectiveAidType === 'vmc_double_flux') {
         mprAmount = MPR_FORFAITS.vmc_double_flux[mprCategory] || 0;
       }
       
       // Chauffe-eau
-      else if (leadData.aid_type === 'cet_part') {
+      else if (effectiveAidType === 'cet_part') {
         const typeCET = leadData.project_data?.type_chauffe_eau;
         if (typeCET === 'thermodynamique') {
           mprAmount = MPR_FORFAITS.chauffe_eau_thermodynamique[mprCategory] || 0;
@@ -175,7 +274,7 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
     }
     
     // Photovoltaïque - Prime à l'autoconsommation (pas de MPR mais prime spécifique)
-    if (leadData.aid_type === 'pv_part') {
+    if (effectiveAidType === 'pv_part') {
       const puissance = leadData.project_data?.puissance_souhaitee || 6;
       aids.prime_autoconso = {
         montant: puissance <= 3 ? 300 * puissance : puissance <= 9 ? 230 * puissance : 200 * puissance,
@@ -185,9 +284,16 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
       score += 25;
     }
 
+    // Housse piscine - uniquement CEE
+    if (effectiveAidType === 'housse_piscine') {
+      const ceeHousse = modeste ? 200 : 150;
+      aids.cee = ceeHousse;
+      score += 20;
+    }
+
     // CEE Particulier
-    const ceeAmount = calculateCEEParticulier(leadData.aid_type, leadData.surface || 0, modeste, leadData.project_data);
-    if (ceeAmount > 0) {
+    const ceeAmount = calculateCEEParticulier(effectiveAidType, leadData.surface || 0, modeste, leadData.project_data);
+    if (ceeAmount > 0 && !aids.cee) {
       aids.cee = ceeAmount;
       score += 25;
     }
@@ -202,7 +308,7 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
 
   } else if (leadData.user_type === 'professionnel') {
     // CEE Professionnel
-    const ceeAmount = calculateCEEProfessionnel(leadData.aid_type, {
+    const ceeAmount = calculateCEEProfessionnel(effectiveAidType, {
       fixture_count: leadData.fixture_count,
       surface: leadData.surface,
       ceiling_height: leadData.ceiling_height
@@ -221,6 +327,11 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
         score += 20;
       }
     }
+  }
+
+  // Logger les types non reconnus pour amélioration future
+  if (score === 0) {
+    console.log(`Warning: aid_type "${effectiveAidType}" did not generate any eligibility score`);
   }
 
   return { score, aids, mprCategory };
@@ -260,7 +371,7 @@ const leadSchema = z.object({
     // Multi-travaux
     "multi_led_pro", "multi_particulier", "ma_prime_renov", "renovation_globale",
     // Autres
-    "housse_piscine"
+    "housse_piscine", "led_unifie"
   ]),
   user_type: z.enum(["particulier", "professionnel"]),
   project_data: z.any().optional(),
