@@ -150,25 +150,46 @@ const Home = () => {
           </div>
 
           {/* Section Parcours Rapide */}
-          <div className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-border/50 mb-8">
+          <div className="max-w-3xl mx-auto bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border-2 border-primary/30 mb-6">
             <div className="text-center mb-6">
               <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
                 🚀 Parcours Rapide - Rénovation Globale
               </h2>
               <p className="text-muted-foreground text-sm md:text-base">
-                Vous envisagez plusieurs travaux ? Obtenez une estimation globale de toutes vos aides en un seul formulaire complet.
+                Vous envisagez plusieurs travaux ? Obtenez une estimation globale de toutes vos aides en un seul formulaire.
+              </p>
+            </div>
+            
+            <div className="flex justify-center">
+              <Button asChild size="lg" variant="default" className="text-base md:text-lg h-12 md:h-14 px-8">
+                <Link to="/parcours-rapide">
+                  <ArrowRight className="mr-2 h-5 w-5" />
+                  Accéder au parcours rapide
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Section Parcours Personnalisé */}
+          <div className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-border/50">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
+                Parcours Personnalisé
+              </h2>
+              <p className="text-muted-foreground text-sm md:text-base">
+                Un seul type de travaux ? Accédez directement aux formulaires dédiés selon votre profil.
               </p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="default" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
-                <Link to="/parcours-rapide?segment=part">
+                <Link to="/particuliers/aides">
                   <HomeIcon className="mr-2 h-5 w-5" />
                   Je suis particulier
                 </Link>
               </Button>
               <Button asChild size="lg" variant="blue" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
-                <Link to="/parcours-rapide?segment=pro">
+                <Link to="/pro/aides">
                   <Building2 className="mr-2 h-5 w-5" />
                   Je suis professionnel
                 </Link>
@@ -176,27 +197,6 @@ const Home = () => {
             </div>
           </div>
 
-        </div>
-      </section>
-
-      {/* Nos Solutions - Choix Pro/Particuliers */}
-      <section className="py-12 md:py-20 bg-gradient-to-br from-background via-background to-muted/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 md:mb-12 animate-fade-in">
-            <h2 className="mb-3 md:mb-4 text-foreground text-2xl md:text-3xl lg:text-4xl">Découvrez les aides disponibles</h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Testez votre éligibilité en 2 minutes et découvrez le montant des aides que vous pouvez obtenir
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <Button asChild size="lg" className="text-base md:text-lg h-12 md:h-14 px-8">
-              <Link to="/simulation">
-                Tester mon éligibilité
-                <ArrowRight className="ml-2" />
-              </Link>
-            </Button>
-          </div>
         </div>
       </section>
 
