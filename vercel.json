@@ -1,4 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/simulation/particuliers",
+      "destination": "/particuliers/aides",
+      "permanent": true
+    },
+    {
+      "source": "/simulation/professionnels",
+      "destination": "/pro/aides",
+      "permanent": true
+    },
+    {
+      "source": "/particuliers",
+      "destination": "/particuliers/aides",
+      "permanent": true
+    },
+    {
+      "source": "/professionnels",
+      "destination": "/pro/aides",
+      "permanent": true
+    },
+    {
+      "source": "/pro/led",
+      "destination": "/pro/aides",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]

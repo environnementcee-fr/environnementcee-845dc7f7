@@ -12,7 +12,7 @@ export const RoleSection = () => {
           
           <div className="grid md:grid-cols-2 gap-8">
             {/* Professionnel */}
-            <Link to="/pro/led">
+            <Link to="/pro/aides">
               <Card className="p-8 hover:shadow-2xl transition-all cursor-pointer group border-2 hover:border-primary h-full">
                 <div className="text-center">
                   <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-smooth">
@@ -30,7 +30,7 @@ export const RoleSection = () => {
             </Link>
 
             {/* Particulier */}
-            <Link to="/particuliers">
+            <Link to="/particuliers/aides">
               <Card className="p-8 hover:shadow-2xl transition-all cursor-pointer group border-2 hover:border-primary h-full">
                 <div className="text-center">
                   <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-smooth">

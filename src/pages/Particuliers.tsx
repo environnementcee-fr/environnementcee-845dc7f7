@@ -81,7 +81,7 @@ const Particuliers = () => {
               Nos conseillers vous accompagnent gratuitement pour maximiser vos aides et concrétiser votre projet.
             </p>
             <Button asChild size="lg" variant="secondary" className="shadow-lg">
-              <Link to="/simulation/particuliers">Démarrer ma simulation gratuite</Link>
+              <Link to="/particuliers/aides">Démarrer ma simulation gratuite</Link>
             </Button>
           </div>
         </div>

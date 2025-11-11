@@ -23,7 +23,7 @@ const Professionnels = () => {
               Entreprises, artisans, collectivités : bénéficiez d'un financement jusqu'à 100% pour vos travaux de rénovation énergétique.
             </p>
             <Button asChild size="lg" className="shadow-lg w-full sm:w-auto">
-              <Link to="/simulation">
+              <Link to="/pro/aides">
                 Tester mon éligibilité
                 <ArrowRight className="ml-2" />
               </Link>
@@ -63,7 +63,7 @@ const Professionnels = () => {
               Nos conseillers analysent gratuitement votre éligibilité et vous accompagnent dans toutes vos démarches.
             </p>
             <Button asChild size="lg" variant="secondary" className="shadow-lg w-full sm:w-auto">
-              <Link to="/simulation">Demander mon étude gratuite</Link>
+              <Link to="/pro/aides">Demander mon étude gratuite</Link>
             </Button>
           </div>
         </div>

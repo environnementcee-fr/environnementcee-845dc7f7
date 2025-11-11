@@ -21,7 +21,7 @@ const Simulation = () => {
 
             {/* Deux grandes cartes CTA */}
             <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-              <Link to="/simulation/particuliers" className="group">
+              <Link to="/particuliers/aides" className="group">
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 hover:border-primary cursor-pointer p-8">
                   <div className="text-center">
                     <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -39,7 +39,7 @@ const Simulation = () => {
                 </Card>
               </Link>
 
-              <Link to="/simulation/professionnels" className="group">
+              <Link to="/pro/aides" className="group">
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 hover:scale-105 border-2 hover:border-primary cursor-pointer p-8">
                   <div className="text-center">
                     <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
