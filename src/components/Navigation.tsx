@@ -14,8 +14,9 @@ export const Navigation = () => {
 
   const navItems = [
     { label: "Accueil", path: "/" },
-    { label: "Professionnels", path: "/professionnels" },
-    { label: "Particuliers", path: "/particuliers" },
+    { label: "Parcours Rapide", path: "/parcours-rapide" },
+    { label: "Professionnels", path: "/pro/aides" },
+    { label: "Particuliers", path: "/particuliers/aides" },
     { label: "Ma Prime Rénov", path: "/ma-prime-renov" },
     { label: "Aides", path: "/aides" },
     { label: "Blog", path: "/blog" },
