@@ -121,14 +121,14 @@ const PhotovoltaiquePartForm = () => {
                   <FormItem>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <VisualChoiceCard
-                        icon={<Home className="h-8 w-8" />}
+                        icon="🏠"
                         title="Maison individuelle"
                         subtitle="Propriété avec toiture accessible"
                         isSelected={field.value === "maison"}
                         onClick={() => field.onChange("maison")}
                       />
                       <VisualChoiceCard
-                        icon={<Home className="h-8 w-8" />}
+                        icon="🏢"
                         title="Appartement"
                         subtitle="En copropriété"
                         isSelected={field.value === "appartement"}

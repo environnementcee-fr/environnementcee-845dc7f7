@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { Home, Maximize2, MapPin, Euro, User, Phone, Mail } from "lucide-react";
 import { fenetresFormSchema, type FenetresFormData } from "@/lib/validations/fenetres";
-import { VisualStepWizard } from "./VisualStepWizard";
+import { VisualStepWizard, type WizardStep } from "./VisualStepWizard";
 import { VisualChoiceCard } from "./VisualChoiceCard";
 import { FormFieldWithIcon } from "./FormFieldWithIcon";
 import { Input } from "@/components/ui/input";
@@ -42,23 +42,23 @@ const FenetresPartForm = () => {
     },
   });
 
-  const steps = [
+  const steps: WizardStep[] = [
     {
-      id: "type-logement",
+      id: 1,
       title: "Type de logement",
       subtitle: "Quel type de bien souhaitez-vous équiper ?",
       emoji: "🏠",
       illustration: "",
     },
     {
-      id: "details-fenetres",
+      id: 2,
       title: "Vos fenêtres",
       subtitle: "Caractéristiques de votre projet",
       emoji: "🪟",
       illustration: "",
     },
     {
-      id: "situation-contact",
+      id: 3,
       title: "Votre situation",
       subtitle: "Pour calculer vos aides et vous recontacter",
       emoji: "📋",
@@ -136,14 +136,14 @@ const FenetresPartForm = () => {
                   <FormItem>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <VisualChoiceCard
-                        icon={<Home className="h-8 w-8" />}
+                        icon="🏠"
                         title="Maison individuelle"
                         subtitle="Propriété avec accès aux fenêtres"
                         isSelected={field.value === "maison"}
                         onClick={() => field.onChange("maison")}
                       />
                       <VisualChoiceCard
-                        icon={<Home className="h-8 w-8" />}
+                        icon="🏢"
                         title="Appartement"
                         subtitle="En copropriété"
                         isSelected={field.value === "appartement"}
