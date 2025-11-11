@@ -13,6 +13,7 @@ import {
 import { VisualStepWizard, WizardStep } from "./VisualStepWizard";
 import { VisualChoiceCard } from "./VisualChoiceCard";
 import { FormFieldWithIcon } from "./FormFieldWithIcon";
+import { SuccessConfetti } from "./SuccessConfetti";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -24,6 +25,7 @@ const HPFlottanteForm = () => {
   const [step, setStep] = useState(1);
   const [step1Data, setStep1Data] = useState<HPFlottanteStep1Data | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const navigate = useNavigate();
 
   const form1 = useForm<HPFlottanteStep1Data>({
@@ -92,6 +94,7 @@ const HPFlottanteForm = () => {
 
       if (error) throw error;
 
+      setShowConfetti(true);
       toast.success("Votre demande a été envoyée avec succès !");
       
       setTimeout(() => {
@@ -120,7 +123,9 @@ const HPFlottanteForm = () => {
   const buildingType = form1.watch("building_type");
 
   return (
-    <VisualStepWizard
+    <>
+      <SuccessConfetti trigger={showConfetti} />
+      <VisualStepWizard
       steps={wizardSteps}
       currentStep={step}
       totalSteps={2}
@@ -382,7 +387,8 @@ const HPFlottanteForm = () => {
           </form>
         </Form>
       )}
-    </VisualStepWizard>
+      </VisualStepWizard>
+    </>
   );
 };
 
