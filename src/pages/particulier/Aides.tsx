@@ -33,6 +33,7 @@ const AidesParticulier = () => {
     switch (selectedAid) {
       case "isolation_murs_part":
       case "isolation_toiture":
+      case "isolation_murs":
         return <IsolationForm userType="particulier" />;
       case "pac_part":
         return <PACForm />;
