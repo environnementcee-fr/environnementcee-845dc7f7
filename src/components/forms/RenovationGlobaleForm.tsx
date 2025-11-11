@@ -23,20 +23,25 @@ const AIDES_LIST = [
 ];
 
 const WIZARD_STEPS = [
-  { id: "profil", title: "Profil", subtitle: "Particulier ou Professionnel", emoji: "👤", illustration: "" },
-  { id: "aides", title: "Aides", subtitle: "Aides que vous visez", emoji: "🎯", illustration: "" },
-  { id: "travaux", title: "Travaux", subtitle: "Types de travaux concernés", emoji: "🔨", illustration: "" },
-  { id: "contexte", title: "Contexte", subtitle: "Détails du chantier", emoji: "🏗️", illustration: "" },
-  { id: "details", title: "Détails", subtitle: "Informations spécifiques", emoji: "📋", illustration: "" },
-  { id: "coordonnees", title: "Contact", subtitle: "Vos coordonnées", emoji: "📱", illustration: "" },
+  { id: 1, title: "Profil", subtitle: "Particulier ou Professionnel", emoji: "👤", illustration: "" },
+  { id: 2, title: "Aides", subtitle: "Aides que vous visez", emoji: "🎯", illustration: "" },
+  { id: 3, title: "Travaux", subtitle: "Types de travaux concernés", emoji: "🔨", illustration: "" },
+  { id: 4, title: "Contexte", subtitle: "Détails du chantier", emoji: "🏗️", illustration: "" },
+  { id: 5, title: "Détails", subtitle: "Informations spécifiques", emoji: "📋", illustration: "" },
+  { id: 6, title: "Contact", subtitle: "Vos coordonnées", emoji: "📱", illustration: "" },
 ];
 
 export const RenovationGlobaleForm = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Récupérer le segment depuis l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const segmentFromUrl = urlParams.get('segment');
+  
   const [formData, setFormData] = useState<Record<string, any>>({
-    segment: "",
+    segment: segmentFromUrl === 'part' || segmentFromUrl === 'pro' ? segmentFromUrl : "",
     aides_souhaitees: [],
     travaux_selectionnes: [],
     postal_code: "",
@@ -302,7 +307,7 @@ export const RenovationGlobaleForm = () => {
 
           <div className="grid md:grid-cols-2 gap-4">
             <CheckboxCard
-              id="profil-part"
+              value="profil-part"
               checked={formData.segment === "part"}
               onChange={() => updateField("segment", "part")}
               icon="🏠"
@@ -310,7 +315,7 @@ export const RenovationGlobaleForm = () => {
               description="Propriétaire occupant, bailleur ou locataire"
             />
             <CheckboxCard
-              id="profil-pro"
+              value="profil-pro"
               checked={formData.segment === "pro"}
               onChange={() => updateField("segment", "pro")}
               icon="🏢"
@@ -334,7 +339,7 @@ export const RenovationGlobaleForm = () => {
             {AIDES_LIST.map(aide => (
               <CheckboxCard
                 key={aide.id}
-                id={`aide-${aide.id}`}
+                value={`aide-${aide.id}`}
                 checked={formData.aides_souhaitees.includes(aide.id)}
                 onChange={() => toggleArrayField("aides_souhaitees", aide.id)}
                 icon={aide.icon}
@@ -358,7 +363,7 @@ export const RenovationGlobaleForm = () => {
             {travauxDisponibles.map(travaux => (
               <CheckboxCard
                 key={travaux.id}
-                id={`travaux-${travaux.id}`}
+                value={`travaux-${travaux.id}`}
                 checked={formData.travaux_selectionnes.includes(travaux.id)}
                 onChange={() => toggleArrayField("travaux_selectionnes", travaux.id)}
                 icon={travaux.icon}

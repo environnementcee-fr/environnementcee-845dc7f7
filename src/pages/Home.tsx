@@ -149,20 +149,31 @@ const Home = () => {
             </Carousel>
           </div>
 
-          {/* Boutons Particuliers / Professionnels */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-2xl mx-auto">
-            <Button asChild size="lg" variant="default" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
-              <Link to="/simulation/particuliers">
-                <HomeIcon className="mr-2 h-5 w-5" />
-                Je suis particulier
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="blue" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
-              <Link to="/simulation/professionnels">
-                <Building2 className="mr-2 h-5 w-5" />
-                Je suis professionnel
-              </Link>
-            </Button>
+          {/* Section Parcours Rapide */}
+          <div className="max-w-3xl mx-auto bg-card/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl border border-border/50 mb-8">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
+                🚀 Parcours Rapide - Rénovation Globale
+              </h2>
+              <p className="text-muted-foreground text-sm md:text-base">
+                Vous envisagez plusieurs travaux ? Obtenez une estimation globale de toutes vos aides en un seul formulaire complet.
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" variant="default" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
+                <Link to="/parcours-rapide?segment=part">
+                  <HomeIcon className="mr-2 h-5 w-5" />
+                  Je suis particulier
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="blue" className="w-full sm:w-auto text-base md:text-lg h-12 md:h-14 px-8">
+                <Link to="/parcours-rapide?segment=pro">
+                  <Building2 className="mr-2 h-5 w-5" />
+                  Je suis professionnel
+                </Link>
+              </Button>
+            </div>
           </div>
 
         </div>
