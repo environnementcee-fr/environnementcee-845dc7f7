@@ -7,6 +7,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { getTravauxById } from "@/data/travauxCatalog";
 import IsolationForm from "@/components/forms/IsolationForm";
 import PACForm from "@/components/forms/PACForm";
+import PhotovoltaiquePartForm from "@/components/forms/PhotovoltaiquePartForm";
+import FenetresPartForm from "@/components/forms/FenetresPartForm";
+import ChaudiereBiomassePartForm from "@/components/forms/ChaudiereBiomassePartForm";
+import VMCDoubleFluxPartForm from "@/components/forms/VMCDoubleFluxPartForm";
+import ChauffeEauPartForm from "@/components/forms/ChauffeEauPartForm";
 
 const AidesParticulier = () => {
   const [selectedAid, setSelectedAid] = useState<string | null>(null);
@@ -31,6 +36,16 @@ const AidesParticulier = () => {
         return <IsolationForm userType="particulier" />;
       case "pac_part":
         return <PACForm />;
+      case "pv_part":
+        return <PhotovoltaiquePartForm />;
+      case "fenetres_part":
+        return <FenetresPartForm />;
+      case "chaudiere_biomasse":
+        return <ChaudiereBiomassePartForm />;
+      case "vmc_double_flux":
+        return <VMCDoubleFluxPartForm />;
+      case "cet_part":
+        return <ChauffeEauPartForm />;
       default:
         return (
           <div className="text-center py-8">
