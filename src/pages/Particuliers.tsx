@@ -57,7 +57,7 @@ const Particuliers = () => {
             Sélectionnez le projet qui vous intéresse pour une estimation personnalisée
           </p>
           
-          <CategoryGrid segment="part" basePath="/simulation/particuliers" />
+          <CategoryGrid segment="part" onCardClick={() => {}} />
 
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-4">Vous avez plusieurs projets ?</p>

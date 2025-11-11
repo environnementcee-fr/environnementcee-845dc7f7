@@ -40,7 +40,7 @@ const Professionnels = () => {
             Sélectionnez la solution adaptée à vos besoins et déposez votre projet en quelques clics
           </p>
           
-          <CategoryGrid segment="pro" basePath="/pro/deposer-projet" />
+          <CategoryGrid segment="pro" onCardClick={() => {}} />
 
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-4">Vous avez plusieurs projets ?</p>
