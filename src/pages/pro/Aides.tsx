@@ -11,6 +11,7 @@ import { LEDEntrepotForm } from "@/components/forms/LEDEntrepotForm";
 import { LEDSolaireForm } from "@/components/forms/LEDSolaireForm";
 import { BrasseurAirForm } from "@/components/forms/BrasseurAirForm";
 import HPFlottanteForm from "@/components/forms/HPFlottanteForm";
+import PACProForm from "@/components/forms/PACProForm";
 
 const AidesPro = () => {
   const [selectedAid, setSelectedAid] = useState<string | null>(null);
@@ -42,6 +43,8 @@ const AidesPro = () => {
         return <BrasseurAirForm />;
       case "hp_flottante":
         return <HPFlottanteForm />;
+      case "pac_pro":
+        return <PACProForm />;
       default:
         return (
           <div className="text-center py-8">

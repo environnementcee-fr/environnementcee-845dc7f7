@@ -80,7 +80,7 @@ const HPFlottanteForm = () => {
     setIsSubmitting(true);
     try {
       const leadData = {
-        aid_type: "housse_piscine",
+        aid_type: "hp_flottante",
         user_type: "professionnel",
         ...step1Data,
         ...data,
@@ -102,7 +102,7 @@ const HPFlottanteForm = () => {
               estimated_aids: response?.estimated_aids || {},
               mpr_category: response?.mpr_category,
               user_type: "professionnel",
-              aid_type: "housse_piscine",
+              aid_type: "hp_flottante",
               first_name: data.first_name,
               estimated_cost: 2000
             }
