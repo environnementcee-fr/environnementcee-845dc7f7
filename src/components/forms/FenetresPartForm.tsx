@@ -74,6 +74,10 @@ const FenetresPartForm = () => {
           ...data,
           aid_type: "fenetres_part",
           user_type: "particulier",
+          project_data: {
+            nb_fenetres: data.nb_fenetres,
+            current_window_type: data.current_window_type,
+          },
         },
       });
 
@@ -85,15 +89,22 @@ const FenetresPartForm = () => {
       setTimeout(() => {
         navigate("/simulation/resultats", {
           state: {
-            eligibility_score: result?.eligibility_score,
-            estimated_aids: result?.estimated_aids,
-            mpr_category: result?.mpr_category,
-          },
+            results: {
+              eligibility_score: result?.eligibility_score || 0,
+              estimated_aids: result?.estimated_aids || {},
+              mpr_category: result?.mpr_category,
+              user_type: "particulier",
+              aid_type: "fenetres_part",
+              first_name: data.first_name,
+              building_type: data.building_type,
+              estimated_cost: data.nb_fenetres * 600, // Estimation ~600€/fenêtre
+            }
+          }
         });
       }, 1500);
     } catch (error: any) {
       console.error("Erreur soumission:", error);
-      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
+      toast.error(error.message || "Erreur lors de l'envoi. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }

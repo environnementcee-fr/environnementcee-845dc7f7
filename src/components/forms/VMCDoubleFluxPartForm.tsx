@@ -75,6 +75,11 @@ const VMCDoubleFluxPartForm = () => {
           ...data,
           aid_type: "vmc_double_flux",
           user_type: "particulier",
+          project_data: {
+            ventilation_type: data.ventilation_type,
+            current_ventilation: data.current_ventilation,
+          },
+          surface: data.surface,
         },
       });
 
@@ -86,15 +91,22 @@ const VMCDoubleFluxPartForm = () => {
       setTimeout(() => {
         navigate("/simulation/resultats", {
           state: {
-            eligibility_score: result?.eligibility_score,
-            estimated_aids: result?.estimated_aids,
-            mpr_category: result?.mpr_category,
-          },
+            results: {
+              eligibility_score: result?.eligibility_score || 0,
+              estimated_aids: result?.estimated_aids || {},
+              mpr_category: result?.mpr_category,
+              user_type: "particulier",
+              aid_type: "vmc_double_flux",
+              first_name: data.first_name,
+              building_type: data.building_type,
+              estimated_cost: 6000, // Estimation moyenne VMC double flux
+            }
+          }
         });
       }, 1500);
     } catch (error: any) {
       console.error("Erreur soumission:", error);
-      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
+      toast.error(error.message || "Erreur lors de l'envoi. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }

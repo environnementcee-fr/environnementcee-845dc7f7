@@ -74,6 +74,11 @@ const ChauffeEauPartForm = () => {
           ...data,
           aid_type: "cet_part",
           user_type: "particulier",
+          project_data: {
+            volume_ballon: data.volume_ballon,
+            current_heating_system: data.current_heating_system,
+            type_chauffe_eau: "thermodynamique",
+          },
         },
       });
 
@@ -85,15 +90,22 @@ const ChauffeEauPartForm = () => {
       setTimeout(() => {
         navigate("/simulation/resultats", {
           state: {
-            eligibility_score: result?.eligibility_score,
-            estimated_aids: result?.estimated_aids,
-            mpr_category: result?.mpr_category,
-          },
+            results: {
+              eligibility_score: result?.eligibility_score || 0,
+              estimated_aids: result?.estimated_aids || {},
+              mpr_category: result?.mpr_category,
+              user_type: "particulier",
+              aid_type: "cet_part",
+              first_name: data.first_name,
+              building_type: data.building_type,
+              estimated_cost: 3500, // Estimation moyenne chauffe-eau thermodynamique
+            }
+          }
         });
       }, 1500);
     } catch (error: any) {
       console.error("Erreur soumission:", error);
-      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
+      toast.error(error.message || "Erreur lors de l'envoi. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }

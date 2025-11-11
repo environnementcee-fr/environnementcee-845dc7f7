@@ -23,9 +23,12 @@ const MPR_REVENUE_BRACKETS: Record<string, Record<MPRCategory, number>> = {
 const MPR_FORFAITS: Record<string, Record<MPRCategory, number>> = {
   isolation_murs_ext: { bleu: 75, jaune: 60, violet: 40, rose: 0 },
   isolation_combles: { bleu: 25, jaune: 20, violet: 15, rose: 0 },
+  isolation_toiture: { bleu: 25, jaune: 20, violet: 15, rose: 0 },
   pac_air_eau: { bleu: 5000, jaune: 4000, violet: 3000, rose: 0 },
   pac_geothermique: { bleu: 11000, jaune: 9000, violet: 5000, rose: 0 },
   chauffe_eau_thermodynamique: { bleu: 1200, jaune: 800, violet: 400, rose: 0 },
+  chauffe_eau_solaire: { bleu: 4000, jaune: 3000, violet: 2000, rose: 0 },
+  chaudiere_biomasse_auto: { bleu: 10000, jaune: 8000, violet: 4000, rose: 0 },
   vmc_double_flux: { bleu: 4000, jaune: 3000, violet: 2000, rose: 0 },
   fenetres: { bleu: 100, jaune: 80, violet: 40, rose: 0 },
 };
@@ -47,15 +50,28 @@ function isModeste(revenuFiscal: number, nbPersonnes: number, region: Region): b
   return category === 'bleu' || category === 'jaune';
 }
 
-function calculateCEEParticulier(aidType: string, surface: number, modeste: boolean): number {
-  if (aidType === 'isolation' && surface) {
+function calculateCEEParticulier(aidType: string, surface: number, modeste: boolean, projectData?: any): number {
+  if ((aidType === 'isolation' || aidType === 'isolation_toiture' || aidType === 'isolation_murs_part') && surface) {
     return surface * 12 * (modeste ? 1.2 : 1);
   }
-  if (aidType === 'pac') {
+  if (aidType === 'pac' || aidType === 'pac_part') {
     return modeste ? 4500 : 3000;
   }
   if (aidType === 'brasseur_air') {
     return 200;
+  }
+  if (aidType === 'fenetres_part' && projectData?.nb_fenetres) {
+    const nbFenetres = parseInt(projectData.nb_fenetres);
+    return nbFenetres * (modeste ? 100 : 80);
+  }
+  if (aidType === 'chaudiere_biomasse') {
+    return modeste ? 1000 : 800;
+  }
+  if (aidType === 'vmc_double_flux') {
+    return modeste ? 500 : 400;
+  }
+  if (aidType === 'cet_part') {
+    return modeste ? 200 : 150;
   }
   return 0;
 }
@@ -111,10 +127,45 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
         (new Date().getFullYear() - leadData.construction_year) >= 15) {
       
       let mprAmount = 0;
+      
+      // Isolation
       if (leadData.aid_type === 'isolation' && leadData.surface) {
         mprAmount = (MPR_FORFAITS.isolation_combles[mprCategory] || 0) * leadData.surface;
-      } else if (leadData.aid_type === 'pac') {
+      } else if (leadData.aid_type === 'isolation_toiture' && leadData.surface) {
+        mprAmount = (MPR_FORFAITS.isolation_toiture[mprCategory] || 0) * leadData.surface;
+      } else if (leadData.aid_type === 'isolation_murs_part' && leadData.surface) {
+        mprAmount = (MPR_FORFAITS.isolation_murs_ext[mprCategory] || 0) * leadData.surface;
+      }
+      
+      // Pompes à chaleur
+      else if (leadData.aid_type === 'pac' || leadData.aid_type === 'pac_part') {
         mprAmount = MPR_FORFAITS.pac_air_eau[mprCategory] || 0;
+      }
+      
+      // Fenêtres
+      else if (leadData.aid_type === 'fenetres_part' && leadData.project_data?.nb_fenetres) {
+        const nbFenetres = parseInt(leadData.project_data.nb_fenetres);
+        mprAmount = (MPR_FORFAITS.fenetres[mprCategory] || 0) * nbFenetres;
+      }
+      
+      // Chaudière biomasse
+      else if (leadData.aid_type === 'chaudiere_biomasse') {
+        mprAmount = MPR_FORFAITS.chaudiere_biomasse_auto[mprCategory] || 0;
+      }
+      
+      // VMC double flux
+      else if (leadData.aid_type === 'vmc_double_flux') {
+        mprAmount = MPR_FORFAITS.vmc_double_flux[mprCategory] || 0;
+      }
+      
+      // Chauffe-eau
+      else if (leadData.aid_type === 'cet_part') {
+        const typeCET = leadData.project_data?.type_chauffe_eau;
+        if (typeCET === 'thermodynamique') {
+          mprAmount = MPR_FORFAITS.chauffe_eau_thermodynamique[mprCategory] || 0;
+        } else if (typeCET === 'solaire') {
+          mprAmount = MPR_FORFAITS.chauffe_eau_solaire[mprCategory] || 0;
+        }
       }
       
       if (mprAmount > 0) {
@@ -122,9 +173,20 @@ function calculateEligibility(leadData: any): { score: number; aids: any; mprCat
         score += 30;
       }
     }
+    
+    // Photovoltaïque - Prime à l'autoconsommation (pas de MPR mais prime spécifique)
+    if (leadData.aid_type === 'pv_part') {
+      const puissance = leadData.project_data?.puissance_souhaitee || 6;
+      aids.prime_autoconso = {
+        montant: puissance <= 3 ? 300 * puissance : puissance <= 9 ? 230 * puissance : 200 * puissance,
+        description: "Prime à l'autoconsommation photovoltaïque"
+      };
+      aids.rachat_edf = "Rachat surplus EDF (0,13€/kWh)";
+      score += 25;
+    }
 
     // CEE Particulier
-    const ceeAmount = calculateCEEParticulier(leadData.aid_type, leadData.surface || 0, modeste);
+    const ceeAmount = calculateCEEParticulier(leadData.aid_type, leadData.surface || 0, modeste, leadData.project_data);
     if (ceeAmount > 0) {
       aids.cee = ceeAmount;
       score += 25;
@@ -187,9 +249,18 @@ const corsHeaders = {
 // Validation schema - Universal pour tous types d'aides
 const leadSchema = z.object({
   aid_type: z.enum([
-    "led_entrepot", "led_bureau", "led_solaire", 
+    // Professionnels
+    "led_entrepot", "led_bureaux", "led_ext_solaire", 
+    "isolation_murs", "brasseur_air", "pac_pro", "hp_flottante",
+    // Particuliers
+    "pac_part", "pv_part", "isolation_toiture", "isolation_murs_part",
+    "fenetres_part", "chaudiere_biomasse", "vmc_double_flux", "cet_part",
+    // Anciens (rétrocompatibilité)
+    "isolation", "pac", "led_bureau", "led_solaire",
+    // Multi-travaux
     "multi_led_pro", "multi_particulier", "ma_prime_renov",
-    "isolation", "pac", "brasseur_air", "housse_piscine"
+    // Autres
+    "housse_piscine"
   ]),
   user_type: z.enum(["particulier", "professionnel"]),
   project_data: z.any().optional(),
@@ -349,7 +420,14 @@ const handler = async (req: Request): Promise<Response> => {
     }).catch(err => console.error("Email notification failed:", err));
 
     return new Response(
-      JSON.stringify({ success: true, id: lead.id }),
+      JSON.stringify({ 
+        success: true, 
+        id: lead.id,
+        // Retourner les résultats de calcul pour affichage immédiat
+        eligibility_score: eligibilityResult.score,
+        estimated_aids: eligibilityResult.aids,
+        mpr_category: eligibilityResult.mprCategory || null,
+      }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
 

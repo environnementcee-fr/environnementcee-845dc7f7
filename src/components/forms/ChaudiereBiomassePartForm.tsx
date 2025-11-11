@@ -76,6 +76,12 @@ const ChaudiereBiomassePartForm = () => {
           ...data,
           aid_type: "chaudiere_biomasse",
           user_type: "particulier",
+          project_data: {
+            type_biomasse: data.type_biomasse,
+            puissance_souhaitee: data.puissance_souhaitee,
+            current_heating_system: data.current_heating_system,
+          },
+          surface: data.surface_chauffee,
         },
       });
 
@@ -87,15 +93,22 @@ const ChaudiereBiomassePartForm = () => {
       setTimeout(() => {
         navigate("/simulation/resultats", {
           state: {
-            eligibility_score: result?.eligibility_score,
-            estimated_aids: result?.estimated_aids,
-            mpr_category: result?.mpr_category,
-          },
+            results: {
+              eligibility_score: result?.eligibility_score || 0,
+              estimated_aids: result?.estimated_aids || {},
+              mpr_category: result?.mpr_category,
+              user_type: "particulier",
+              aid_type: "chaudiere_biomasse",
+              first_name: data.first_name,
+              building_type: data.building_type,
+              estimated_cost: data.puissance_souhaitee * 400, // Estimation ~400€/kW
+            }
+          }
         });
       }, 1500);
     } catch (error: any) {
       console.error("Erreur soumission:", error);
-      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
+      toast.error(error.message || "Erreur lors de l'envoi. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
