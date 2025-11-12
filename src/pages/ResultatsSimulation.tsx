@@ -32,11 +32,15 @@ interface Aid {
 interface SimulationResults {
   eligibility_score: number;
   estimated_aids: {
-    mpr?: number;
-    cee?: number;
-    ecoptz?: number | string;
-    tva?: string;
-    credit_impot_pme?: string;
+    mpr?: number | { eligible: boolean; montant: number; details: string };
+    cee?: number | { eligible: boolean; montant: number; details: string };
+    ecoptz?: number | string | { eligible: boolean; montant: number; details: string };
+    eco_ptz?: number | string | { eligible: boolean; montant: number; details: string };
+    tva?: string | { eligible: boolean; details: string };
+    tva_reduite?: string | { eligible: boolean; details: string };
+    credit_impot_pme?: string | number | { eligible: boolean; montant: number; details: string };
+    credit_impot?: string | number | { eligible: boolean; montant: number; details: string };
+    [key: string]: any;
   };
   mpr_category?: string;
   user_type: 'particulier' | 'professionnel';
