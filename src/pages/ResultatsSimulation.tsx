@@ -32,11 +32,15 @@ interface Aid {
 interface SimulationResults {
   eligibility_score: number;
   estimated_aids: {
-    mpr?: number;
-    cee?: number;
-    ecoptz?: number | string;
-    tva?: string;
-    credit_impot_pme?: string;
+    mpr?: number | { eligible: boolean; montant: number; details: string };
+    cee?: number | { eligible: boolean; montant: number; details: string };
+    ecoptz?: number | string | { eligible: boolean; montant: number; details: string };
+    eco_ptz?: number | string | { eligible: boolean; montant: number; details: string };
+    tva?: string | { eligible: boolean; details: string };
+    tva_reduite?: string | { eligible: boolean; details: string };
+    credit_impot_pme?: string | number | { eligible: boolean; montant: number; details: string };
+    credit_impot?: string | number | { eligible: boolean; montant: number; details: string };
+    [key: string]: any;
   };
   mpr_category?: string;
   user_type: 'particulier' | 'professionnel';
@@ -72,62 +76,82 @@ const ResultatsSimulation = () => {
   const avantagesFiscaux: Aid[] = [];
   let totalAids = 0;
 
+  // Helper function to extract amount from aid (handles both flat and nested formats)
+  const extractAmount = (aid: any): number => {
+    if (typeof aid === 'number') return aid;
+    if (typeof aid === 'object' && aid !== null && 'montant' in aid) return aid.montant;
+    return 0;
+  };
+
   // Construire la liste des aides par catégorie
   if (results.estimated_aids.mpr) {
-    const aide = {
-      name: "MaPrimeRénov'",
-      type: "MPR",
-      amount: results.estimated_aids.mpr,
-      description: results.mpr_category ? `Catégorie ${results.mpr_category.toUpperCase()}` : undefined
-    };
-    subventions.push(aide);
-    aids.push(aide);
-    totalAids += results.estimated_aids.mpr;
+    const mprAmount = extractAmount(results.estimated_aids.mpr);
+    if (mprAmount > 0) {
+      const aide = {
+        name: "MaPrimeRénov'",
+        type: "MPR",
+        amount: mprAmount,
+        description: results.mpr_category ? `Catégorie ${results.mpr_category.toUpperCase()}` : undefined
+      };
+      subventions.push(aide);
+      aids.push(aide);
+      totalAids += mprAmount;
+    }
   }
 
   if (results.estimated_aids.cee) {
-    const aide = {
-      name: "Prime CEE",
-      type: "CEE",
-      amount: results.estimated_aids.cee,
-      description: results.user_type === 'particulier' ? "Certificats d'Économies d'Énergie" : "Prime CEE Entreprise"
-    };
-    subventions.push(aide);
-    aids.push(aide);
-    totalAids += results.estimated_aids.cee;
+    const ceeAmount = extractAmount(results.estimated_aids.cee);
+    if (ceeAmount > 0) {
+      const aide = {
+        name: "Prime CEE",
+        type: "CEE",
+        amount: ceeAmount,
+        description: results.user_type === 'particulier' ? "Certificats d'Économies d'Énergie" : "Prime CEE Entreprise"
+      };
+      subventions.push(aide);
+      aids.push(aide);
+      totalAids += ceeAmount;
+    }
   }
 
-  if (results.estimated_aids.ecoptz) {
-    const aide = {
-      name: "Éco-PTZ",
-      type: "ECOPTZ",
-      amount: results.estimated_aids.ecoptz,
-      description: "Prêt à taux zéro"
-    };
-    prets.push(aide);
-    aids.push(aide);
+  if (results.estimated_aids.ecoptz || results.estimated_aids.eco_ptz) {
+    const ecoptzAmount = extractAmount(results.estimated_aids.ecoptz || results.estimated_aids.eco_ptz);
+    if (ecoptzAmount > 0) {
+      const aide = {
+        name: "Éco-PTZ",
+        type: "ECOPTZ",
+        amount: ecoptzAmount,
+        description: "Prêt à taux zéro"
+      };
+      prets.push(aide);
+      aids.push(aide);
+    }
   }
 
-  if (results.estimated_aids.tva) {
+  if (results.estimated_aids.tva || results.estimated_aids.tva_reduite) {
+    const tvaData = results.estimated_aids.tva || results.estimated_aids.tva_reduite;
     const aide = {
       name: "TVA Réduite",
       type: "TVA",
-      amount: results.estimated_aids.tva,
+      amount: typeof tvaData === 'string' ? tvaData : "Taux réduit 5,5%",
       description: "Taux réduit 5,5%"
     };
     avantagesFiscaux.push(aide);
     aids.push(aide);
   }
 
-  if (results.estimated_aids.credit_impot_pme) {
-    const aide = {
-      name: "Crédit d'impôt PME",
-      type: "FISCAL",
-      amount: results.estimated_aids.credit_impot_pme,
-      description: "Déduction fiscale"
-    };
-    avantagesFiscaux.push(aide);
-    aids.push(aide);
+  if (results.estimated_aids.credit_impot_pme || results.estimated_aids.credit_impot) {
+    const creditAmount = extractAmount(results.estimated_aids.credit_impot_pme || results.estimated_aids.credit_impot);
+    if (creditAmount > 0) {
+      const aide = {
+        name: "Crédit d'impôt PME",
+        type: "FISCAL",
+        amount: creditAmount,
+        description: "Déduction fiscale"
+      };
+      avantagesFiscaux.push(aide);
+      aids.push(aide);
+    }
   }
 
   const estimatedCost = results.estimated_cost || 15000;
