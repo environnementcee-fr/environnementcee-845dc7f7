@@ -147,13 +147,6 @@ export const LeadFormPart = () => {
 
     setIsSubmitting(true);
     try {
-      // Calculer score basique
-      let score = 50; // base
-      if (formData.delai === "immediat") score += 20;
-      if (formData.budget && formData.budget !== "a_definir") score += 10;
-      if (formData.description && formData.description.length > 50) score += 10;
-      if (formData.phone) score += 10;
-
       const payload = {
         user_type: "particulier",
         aid_type: formData.aid_type,
@@ -165,9 +158,7 @@ export const LeadFormPart = () => {
         building_type: formData.building_type,
         construction_year: parseInt(formData.construction_year),
         consent_privacy: formData.consent_privacy,
-        consent_partner: formData.consent_partner,
-        status: "nouveau",
-        eligibility_score: score,
+        consent_partner: formData.consent_partner || false,
         project_data: {
           description: formData.description,
           budget: formData.budget,
@@ -184,20 +175,12 @@ export const LeadFormPart = () => {
         },
       };
 
-      const { error: insertError } = await supabase
-        .from("lead_submissions")
-        .insert([payload]);
+      // Soumettre via l'edge function sécurisée
+      const { data: result, error: submitError } = await supabase.functions.invoke("submit-lead", {
+        body: payload,
+      });
 
-      if (insertError) throw insertError;
-
-      // Appeler edge function notification
-      try {
-        await supabase.functions.invoke("notify-new-lead", {
-          body: { leadData: payload, segment: "particulier" }
-        });
-      } catch (fnError) {
-        console.error("Erreur notification:", fnError);
-      }
+      if (submitError) throw submitError;
 
       toast.success("Demande envoyée avec succès !");
       localStorage.removeItem(`lead_part_draft_${formData.aid_type}`);

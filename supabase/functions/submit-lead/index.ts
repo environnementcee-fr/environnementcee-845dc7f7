@@ -466,8 +466,8 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
 
-    // Check for duplicate submissions (5 minutes pour tests - remettre à 86400000 ms pour 24h en production)
-    const oneDayAgo = new Date(Date.now() - 300000).toISOString(); // 5 minutes
+    // Check for duplicate submissions (24 hours window for production)
+    const oneDayAgo = new Date(Date.now() - 86400000).toISOString(); // 24 hours
     const { data: existingLead } = await supabaseAdmin
       .from("lead_submissions")
       .select("id")

@@ -83,74 +83,58 @@ export const LeadFormPro = () => {
   const onSubmit = async (data: LeadProFormData) => {
     setIsSubmitting(true);
     try {
-      // Calculer le score
-      let score = 100; // Fraîcheur de base
-      if (data.telephone) score += 10;
-      if (data.budget_estime !== 'a_definir') score += 10;
-      if (data.description_besoins.length >= 50) score += 10;
-
       // Capturer les UTM params
       const utmSource = searchParams.get('utm_source') || undefined;
       const utmMedium = searchParams.get('utm_medium') || undefined;
       const utmCampaign = searchParams.get('utm_campaign') || undefined;
 
-      // Insérer le lead
-      const { data: leadData, error: leadError } = await supabase
-        .from("lead_submissions")
-        .insert({
-          aid_type: data.type_travaux,
-          user_type: "professionnel",
-          company_name: data.raison_sociale,
-          siren: data.siren,
-          postal_code: data.code_postal,
-          first_name: data.prenom,
-          last_name: data.nom,
-          email: data.email,
-          phone: data.telephone,
-          consent_privacy: data.consent_privacy,
-          consent_partner: data.consent_partner || false,
-          eligibility_score: score,
-          project_data: {
-            type_travaux: data.type_travaux,
-            description_besoins: data.description_besoins,
-            budget_estime: data.budget_estime,
-            delai_souhaite: data.delai_souhaite,
-            adresse_site: data.adresse_site,
-            ville: data.ville,
-            type_batiment: data.type_batiment,
-            secteur_activite: data.secteur_activite,
-            // Conditionnels
-            nb_luminaires: data.nb_luminaires,
-            hauteur_plafond: data.hauteur_plafond,
-            usage_eclairage: data.usage_eclairage,
-            surface_isolation: data.surface_isolation,
-            type_isolation: data.type_isolation,
-            puissance_actuelle: data.puissance_actuelle,
-            energie_existante: data.energie_existante,
-            surface_chauffage: data.surface_chauffage,
-            volume_chambre: data.volume_chambre,
-            usage_chambre: data.usage_chambre,
-            temperature_cible: data.temperature_cible,
-            // UTM tracking
-            utm_source: utmSource,
-            utm_medium: utmMedium,
-            utm_campaign: utmCampaign,
-          },
-          status: "nouveau",
-        })
-        .select()
-        .single();
+      // Préparer le payload pour submit-lead edge function
+      const payload = {
+        aid_type: data.type_travaux,
+        user_type: "professionnel",
+        company_name: data.raison_sociale,
+        siren: data.siren,
+        postal_code: data.code_postal,
+        first_name: data.prenom,
+        last_name: data.nom,
+        email: data.email,
+        phone: data.telephone,
+        consent_privacy: data.consent_privacy,
+        consent_partner: data.consent_partner || false,
+        building_type: data.type_batiment,
+        project_data: {
+          type_travaux: data.type_travaux,
+          description_besoins: data.description_besoins,
+          budget_estime: data.budget_estime,
+          delai_souhaite: data.delai_souhaite,
+          adresse_site: data.adresse_site,
+          ville: data.ville,
+          secteur_activite: data.secteur_activite,
+          // Conditionnels
+          nb_luminaires: data.nb_luminaires,
+          hauteur_plafond: data.hauteur_plafond,
+          usage_eclairage: data.usage_eclairage,
+          surface_isolation: data.surface_isolation,
+          type_isolation: data.type_isolation,
+          puissance_actuelle: data.puissance_actuelle,
+          energie_existante: data.energie_existante,
+          surface_chauffage: data.surface_chauffage,
+          volume_chambre: data.volume_chambre,
+          usage_chambre: data.usage_chambre,
+          temperature_cible: data.temperature_cible,
+          // UTM tracking
+          utm_source: utmSource,
+          utm_medium: utmMedium,
+          utm_campaign: utmCampaign,
+        },
+      };
 
-      if (leadError) throw leadError;
+      // Soumettre via l'edge function sécurisée
+      const { data: result, error: submitError } = await supabase.functions.invoke("submit-lead", {
+        body: payload,
+      });
 
-      // Appeler l'edge function pour notification
-      try {
-        await supabase.functions.invoke("notify-new-lead", {
-          body: { leadId: leadData.id },
-        });
-      } catch (emailError) {
-        console.error("Erreur notification email:", emailError);
-      }
+      if (submitError) throw submitError;
 
       // Nettoyer le localStorage
       localStorage.removeItem("lead_pro_draft");
