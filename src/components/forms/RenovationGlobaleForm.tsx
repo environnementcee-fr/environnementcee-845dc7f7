@@ -252,11 +252,18 @@ export const RenovationGlobaleForm = () => {
       // Rediriger vers résultats avec données d'éligibilité
       navigate("/simulation/resultats", {
         state: {
-          eligibility_score: eligibilityData?.score || 50,
-          estimated_aids: eligibilityData?.eligibilite || {},
-          total_aides_estimees: eligibilityData?.total_aides_estimees || 0,
-          mpr_category: eligibilityData?.revenu_category || null,
-        },
+          results: {
+            eligibility_score: eligibilityData?.score || 50,
+            estimated_aids: eligibilityData?.eligibilite || {},
+            mpr_category: eligibilityData?.revenu_category || null,
+            user_type: formData.segment === "part" ? "particulier" : "professionnel",
+            aid_type: "renovation_globale",
+            first_name: formData.first_name,
+            estimated_cost: eligibilityData?.total_aides_estimees || 15000,
+            total_aides_estimees: eligibilityData?.total_aides_estimees || 0,
+            travaux_selectionnes: formData.travaux_selectionnes,
+          }
+        }
       });
     } catch (error: any) {
       console.error("Erreur soumission:", error);

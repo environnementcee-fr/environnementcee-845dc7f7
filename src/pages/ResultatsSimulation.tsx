@@ -43,6 +43,8 @@ interface SimulationResults {
   aid_type: string;
   first_name?: string;
   estimated_cost?: number;
+  total_aides_estimees?: number;
+  travaux_selectionnes?: string[];
 }
 
 const ResultatsSimulation = () => {
@@ -360,7 +362,16 @@ const ResultatsSimulation = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-sm text-muted-foreground">Type de travaux</p>
-                    <p className="font-semibold">{results.aid_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                    {results.aid_type === 'renovation_globale' && results.travaux_selectionnes ? (
+                      <div className="space-y-1">
+                        <p className="font-semibold">Rénovation Globale</p>
+                        <p className="text-sm text-muted-foreground">
+                          {results.travaux_selectionnes.length} types de travaux sélectionnés
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="font-semibold">{results.aid_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                    )}
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Profil</p>
@@ -368,6 +379,14 @@ const ResultatsSimulation = () => {
                       {results.user_type === 'particulier' ? 'Particulier' : 'Professionnel'}
                     </p>
                   </div>
+                  {results.total_aides_estimees && results.aid_type === 'renovation_globale' && (
+                    <div className="col-span-2 pt-4 border-t">
+                      <p className="text-sm text-muted-foreground mb-1">Montant estimé du projet</p>
+                      <p className="text-2xl font-bold text-primary">
+                        {results.total_aides_estimees.toLocaleString()} €
+                      </p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
